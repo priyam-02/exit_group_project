@@ -429,6 +429,7 @@ curl "http://localhost:5001/api/kpis"
   "avg_confidence_score": 0.73,
   "avg_revenue": 4250000,
   "ownership_identified_pct": 78.5,
+  "companies_with_ownership": 99,
   "pe_backed_count": 12,
   "states_covered": 35,
   "top_service": "R&D Tax Credits",
@@ -770,13 +771,85 @@ The pipeline collects data from 5+ sources:
 - **Rate Limit:** 1.0 req/sec (1s delay)
 - **Implementation:** `scrapers/clutch_directory.py`
 
-### 4. Website Scraping
+### 4. Website Scraping (Enhanced - 7 Major Improvements)
 - **Requires:** None
-- **Provides:** Services, revenue, ownership, key contacts
+- **Provides:** Services, revenue, ownership, key contacts, LinkedIn URLs, employee counts
 - **Rate Limit:** 1.0 req/sec (1s delay)
-- **Implementation:** `enrichers/website.py`
+- **Implementation:** `enrichers/website.py` (805 lines)
 
+**Recent Enhancements (March 2026):**
+1. **LinkedIn URL extraction** - Searches 5 pages instead of 1 (30-50% discovery rate)
+2. **Revenue patterns** - 20+ new patterns including ranges and tax credit inference (25-35% coverage)
+3. **Employee patterns** - 15+ patterns including qualitative firm descriptions (35-45% coverage)
+4. **Smart contact extraction** - Email filtering and Schema.org JSON-LD parsing (20-30% coverage)
+5. **Employee range conversion** - LinkedIn ranges to midpoint estimates
+6. **Text extraction improvements** - Preserves footer text for pattern matching
+7. **Enhanced logging** - Tracks extraction success rates per field
+
+**Expected Coverage Improvements:**
+- Revenue: 0% → 25-35% (37-52 companies from 149)
+- Employees: 9.6% → 35-45% (52-67 companies from 149)
+- Contacts: 1.8% → 20-30% (30-45 companies from 149)
+- LinkedIn URLs: 0% → 30-50% (45-75 companies from 149)
+
+See [ENRICHMENT_IMPROVEMENTS.md](../ENRICHMENT_IMPROVEMENTS.md) for detailed documentation of improvements.
 See [DATA_SOURCES.md](DATA_SOURCES.md) for comprehensive data source documentation.
+
+#### Enhanced Extraction Patterns (March 2026)
+
+**Revenue Extraction (20+ patterns) - `website.py:340-430`:**
+- Revenue ranges: "$5-10M in revenue" → $7.5M (midpoint)
+- Flexible phrasings: "revenues of $5M", "turnover of $5 million"
+- Billion-scale: "$1.2 billion" → $1,200,000,000
+- Tax credit inference: "$100M+ credits processed" → implies $10M+ revenue firm
+- Without dollar signs: "revenue 5 million dollars"
+
+**Example patterns matched:**
+```
+- "$5M in annual revenue"
+- "revenues of approximately $10 million"
+- "$5-10M revenue range"
+- "processed over $50M in R&D tax credits" (infers $5M+ revenue)
+- "turnover: 3.5 million dollars"
+```
+
+**Employee Extraction (15+ patterns) - `website.py:440-520`:**
+- Employee ranges: "10-20 employees" → 15 (midpoint)
+- Qualitative descriptions:
+  - "small/boutique firm" → 8 employees
+  - "mid-sized firm" → 25 employees
+  - "large/full-service firm" → 75 employees
+- Partner counting: "5 partners" → 25 employees (partners × 5 heuristic)
+- Multiple phrasings: "team of 50", "over 30 professionals"
+- Office counting: 3+ offices → minimum 15 employees
+
+**Example patterns matched:**
+```
+- "team of 25 professionals"
+- "11-50 employees" (from LinkedIn)
+- "boutique tax firm" → 8 employees
+- "5 partners and their teams" → 25 employees
+- "offices in 3 states" → 15 employees minimum
+```
+
+**Contact Extraction - `website.py:265-310`:**
+- Email extraction from ALL pages (not just contact page)
+- Smart filtering: skips generic (info@, sales@, hr@), prefers personal (john.smith@)
+- Founder narrative extraction: "Founded by John Smith"
+- Schema.org structured data parsing (JSON-LD)
+
+**LinkedIn URL Extraction - `website.py:102-144`:**
+- Searches 5 pages: homepage, /about, /about-us, /contact, /contact-us
+- Supports both company pages and personal profiles
+- Extracts before footer removal (previously missed)
+- CEO/founder profile detection
+
+**Employee Range Conversion - `website.py:575-588`:**
+- Converts LinkedIn ranges to midpoint estimates
+- Example: "11-50 employees" → 30 employees
+- Marks source as "range_midpoint" for transparency
+
+**Testing:** Use `test_enrichment.py` to validate extraction on specific companies
 
 ---
 
@@ -997,6 +1070,38 @@ def enrich_from_new_source(company: Company) -> Company:
 
 Register in `pipeline.py` `enrich()` function.
 
+### Testing Enrichment
+
+Use `test_enrichment.py` to validate enrichment improvements before running the full pipeline:
+
+**Test single company by URL:**
+```bash
+python test_enrichment.py --url https://taxpointadvisors.com
+```
+
+**Test batch of companies from database:**
+```bash
+python test_enrichment.py --batch 10  # Test top 10 companies
+```
+
+**Test specific company by name:**
+```bash
+python test_enrichment.py --name "Tax Point Advisors"
+```
+
+**Expected output:**
+- LinkedIn URLs found: 30-50% of companies
+- Revenue extracted: 25-35% of companies
+- Employees extracted: 35-45% of companies
+- Contacts extracted: 20-30% of companies
+
+**View enrichment logs:**
+```bash
+tail -f data/pipeline.log | grep "Enriching\|Extracted"
+```
+
+See [ENRICHMENT_IMPROVEMENTS.md](../ENRICHMENT_IMPROVEMENTS.md) for detailed documentation of all 7 improvements.
+
 ### Modifying Scoring Algorithm
 
 Edit `scoring.py`:
@@ -1146,6 +1251,8 @@ chmod 755 data
 - **[Project README](../README.md)** - Project overview and quick start
 - **[Frontend README](../frontend/README.md)** - Dashboard documentation
 - **[DATA_SOURCES.md](DATA_SOURCES.md)** - Comprehensive data source guide
+- **[Enrichment Improvements](../ENRICHMENT_IMPROVEMENTS.md)** - Detailed documentation of 7 extraction enhancements
+- **[Test Enrichment](test_enrichment.py)** - Testing script for enrichment pipeline
 - **[CLAUDE.md](../CLAUDE.md)** - Internal developer guide
 
 ---

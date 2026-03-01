@@ -80,7 +80,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({
                         </div>
                       )}
                     </div>
-                    {company.is_pe_backed && (
+                    {!!company.is_pe_backed && (
                       <Badge variant="red" className="text-[9px] px-1.5 py-0.5 flex-shrink-0">
                         PE
                       </Badge>

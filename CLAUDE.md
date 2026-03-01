@@ -93,6 +93,19 @@ cp backend/.env.example backend/.env
 # Edit .env and add your API keys
 ```
 
+### Testing Enrichment
+
+```bash
+# Test enrichment pipeline on top 10 companies
+python backend/test_enrichment.py --batch 10
+
+# Test single URL
+python backend/test_enrichment.py --url https://example.com
+
+# Test specific company by name
+python backend/test_enrichment.py --name "Company Name"
+```
+
 ## Database
 
 - **Location**: `data/companies.db` (SQLite)
@@ -168,6 +181,22 @@ Demo data is defined in `main.py` lines 128-863 (`_seed_demo_data` function).
 2. Add weight to `WEIGHTS` dict (must sum to 1.0)
 3. Add to `score_company()` scores dict
 4. Test with demo data to validate
+
+### Testing Enrichment
+
+Use `test_enrichment.py` to validate enrichment improvements:
+
+1. Test single URL: `python backend/test_enrichment.py --url <URL>`
+2. Test batch: `python backend/test_enrichment.py --batch <N>`
+3. Test by name: `python backend/test_enrichment.py --name "<Company Name>"`
+
+Expected coverage improvements:
+- Revenue: 25-35% (from 0%)
+- Employees: 35-45% (from 9.6%)
+- Contacts: 20-30% (from 1.8%)
+- LinkedIn URLs: 30-50% discovery rate
+
+See `ENRICHMENT_IMPROVEMENTS.md` for details on 7 major improvements.
 
 ## API Endpoints
 

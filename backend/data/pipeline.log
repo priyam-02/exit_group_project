@@ -785,3 +785,1138 @@
 2026-03-01 10:19:52,777 [INFO] pipeline: CSV Export: data/companies.csv
 2026-03-01 10:19:52,777 [INFO] pipeline: JSON Export: data/companies.json
 2026-03-01 10:19:52,777 [INFO] pipeline: ============================================================
+2026-03-01 11:15:26,735 [INFO] __main__: API Keys configured:
+2026-03-01 11:15:26,735 [INFO] __main__:   Google Places: ✓
+2026-03-01 11:15:26,735 [INFO] __main__:   SerpAPI:       ✓
+2026-03-01 11:15:26,740 [INFO] pipeline: ============================================================
+2026-03-01 11:15:26,740 [INFO] pipeline: Pipeline started: Specialty Tax Advisory Services
+2026-03-01 11:15:26,740 [INFO] pipeline: Target services: ['R&D Tax Credits', 'Cost Segregation', 'Work Opportunity Tax Credits', 'Sales & Use Tax']
+2026-03-01 11:15:26,741 [INFO] pipeline: ============================================================
+2026-03-01 11:15:26,742 [INFO] pipeline: 
+📡 STEP 1: Collecting data from sources...
+2026-03-01 11:15:26,742 [INFO] scrapers.google_places: Google Places: Running 50 search queries (randomized for balanced coverage)...
+2026-03-01 11:15:26,742 [INFO] scrapers.google_places:   [1/50] Searching: 'R&D tax credit consulting' near 'Dallas, TX'
+2026-03-01 11:15:28,061 [INFO] scrapers.google_places:   [2/50] Searching: 'R&D tax credit consulting' near 'Boston, MA'
+2026-03-01 11:15:29,103 [INFO] scrapers.google_places:   [3/50] Searching: 'sales and use tax consulting' near 'Atlanta, GA'
+2026-03-01 11:15:29,749 [INFO] scrapers.google_places:   [4/50] Searching: 'R&D tax credit consulting' near 'Atlanta, GA'
+2026-03-01 11:15:30,383 [INFO] scrapers.google_places:   [5/50] Searching: 'R&D tax credit consulting' near 'Houston, TX'
+2026-03-01 11:15:31,744 [INFO] scrapers.google_places:   [6/50] Searching: 'specialty tax advisory firm' near 'Philadelphia, PA'
+2026-03-01 11:15:33,408 [INFO] scrapers.google_places:   [7/50] Searching: 'WOTC tax credit services' near 'Philadelphia, PA'
+2026-03-01 11:15:34,181 [INFO] scrapers.google_places:   [8/50] Searching: 'specialty tax advisory firm' near 'San Francisco, CA'
+2026-03-01 11:15:35,203 [INFO] scrapers.google_places:   [9/50] Searching: 'cost segregation company' near 'Atlanta, GA'
+2026-03-01 11:15:35,805 [INFO] scrapers.google_places:   [10/50] Searching: 'R&D tax credit consulting' near 'Chicago, IL'
+2026-03-01 11:15:36,761 [INFO] scrapers.google_places: Reached max company cap, stopping.
+2026-03-01 11:15:36,761 [INFO] scrapers.google_places: Google Places: Found 100 unique companies
+2026-03-01 11:15:36,762 [INFO] scrapers.google_places:   Service distribution: R&D=30, CostSeg=7, WOTC=11, SUT=13
+2026-03-01 11:15:36,762 [INFO] pipeline:   → Google Places: 100 companies
+2026-03-01 11:15:36,764 [INFO] scrapers.clutch_directory: Clutch Directory: Searching 4 categories...
+2026-03-01 11:15:36,932 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-consulting: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-consulting
+2026-03-01 11:15:37,887 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-advisory: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-advisory
+2026-03-01 11:15:38,893 [ERROR] scrapers.clutch_directory: Error scraping page 0 of accounting-firms/tax-services: 403 Client Error: Forbidden for url: https://clutch.co/directory/accounting-firms/tax-services
+2026-03-01 11:15:39,886 [ERROR] scrapers.clutch_directory: Error scraping page 0 of business-services/tax-preparation: 403 Client Error: Forbidden for url: https://clutch.co/directory/business-services/tax-preparation
+2026-03-01 11:15:39,886 [INFO] scrapers.clutch_directory: Clutch Directory: Found 0 companies
+2026-03-01 11:15:39,886 [INFO] pipeline:   → Clutch Directory: 0 companies
+2026-03-01 11:15:39,886 [INFO] pipeline:   → SerpAPI: Disabled (using Google Places only)
+2026-03-01 11:15:39,886 [INFO] pipeline: 
+  Total raw results: 100
+2026-03-01 11:15:39,886 [INFO] pipeline: 
+🔄 STEP 2: Deduplicating records...
+2026-03-01 11:15:39,886 [INFO] dedup: Deduplication: Starting with 100 companies
+2026-03-01 11:15:39,886 [INFO] dedup:   After domain dedup: 100
+2026-03-01 11:15:39,934 [INFO] dedup:   After name dedup: 99
+2026-03-01 11:15:39,934 [INFO] dedup: Deduplication: Final count = 99
+2026-03-01 11:15:39,934 [INFO] pipeline:   → After dedup: 99 companies
+2026-03-01 11:15:39,934 [INFO] pipeline: 
+🔍 STEP 3: Enriching from company websites...
+2026-03-01 11:15:39,934 [INFO] pipeline:   → Fetching website URLs from Google Places...
+2026-03-01 11:16:29,443 [INFO] pipeline:   → Found 93 websites
+2026-03-01 11:16:29,444 [INFO] pipeline:   → Visiting websites for enrichment...
+2026-03-01 11:16:29,444 [INFO] pipeline:   [1/99] Enriching: R&R and Associates, LLC (https://rrthefirm.com)
+2026-03-01 11:16:29,444 [INFO] enrichers.website: Enriching R&R and Associates, LLC from https://rrthefirm.com
+2026-03-01 11:16:30,060 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/randrtax
+2026-03-01 11:16:31,681 [INFO] enrichers.website: ✓ R&R and Associates, LLC: Extracted linkedin_url
+2026-03-01 11:16:31,682 [INFO] pipeline:   [2/99] Enriching: R & D Insurance and Tax Service (https://rdinsuranceandtaxservice.com)
+2026-03-01 11:16:31,682 [INFO] enrichers.website: Enriching R & D Insurance and Tax Service from https://rdinsuranceandtaxservice.com
+2026-03-01 11:16:46,204 [INFO] pipeline:   [3/99] Enriching: RND Consulting Inc (https://rndcredits.com)
+2026-03-01 11:16:46,206 [INFO] enrichers.website: Enriching RND Consulting Inc from https://rndcredits.com
+2026-03-01 11:16:46,461 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/rnd-consulting-inc-
+2026-03-01 11:16:47,990 [INFO] enrichers.website: ✓ RND Consulting Inc: Extracted linkedin_url, employees, contact
+2026-03-01 11:16:47,990 [INFO] pipeline:   [4/99] Enriching: KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) (https://kbkg.com)
+2026-03-01 11:16:47,990 [INFO] enrichers.website: Enriching KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) from https://kbkg.com
+2026-03-01 11:16:48,942 [INFO] pipeline:   [5/99] Enriching: Energy Tax Savers / R&D Tax Savers (https://energytaxsavers.com)
+2026-03-01 11:16:48,943 [INFO] enrichers.website: Enriching Energy Tax Savers / R&D Tax Savers from https://energytaxsavers.com
+2026-03-01 11:16:52,756 [INFO] pipeline:   [6/99] Enriching: TRI-MERIT SPECIALTY TAX PROFESSIONALS (https://tri-merit.com)
+2026-03-01 11:16:52,756 [INFO] enrichers.website: Enriching TRI-MERIT SPECIALTY TAX PROFESSIONALS from https://tri-merit.com
+2026-03-01 11:16:52,948 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/2289094
+2026-03-01 11:17:00,531 [INFO] enrichers.website: ✓ TRI-MERIT SPECIALTY TAX PROFESSIONALS: Extracted linkedin_url
+2026-03-01 11:17:00,532 [INFO] pipeline:   [7/99] Enriching: Tax Point Advisors (https://taxpointadvisors.com)
+2026-03-01 11:17:00,533 [INFO] enrichers.website: Enriching Tax Point Advisors from https://taxpointadvisors.com
+2026-03-01 11:17:00,798 [INFO] enrichers.website: ✓ LinkedIn URL: http://www.linkedin.com/company/884203
+2026-03-01 11:17:04,034 [INFO] enrichers.website: ✓ Tax Point Advisors: Extracted linkedin_url, contact
+2026-03-01 11:17:04,034 [INFO] pipeline:   [9/99] Enriching: PRD TAX SERVICES (https://prdtaxservices.com)
+2026-03-01 11:17:04,035 [INFO] enrichers.website: Enriching PRD TAX SERVICES from https://prdtaxservices.com
+2026-03-01 11:17:05,218 [INFO] pipeline:   [10/99] Enriching: Walter Shuffain (https://wsadvisors.com)
+2026-03-01 11:17:05,218 [INFO] enrichers.website: Enriching Walter Shuffain from https://wsadvisors.com
+2026-03-01 11:17:05,347 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/wscpaboston
+2026-03-01 11:17:09,007 [INFO] enrichers.website: ✓ Walter Shuffain: Extracted linkedin_url, employees
+2026-03-01 11:17:09,008 [INFO] pipeline:   [11/99] Enriching: Anomaly CPA (https://anomalycpa.com/our-impact)
+2026-03-01 11:17:09,008 [INFO] enrichers.website: Enriching Anomaly CPA from https://anomalycpa.com/our-impact
+2026-03-01 11:17:09,430 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/anomalycpa
+2026-03-01 11:17:11,411 [INFO] enrichers.website: ✓ Anomaly CPA: Extracted linkedin_url
+2026-03-01 11:17:11,412 [INFO] pipeline:   [12/99] Enriching: CFGI (https://cfgi.com)
+2026-03-01 11:17:11,412 [INFO] enrichers.website: Enriching CFGI from https://cfgi.com
+2026-03-01 11:17:12,117 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/thecorporatefinancegroup
+2026-03-01 11:17:19,962 [INFO] enrichers.website: ✓ CFGI: Extracted linkedin_url
+2026-03-01 11:17:19,962 [INFO] pipeline:   [13/99] Enriching: FinAccurate, LLC (https://finaccurate.com)
+2026-03-01 11:17:19,963 [INFO] enrichers.website: Enriching FinAccurate, LLC from https://finaccurate.com
+2026-03-01 11:17:20,446 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/finaccurate-llc
+2026-03-01 11:17:23,007 [INFO] enrichers.website: ✓ FinAccurate, LLC: Extracted linkedin_url, contact
+2026-03-01 11:17:23,007 [INFO] pipeline:   [14/99] Enriching: Research Tax Credits, LLC (https://researchtaxcreditsllc.com/about-us)
+2026-03-01 11:17:23,007 [INFO] enrichers.website: Enriching Research Tax Credits, LLC from https://researchtaxcreditsllc.com/about-us
+2026-03-01 11:17:26,619 [INFO] pipeline:   [15/99] Enriching: randd uk ltd (https://randduk.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb_profile)
+2026-03-01 11:17:26,620 [INFO] enrichers.website: Enriching randd uk ltd from https://randduk.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb_profile
+2026-03-01 11:17:27,176 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/randd-uk-ltd
+2026-03-01 11:17:28,812 [INFO] enrichers.website: ✓ randd uk ltd: Extracted linkedin_url, employees, contact
+2026-03-01 11:17:28,812 [INFO] pipeline:   [16/99] Enriching: Debits & Credits LLC (https://dbscds.com)
+2026-03-01 11:17:28,812 [INFO] enrichers.website: Enriching Debits & Credits LLC from https://dbscds.com
+2026-03-01 11:17:31,296 [INFO] enrichers.website: ✓ Debits & Credits LLC: Extracted employees
+2026-03-01 11:17:31,296 [INFO] pipeline:   [17/99] Enriching: Financetec (https://financetec.com)
+2026-03-01 11:17:31,296 [INFO] enrichers.website: Enriching Financetec from https://financetec.com
+2026-03-01 11:17:32,029 [INFO] pipeline:   [18/99] Enriching: Strategic Tax Planning, LLC (https://strategictaxplanning.net)
+2026-03-01 11:17:32,031 [INFO] enrichers.website: Enriching Strategic Tax Planning, LLC from https://strategictaxplanning.net
+2026-03-01 11:17:32,220 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/strategictaxplanning
+2026-03-01 11:17:33,012 [INFO] enrichers.website: ✓ Strategic Tax Planning, LLC: Extracted linkedin_url
+2026-03-01 11:17:33,013 [INFO] pipeline:   [19/99] Enriching: Advisors Professional Services Inc (https://advisorstaxpro.com)
+2026-03-01 11:17:33,013 [INFO] enrichers.website: Enriching Advisors Professional Services Inc from https://advisorstaxpro.com
+2026-03-01 11:17:34,710 [INFO] pipeline:   [20/99] Enriching: W3 Business & Tax Consultants, Inc. (https://warrenlee3.net)
+2026-03-01 11:17:34,710 [INFO] enrichers.website: Enriching W3 Business & Tax Consultants, Inc. from https://warrenlee3.net
+2026-03-01 11:17:35,486 [INFO] pipeline:   [21/99] Enriching: Levy Tax & Consulting LLC (https://levycpafirm.com)
+2026-03-01 11:17:35,486 [INFO] enrichers.website: Enriching Levy Tax & Consulting LLC from https://levycpafirm.com
+2026-03-01 11:17:36,010 [INFO] pipeline:   [22/99] Enriching: Distinct Tax Consulting Group (https://distincttax.com)
+2026-03-01 11:17:36,011 [INFO] enrichers.website: Enriching Distinct Tax Consulting Group from https://distincttax.com
+2026-03-01 11:17:36,453 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/22311119
+2026-03-01 11:17:39,017 [INFO] enrichers.website: ✓ Distinct Tax Consulting Group: Extracted linkedin_url
+2026-03-01 11:17:39,018 [INFO] pipeline:   [23/99] Enriching: Clarke CPA LLC (https://clarkecpallc.com)
+2026-03-01 11:17:39,019 [INFO] enrichers.website: Enriching Clarke CPA LLC from https://clarkecpallc.com
+2026-03-01 11:17:39,528 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/clarkecpallc
+2026-03-01 11:17:41,167 [INFO] enrichers.website: ✓ Clarke CPA LLC: Extracted linkedin_url, employees
+2026-03-01 11:17:41,167 [INFO] pipeline:   [24/99] Enriching: The Peck Group, LC (https://pecklc.com)
+2026-03-01 11:17:41,167 [INFO] enrichers.website: Enriching The Peck Group, LC from https://pecklc.com
+2026-03-01 11:17:43,330 [INFO] pipeline:   [25/99] Enriching: Taxes David (https://taxesdavid.com)
+2026-03-01 11:17:43,330 [INFO] enrichers.website: Enriching Taxes David from https://taxesdavid.com
+2026-03-01 11:17:44,153 [INFO] pipeline:   [26/99] Enriching: Cumberland Law Group, LLC | Tax Attorney (https://cumberlandlawatlanta.com/?utm_source=gbp-atlanta)
+2026-03-01 11:17:44,154 [INFO] enrichers.website: Enriching Cumberland Law Group, LLC | Tax Attorney from https://cumberlandlawatlanta.com/?utm_source=gbp-atlanta
+2026-03-01 11:17:47,154 [INFO] enrichers.website: ✓ Cumberland Law Group, LLC | Tax Attorney: Extracted employees
+2026-03-01 11:17:47,155 [INFO] pipeline:   [27/99] Enriching: Manay CPA Inc. (https://manaycpa.com)
+2026-03-01 11:17:47,155 [INFO] enrichers.website: Enriching Manay CPA Inc. from https://manaycpa.com
+2026-03-01 11:17:49,219 [INFO] enrichers.website: ✓ LinkedIn URL: https://tr.linkedin.com/company/manay-cpa
+2026-03-01 11:18:07,354 [INFO] enrichers.website: ✓ Manay CPA Inc.: Extracted linkedin_url, employees
+2026-03-01 11:18:07,355 [INFO] pipeline:   [28/99] Enriching: Carter & Company Business Accounting Firm Atlanta CPA (https://cartercompanycpa.com)
+2026-03-01 11:18:07,355 [INFO] enrichers.website: Enriching Carter & Company Business Accounting Firm Atlanta CPA from https://cartercompanycpa.com
+2026-03-01 11:18:07,747 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/carter-company
+2026-03-01 11:18:08,980 [INFO] enrichers.website: ✓ Carter & Company Business Accounting Firm Atlanta CPA: Extracted linkedin_url
+2026-03-01 11:18:08,980 [INFO] pipeline:   [29/99] Enriching: King of Kings Firm LLC (https://kingofkingsllc.com/?utm_source=gbp&utm_medium=organic)
+2026-03-01 11:18:08,980 [INFO] enrichers.website: Enriching King of Kings Firm LLC from https://kingofkingsllc.com/?utm_source=gbp&utm_medium=organic
+2026-03-01 11:18:09,260 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/king-of-kings-firm-llc
+2026-03-01 11:18:10,886 [INFO] enrichers.website: ✓ King of Kings Firm LLC: Extracted linkedin_url, employees
+2026-03-01 11:18:10,886 [INFO] pipeline:   [30/99] Enriching: Eleven30 Financial Group (https://eleven30fg.com)
+2026-03-01 11:18:10,886 [INFO] enrichers.website: Enriching Eleven30 Financial Group from https://eleven30fg.com
+2026-03-01 11:18:13,045 [INFO] pipeline:   [31/99] Enriching: Tax Solutions Atlanta USA (https://taxsolutionsatlanta.net)
+2026-03-01 11:18:13,045 [INFO] enrichers.website: Enriching Tax Solutions Atlanta USA from https://taxsolutionsatlanta.net
+2026-03-01 11:18:22,946 [INFO] enrichers.website: ✓ Tax Solutions Atlanta USA: Extracted contact
+2026-03-01 11:18:22,947 [INFO] pipeline:   [32/99] Enriching: Real Tax Debt Relief (https://realtaxdebtrelief.com)
+2026-03-01 11:18:22,947 [INFO] enrichers.website: Enriching Real Tax Debt Relief from https://realtaxdebtrelief.com
+2026-03-01 11:18:23,630 [INFO] pipeline:   [33/99] Enriching: Withum (https://withum.com/our-locations?utm_source=gmb&utm_medium=referral&utm_campaign=regional&utm_content=houston)
+2026-03-01 11:18:23,631 [INFO] enrichers.website: Enriching Withum from https://withum.com/our-locations?utm_source=gmb&utm_medium=referral&utm_campaign=regional&utm_content=houston
+2026-03-01 11:18:24,132 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/withumsmith-brown
+2026-03-01 11:18:26,916 [INFO] enrichers.website: ✓ Withum: Extracted linkedin_url
+2026-03-01 11:18:26,916 [INFO] pipeline:   [34/99] Enriching: DRDA, LLC - Certified Public Accountants & Business Consultants (https://drdacpa.com)
+2026-03-01 11:18:26,917 [INFO] enrichers.website: Enriching DRDA, LLC - Certified Public Accountants & Business Consultants from https://drdacpa.com
+2026-03-01 11:18:27,403 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/drda-pllc
+2026-03-01 11:18:34,076 [INFO] enrichers.website: ✓ DRDA, LLC - Certified Public Accountants & Business Consultants: Extracted linkedin_url, employees
+2026-03-01 11:18:34,077 [INFO] pipeline:   [35/99] Enriching: Maxwell Locke & Ritter (https://mlrpc.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb_listing)
+2026-03-01 11:18:34,077 [INFO] enrichers.website: Enriching Maxwell Locke & Ritter from https://mlrpc.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb_listing
+2026-03-01 11:18:34,521 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/maxlocrit
+2026-03-01 11:18:37,259 [INFO] enrichers.website: ✓ Maxwell Locke & Ritter: Extracted linkedin_url, employees
+2026-03-01 11:18:37,259 [INFO] pipeline:   [36/99] Enriching: D&S Financial Services (https://dstaxservices.net)
+2026-03-01 11:18:37,259 [INFO] enrichers.website: Enriching D&S Financial Services from https://dstaxservices.net
+2026-03-01 11:18:41,542 [INFO] enrichers.website: ✓ D&S Financial Services: Extracted contact
+2026-03-01 11:18:41,542 [INFO] pipeline:   [37/99] Enriching: R.A.D PROFESSIONAL SERVICES LLC (https://radprofessionalservices.com)
+2026-03-01 11:18:41,542 [INFO] enrichers.website: Enriching R.A.D PROFESSIONAL SERVICES LLC from https://radprofessionalservices.com
+2026-03-01 11:18:41,621 [INFO] pipeline:   [38/99] Enriching: Precision Tax & Advisory (https://precisiontaxadvisory.com)
+2026-03-01 11:18:41,621 [INFO] enrichers.website: Enriching Precision Tax & Advisory from https://precisiontaxadvisory.com
+2026-03-01 11:18:43,697 [INFO] enrichers.website: ✓ Precision Tax & Advisory: Extracted contact
+2026-03-01 11:18:43,698 [INFO] pipeline:   [39/99] Enriching: Kim Yeung Ling P.C. (https://kimlingcpa.net)
+2026-03-01 11:18:43,698 [INFO] enrichers.website: Enriching Kim Yeung Ling P.C. from https://kimlingcpa.net
+2026-03-01 11:18:47,659 [INFO] enrichers.website: ✓ Kim Yeung Ling P.C.: Extracted employees, contact
+2026-03-01 11:18:47,660 [INFO] pipeline:   [40/99] Enriching: Parker Financial Services (https://lesstax123.com)
+2026-03-01 11:18:47,660 [INFO] enrichers.website: Enriching Parker Financial Services from https://lesstax123.com
+2026-03-01 11:18:48,368 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/parker-tax-service
+2026-03-01 11:18:50,683 [INFO] enrichers.website: ✓ Parker Financial Services: Extracted linkedin_url
+2026-03-01 11:18:50,684 [INFO] pipeline:   [41/99] Enriching: Internal Tax Service, LLC (https://bestphillycpa.com)
+2026-03-01 11:18:50,684 [INFO] enrichers.website: Enriching Internal Tax Service, LLC from https://bestphillycpa.com
+2026-03-01 11:18:52,820 [INFO] pipeline:   [42/99] Enriching: NB Advisors Small Business Accountant - Philadelphia Location (https://nbcpa.us/small-business-accountant-philadelphia)
+2026-03-01 11:18:52,820 [INFO] enrichers.website: Enriching NB Advisors Small Business Accountant - Philadelphia Location from https://nbcpa.us/small-business-accountant-philadelphia
+2026-03-01 11:18:57,356 [INFO] pipeline:   [43/99] Enriching: JBB & Associates, LLC (https://jbbandassociates.com)
+2026-03-01 11:18:57,356 [INFO] enrichers.website: Enriching JBB & Associates, LLC from https://jbbandassociates.com
+2026-03-01 11:18:58,130 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/jbbassoc
+2026-03-01 11:19:03,693 [INFO] enrichers.website: ✓ JBB & Associates, LLC: Extracted linkedin_url
+2026-03-01 11:19:03,694 [INFO] pipeline:   [44/99] Enriching: Amro Azazi CPA, PC (https://amroazazi.com)
+2026-03-01 11:19:03,694 [INFO] enrichers.website: Enriching Amro Azazi CPA, PC from https://amroazazi.com
+2026-03-01 11:19:05,807 [INFO] pipeline:   [45/99] Enriching: Spina McCarthy & Company, LLC (https://spinacpa.com)
+2026-03-01 11:19:05,807 [INFO] enrichers.website: Enriching Spina McCarthy & Company, LLC from https://spinacpa.com
+2026-03-01 11:19:09,696 [INFO] pipeline:   [46/99] Enriching: EisnerAmper (https://eisneramper.com)
+2026-03-01 11:19:09,696 [INFO] enrichers.website: Enriching EisnerAmper from https://eisneramper.com
+2026-03-01 11:19:10,018 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/162443
+2026-03-01 11:19:11,520 [INFO] enrichers.website: ✓ EisnerAmper: Extracted linkedin_url, contact
+2026-03-01 11:19:11,520 [INFO] pipeline:   [47/99] Enriching: Centri Business Consulting (https://centriconsulting.com/locations/philadelphia/?utm_source=google&utm_medium=organic&utm_campaign=local_philly)
+2026-03-01 11:19:11,520 [INFO] enrichers.website: Enriching Centri Business Consulting from https://centriconsulting.com/locations/philadelphia/?utm_source=google&utm_medium=organic&utm_campaign=local_philly
+2026-03-01 11:19:11,777 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/centri-business-consulting-llc
+2026-03-01 11:19:12,821 [INFO] enrichers.website: ✓ Centri Business Consulting: Extracted linkedin_url, contact
+2026-03-01 11:19:12,821 [INFO] pipeline:   [48/99] Enriching: Keystone Tax Service, Inc (https://keystonetax.com)
+2026-03-01 11:19:12,821 [INFO] enrichers.website: Enriching Keystone Tax Service, Inc from https://keystonetax.com
+2026-03-01 11:19:19,656 [INFO] enrichers.website: ✓ Keystone Tax Service, Inc: Extracted employees, contact
+2026-03-01 11:19:19,657 [INFO] pipeline:   [49/99] Enriching: Stanton Financial Management (https://stanton-financial.com)
+2026-03-01 11:19:19,657 [INFO] enrichers.website: Enriching Stanton Financial Management from https://stanton-financial.com
+2026-03-01 11:19:20,419 [INFO] pipeline:   [50/99] Enriching: Mac Alpine Carll & Co (https://macalpinecarll.com)
+2026-03-01 11:19:20,420 [INFO] enrichers.website: Enriching Mac Alpine Carll & Co from https://macalpinecarll.com
+2026-03-01 11:19:21,381 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/macalpine-carll-&-company
+2026-03-01 11:19:24,196 [INFO] enrichers.website: ✓ Mac Alpine Carll & Co: Extracted linkedin_url, employees
+2026-03-01 11:19:24,196 [INFO] pipeline:   [51/99] Enriching: JMS Tax & Business Solutions (https://jmstaxsolutions.com)
+2026-03-01 11:19:24,196 [INFO] enrichers.website: Enriching JMS Tax & Business Solutions from https://jmstaxsolutions.com
+2026-03-01 11:19:24,834 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/98908641/admin/feed/posts
+2026-03-01 11:19:26,537 [INFO] enrichers.website: ✓ JMS Tax & Business Solutions: Extracted linkedin_url
+2026-03-01 11:19:26,538 [INFO] pipeline:   [52/99] Enriching: BDO (https://bdo.com/locations/bdo-philadelphia-office)
+2026-03-01 11:19:26,538 [INFO] enrichers.website: Enriching BDO from https://bdo.com/locations/bdo-philadelphia-office
+2026-03-01 11:19:27,221 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/bdo-usa-llp
+2026-03-01 11:19:30,652 [INFO] enrichers.website: ✓ BDO: Extracted linkedin_url
+2026-03-01 11:19:30,653 [INFO] pipeline:   [53/99] Enriching: SD Associates, P.C. (https://sdaccounting.com)
+2026-03-01 11:19:30,653 [INFO] enrichers.website: Enriching SD Associates, P.C. from https://sdaccounting.com
+2026-03-01 11:19:31,082 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/siegal-&-drossner
+2026-03-01 11:19:33,447 [INFO] enrichers.website: ✓ SD Associates, P.C.: Extracted linkedin_url
+2026-03-01 11:19:33,447 [INFO] pipeline:   [54/99] Enriching: Citrin Cooperman (https://citrincooperman.com)
+2026-03-01 11:19:33,447 [INFO] enrichers.website: Enriching Citrin Cooperman from https://citrincooperman.com
+2026-03-01 11:19:34,038 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/citrin-cooperman
+2026-03-01 11:19:37,852 [INFO] enrichers.website: ✓ Citrin Cooperman: Extracted linkedin_url, employees
+2026-03-01 11:19:37,852 [INFO] pipeline:   [55/99] Enriching: Wipfli (https://wipfli.com/about-wipfli/locations/pennsylvania/pa-philadelphia?utm_source=gmb&utm_medium=organic)
+2026-03-01 11:19:37,852 [INFO] enrichers.website: Enriching Wipfli from https://wipfli.com/about-wipfli/locations/pennsylvania/pa-philadelphia?utm_source=gmb&utm_medium=organic
+2026-03-01 11:19:39,649 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/wipfli
+2026-03-01 11:19:58,010 [INFO] enrichers.website: ✓ Wipfli: Extracted linkedin_url, employees, contact
+2026-03-01 11:19:58,010 [INFO] pipeline:   [56/99] Enriching: Christopher J. Keiluhn, CPA LLC (https://phillytaxcpa.com)
+2026-03-01 11:19:58,011 [INFO] enrichers.website: Enriching Christopher J. Keiluhn, CPA LLC from https://phillytaxcpa.com
+2026-03-01 11:19:59,034 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/keiluhncpa
+2026-03-01 11:20:02,394 [INFO] enrichers.website: ✓ Christopher J. Keiluhn, CPA LLC: Extracted linkedin_url, employees, contact
+2026-03-01 11:20:02,394 [INFO] pipeline:   [57/99] Enriching: KPMG (https://home.kpmg/us/en/home/about/offices/philadelphia-1.html)
+2026-03-01 11:20:02,394 [INFO] enrichers.website: Enriching KPMG from https://home.kpmg/us/en/home/about/offices/philadelphia-1.html
+2026-03-01 11:20:03,133 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/kpmg-us
+2026-03-01 11:20:05,724 [INFO] enrichers.website: ✓ KPMG: Extracted linkedin_url, employees
+2026-03-01 11:20:05,724 [INFO] pipeline:   [58/99] Enriching: Woodwee Financial Services (https://woodweefinancial.com)
+2026-03-01 11:20:05,725 [INFO] enrichers.website: Enriching Woodwee Financial Services from https://woodweefinancial.com
+2026-03-01 11:20:06,421 [INFO] pipeline:   [59/99] Enriching: Philadelphia Department of Revenue-Center City Philadelphia (https://phila.gov/revenue)
+2026-03-01 11:20:06,422 [INFO] enrichers.website: Enriching Philadelphia Department of Revenue-Center City Philadelphia from https://phila.gov/revenue
+2026-03-01 11:20:09,875 [INFO] enrichers.website: ✓ Philadelphia Department of Revenue-Center City Philadelphia: Extracted contact
+2026-03-01 11:20:09,875 [INFO] pipeline:   [60/99] Enriching: Worry Free Tax & Financial Solutions, LLC (https://wftfs.com)
+2026-03-01 11:20:09,875 [INFO] enrichers.website: Enriching Worry Free Tax & Financial Solutions, LLC from https://wftfs.com
+2026-03-01 11:20:19,123 [INFO] pipeline:   [62/99] Enriching: Wise Financial Profit Inc (https://wisefinancialinc.com)
+2026-03-01 11:20:19,123 [INFO] enrichers.website: Enriching Wise Financial Profit Inc from https://wisefinancialinc.com
+2026-03-01 11:20:28,692 [INFO] pipeline:   [63/99] Enriching: Victor's Office - VJP Services (https://vjpservices.com)
+2026-03-01 11:20:28,693 [INFO] enrichers.website: Enriching Victor's Office - VJP Services from https://vjpservices.com
+2026-03-01 11:20:33,034 [INFO] enrichers.website: ✓ Victor's Office - VJP Services: Extracted employees
+2026-03-01 11:20:33,034 [INFO] pipeline:   [64/99] Enriching: TC Services USA Inc (https://tcservicesusa.com)
+2026-03-01 11:20:33,034 [INFO] enrichers.website: Enriching TC Services USA Inc from https://tcservicesusa.com
+2026-03-01 11:20:33,915 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/wotccom
+2026-03-01 11:20:41,303 [INFO] enrichers.website: ✓ TC Services USA Inc: Extracted linkedin_url
+2026-03-01 11:20:41,303 [INFO] pipeline:   [65/99] Enriching: Wiser Tax Solutions LLC (https://wisertaxsolutions.com)
+2026-03-01 11:20:41,304 [INFO] enrichers.website: Enriching Wiser Tax Solutions LLC from https://wisertaxsolutions.com
+2026-03-01 11:20:44,071 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/wisertaxsolutions
+2026-03-01 11:20:56,334 [INFO] enrichers.website: ✓ Wiser Tax Solutions LLC: Extracted linkedin_url, employees
+2026-03-01 11:20:56,334 [INFO] pipeline:   [67/99] Enriching: Accountants For You & OfficeStaff For You (https://accountantsforyou.com)
+2026-03-01 11:20:56,334 [INFO] enrichers.website: Enriching Accountants For You & OfficeStaff For You from https://accountantsforyou.com
+2026-03-01 11:20:58,291 [INFO] pipeline:   [69/99] Enriching: Flex Tax and Consulting Group (https://flextcg.com)
+2026-03-01 11:20:58,292 [INFO] enrichers.website: Enriching Flex Tax and Consulting Group from https://flextcg.com
+2026-03-01 11:21:32,525 [INFO] enrichers.website: ✓ Flex Tax and Consulting Group: Extracted employees
+2026-03-01 11:21:32,525 [INFO] pipeline:   [70/99] Enriching: BASTA & COMPANY (https://bastacpa.com/?utm_source=web&utm_medium=googlebusinesspage)
+2026-03-01 11:21:32,525 [INFO] enrichers.website: Enriching BASTA & COMPANY from https://bastacpa.com/?utm_source=web&utm_medium=googlebusinesspage
+2026-03-01 11:21:34,379 [INFO] enrichers.website: ✓ LinkedIn URL: https://linkedin.com/company/basta-company
+2026-03-01 11:21:48,248 [INFO] enrichers.website: ✓ BASTA & COMPANY: Extracted linkedin_url, employees
+2026-03-01 11:21:48,252 [INFO] pipeline:   [71/99] Enriching: B.O.L. Global, Inc. (https://bolglobalcpa.com)
+2026-03-01 11:21:48,252 [INFO] enrichers.website: Enriching B.O.L. Global, Inc. from https://bolglobalcpa.com
+2026-03-01 11:21:49,145 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/b-o-l-global-inc
+2026-03-01 11:21:51,457 [INFO] enrichers.website: ✓ B.O.L. Global, Inc.: Extracted linkedin_url, employees
+2026-03-01 11:21:51,457 [INFO] pipeline:   [72/99] Enriching: Kruze Consulting (https://kruzeconsulting.com)
+2026-03-01 11:21:51,457 [INFO] enrichers.website: Enriching Kruze Consulting from https://kruzeconsulting.com
+2026-03-01 11:21:51,961 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/kruze-consulting
+2026-03-01 11:21:53,994 [INFO] enrichers.website: ✓ Kruze Consulting: Extracted linkedin_url
+2026-03-01 11:21:53,994 [INFO] pipeline:   [73/99] Enriching: Tony Quach & Co. CPA (https://tonyquach.com)
+2026-03-01 11:21:53,994 [INFO] enrichers.website: Enriching Tony Quach & Co. CPA from https://tonyquach.com
+2026-03-01 11:21:59,558 [INFO] pipeline:   [74/99] Enriching: Steve Rabin CPA (https://taxservice2u.com)
+2026-03-01 11:21:59,559 [INFO] enrichers.website: Enriching Steve Rabin CPA from https://taxservice2u.com
+2026-03-01 11:22:00,141 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/steve-rabin-cpa
+2026-03-01 11:22:01,512 [INFO] enrichers.website: ✓ Steve Rabin CPA: Extracted linkedin_url
+2026-03-01 11:22:01,512 [INFO] pipeline:   [75/99] Enriching: Scott Porter, CPA (https://baycpafirm.com)
+2026-03-01 11:22:01,513 [INFO] enrichers.website: Enriching Scott Porter, CPA from https://baycpafirm.com
+2026-03-01 11:22:02,201 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/scott-porter-corporation-pc
+2026-03-01 11:22:03,648 [INFO] enrichers.website: ✓ Scott Porter, CPA: Extracted linkedin_url
+2026-03-01 11:22:03,649 [INFO] pipeline:   [76/99] Enriching: Swanson Reed | Specialist R&D Tax Advisors (https://swansonreed.com/california)
+2026-03-01 11:22:03,649 [INFO] enrichers.website: Enriching Swanson Reed | Specialist R&D Tax Advisors from https://swansonreed.com/california
+2026-03-01 11:23:19,401 [INFO] enrichers.website: ✓ Swanson Reed | Specialist R&D Tax Advisors: Extracted contact
+2026-03-01 11:23:19,402 [INFO] pipeline:   [77/99] Enriching: Withum (https://withum.com/our-locations/san-francisco-ca/?utm_source=gmb&utm_medium=referral&utm_campaign=san%20francisco)
+2026-03-01 11:23:19,402 [INFO] enrichers.website: Enriching Withum from https://withum.com/our-locations/san-francisco-ca/?utm_source=gmb&utm_medium=referral&utm_campaign=san%20francisco
+2026-03-01 11:23:19,838 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/withumsmith-brown
+2026-03-01 11:23:21,981 [INFO] enrichers.website: ✓ Withum: Extracted linkedin_url, employees
+2026-03-01 11:23:21,981 [INFO] pipeline:   [78/99] Enriching: SD Mayer & Associates (https://sdmayer.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb&utm_content=san-francisco)
+2026-03-01 11:23:21,982 [INFO] enrichers.website: Enriching SD Mayer & Associates from https://sdmayer.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb&utm_content=san-francisco
+2026-03-01 11:23:22,474 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/sdmayerllp
+2026-03-01 11:23:25,348 [INFO] enrichers.website: ✓ SD Mayer & Associates: Extracted linkedin_url, employees, contact
+2026-03-01 11:23:25,348 [INFO] pipeline:   [79/99] Enriching: Why Blu (https://whyblu.com)
+2026-03-01 11:23:25,348 [INFO] enrichers.website: Enriching Why Blu from https://whyblu.com
+2026-03-01 11:23:25,839 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/whyblu
+2026-03-01 11:23:29,098 [INFO] enrichers.website: ✓ Why Blu: Extracted linkedin_url
+2026-03-01 11:23:29,098 [INFO] pipeline:   [80/99] Enriching: ASAM LLP (https://asamllp.com)
+2026-03-01 11:23:29,098 [INFO] enrichers.website: Enriching ASAM LLP from https://asamllp.com
+2026-03-01 11:24:08,939 [INFO] pipeline:   [81/99] Enriching: theTaxGuySF (https://thetaxguysf.com)
+2026-03-01 11:24:08,940 [INFO] enrichers.website: Enriching theTaxGuySF from https://thetaxguysf.com
+2026-03-01 11:24:12,101 [INFO] pipeline:   [82/99] Enriching: Block Advisors (https://blockadvisors.com/tax-office-near-me/california/san-francisco/6189/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 11:24:12,101 [INFO] enrichers.website: Enriching Block Advisors from https://blockadvisors.com/tax-office-near-me/california/san-francisco/6189/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local
+2026-03-01 11:24:14,646 [INFO] pipeline:   [83/99] Enriching: Grant Thornton (https://grantthornton.com/offices/california/san-francisco)
+2026-03-01 11:24:14,647 [INFO] enrichers.website: Enriching Grant Thornton from https://grantthornton.com/offices/california/san-francisco
+2026-03-01 11:24:14,916 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/grant-thornton-us
+2026-03-01 11:24:15,833 [INFO] enrichers.website: ✓ Grant Thornton: Extracted linkedin_url
+2026-03-01 11:24:15,834 [INFO] pipeline:   [84/99] Enriching: Safe Harbor, CPA and Accountants (https://safeharborcpa.com)
+2026-03-01 11:24:15,834 [INFO] enrichers.website: Enriching Safe Harbor, CPA and Accountants from https://safeharborcpa.com
+2026-03-01 11:24:17,066 [INFO] enrichers.website: ✓ LinkedIn URL: http://www.linkedin.com/company/safe-harbor-llp
+2026-03-01 11:24:39,587 [INFO] enrichers.website: ✓ Safe Harbor, CPA and Accountants: Extracted linkedin_url
+2026-03-01 11:24:39,588 [INFO] pipeline:   [85/99] Enriching: Leung, Louie, Ip & Co. LLP (https://llicocpa.com)
+2026-03-01 11:24:39,588 [INFO] enrichers.website: Enriching Leung, Louie, Ip & Co. LLP from https://llicocpa.com
+2026-03-01 11:24:48,656 [INFO] enrichers.website: ✓ Leung, Louie, Ip & Co. LLP: Extracted contact
+2026-03-01 11:24:48,656 [INFO] pipeline:   [86/99] Enriching: Moskowitz LLP (https://moskowitzllp.com/?utm_source=google-business-profile&utm_medium=organic&utm_campaign=branded)
+2026-03-01 11:24:48,657 [INFO] enrichers.website: Enriching Moskowitz LLP from https://moskowitzllp.com/?utm_source=google-business-profile&utm_medium=organic&utm_campaign=branded
+2026-03-01 11:24:50,353 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/moskowitz-llp
+2026-03-01 11:25:15,264 [INFO] enrichers.website: ✓ Moskowitz LLP: Extracted linkedin_url, employees
+2026-03-01 11:25:15,265 [INFO] pipeline:   [88/99] Enriching: Shwiff, Levy & Polo, LLP (https://slpconsults.cpa)
+2026-03-01 11:25:15,266 [INFO] enrichers.website: Enriching Shwiff, Levy & Polo, LLP from https://slpconsults.cpa
+2026-03-01 11:25:21,585 [INFO] pipeline:   [89/99] Enriching: Cost Segregation Consultants, LLC (https://costsegconsultants.com)
+2026-03-01 11:25:21,585 [INFO] enrichers.website: Enriching Cost Segregation Consultants, LLC from https://costsegconsultants.com
+2026-03-01 11:25:29,257 [INFO] pipeline:   [90/99] Enriching: Delerme CPA (https://delermecpa.com)
+2026-03-01 11:25:29,258 [INFO] enrichers.website: Enriching Delerme CPA from https://delermecpa.com
+2026-03-01 11:25:29,934 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/delermecpa
+2026-03-01 11:25:31,275 [INFO] enrichers.website: ✓ Delerme CPA: Extracted linkedin_url
+2026-03-01 11:25:31,275 [INFO] pipeline:   [91/99] Enriching: Forvis Mazars, LLP (https://forvismazars.us/about-us/locations/atlanta-ga?utm_source=yext&utm_medium=organic&utm_campaign=yext)
+2026-03-01 11:25:31,276 [INFO] enrichers.website: Enriching Forvis Mazars, LLP from https://forvismazars.us/about-us/locations/atlanta-ga?utm_source=yext&utm_medium=organic&utm_campaign=yext
+2026-03-01 11:25:31,718 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/forvis-mazars-us
+2026-03-01 11:25:33,404 [INFO] enrichers.website: ✓ Forvis Mazars, LLP: Extracted linkedin_url
+2026-03-01 11:25:33,404 [INFO] pipeline:   [92/99] Enriching: Roe CPA, P.C. (https://roecpa.com)
+2026-03-01 11:25:33,404 [INFO] enrichers.website: Enriching Roe CPA, P.C. from https://roecpa.com
+2026-03-01 11:25:35,827 [INFO] pipeline:   [94/99] Enriching: HLB Gross Collins, P.C. (https://hlbgrosscollins.com)
+2026-03-01 11:25:35,827 [INFO] enrichers.website: Enriching HLB Gross Collins, P.C. from https://hlbgrosscollins.com
+2026-03-01 11:25:36,005 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/hlb-gross-collins-p.c.
+2026-03-01 11:25:38,369 [INFO] enrichers.website: ✓ HLB Gross Collins, P.C.: Extracted linkedin_url, employees
+2026-03-01 11:25:38,370 [INFO] pipeline:   [95/99] Enriching: De Sensi & Associates, LLC. (https://taxofficechicago.com)
+2026-03-01 11:25:38,370 [INFO] enrichers.website: Enriching De Sensi & Associates, LLC. from https://taxofficechicago.com
+2026-03-01 11:25:39,522 [INFO] pipeline:   [96/99] Enriching: R&M Consulting (https://rmc-chi.com)
+2026-03-01 11:25:39,522 [INFO] enrichers.website: Enriching R&M Consulting from https://rmc-chi.com
+2026-03-01 11:25:39,701 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/r&m-consulting
+2026-03-01 11:25:42,606 [INFO] enrichers.website: ✓ R&M Consulting: Extracted linkedin_url
+2026-03-01 11:25:42,607 [INFO] pipeline:   [97/99] Enriching: RR Financial Services, Inc (https://rrfinancialservices.com)
+2026-03-01 11:25:42,607 [INFO] enrichers.website: Enriching RR Financial Services, Inc from https://rrfinancialservices.com
+2026-03-01 11:25:43,645 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/rr-financial-services-inc
+2026-03-01 11:25:46,028 [INFO] enrichers.website: ✓ RR Financial Services, Inc: Extracted linkedin_url
+2026-03-01 11:25:46,028 [INFO] pipeline:   [98/99] Enriching: Drade Consulting (CPA) LLC (https://dradeconsulting.com)
+2026-03-01 11:25:46,028 [INFO] enrichers.website: Enriching Drade Consulting (CPA) LLC from https://dradeconsulting.com
+2026-03-01 11:25:46,412 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/drade-consulting
+2026-03-01 11:25:47,593 [INFO] enrichers.website: ✓ Drade Consulting (CPA) LLC: Extracted linkedin_url, employees
+2026-03-01 11:25:47,593 [INFO] pipeline:   [99/99] Enriching: Myriad Ireland - R&D Tax Credit & Grant Funding Advisers (https://myriadassociates.ie)
+2026-03-01 11:25:47,594 [INFO] enrichers.website: Enriching Myriad Ireland - R&D Tax Credit & Grant Funding Advisers from https://myriadassociates.ie
+2026-03-01 11:25:49,509 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/myriad-associates-ireland
+2026-03-01 11:25:52,141 [INFO] enrichers.website: ✓ Myriad Ireland - R&D Tax Credit & Grant Funding Advisers: Extracted linkedin_url, employees
+2026-03-01 11:25:52,141 [INFO] pipeline:   → Enriched 93 companies from websites
+2026-03-01 11:25:52,141 [INFO] pipeline: 
+📊 STEP 4: Scoring companies...
+2026-03-01 11:25:52,141 [INFO] pipeline: 
+🏷️  STEP 5: Applying thesis filters...
+2026-03-01 11:25:52,141 [INFO] pipeline:   → Excluded: 9 companies
+2026-03-01 11:25:52,141 [INFO] pipeline:     - SD Mayer & Associates: Exclusively focused on Property Tax consulting
+2026-03-01 11:25:52,141 [INFO] pipeline:     - TC Services USA Inc: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 11:25:52,141 [INFO] pipeline:     - R&M Consulting: Exclusively focused on Property Tax consulting
+2026-03-01 11:25:52,141 [INFO] pipeline:     - TRI-MERIT SPECIALTY TAX PROFESSIONALS: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 11:25:52,141 [INFO] pipeline:     - Strategic Tax Planning, LLC: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 11:25:52,141 [INFO] pipeline:     - Philadelphia Department of Revenue-Center City Philadelphia: Exclusively focused on Property Tax consulting
+2026-03-01 11:25:52,141 [INFO] pipeline:     - Moskowitz LLP: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 11:25:52,142 [INFO] pipeline:     - Christopher J. Keiluhn, CPA LLC: Exclusively focused on Property Tax consulting
+2026-03-01 11:25:52,142 [INFO] pipeline:     - SD Associates, P.C.: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 11:25:52,142 [INFO] pipeline:   → Active targets: 90 companies
+2026-03-01 11:25:52,142 [INFO] pipeline: 
+💾 STEP 6: Saving to database...
+2026-03-01 11:25:52,422 [INFO] pipeline:   → Saved 99 companies to database
+2026-03-01 11:25:52,422 [INFO] pipeline: 
+📁 STEP 7: Exporting data...
+2026-03-01 11:25:52,428 [INFO] pipeline:   → Exported CSV: data/companies.csv
+2026-03-01 11:25:52,435 [INFO] pipeline:   → Exported JSON: data/companies.json
+2026-03-01 11:25:52,436 [INFO] pipeline: 
+============================================================
+2026-03-01 11:25:52,439 [INFO] pipeline: PIPELINE SUMMARY
+2026-03-01 11:25:52,439 [INFO] pipeline: ============================================================
+2026-03-01 11:25:52,439 [INFO] pipeline:   Raw results collected:  100
+2026-03-01 11:25:52,439 [INFO] pipeline:   After deduplication:    99
+2026-03-01 11:25:52,439 [INFO] pipeline:   Excluded:               9
+2026-03-01 11:25:52,439 [INFO] pipeline:   Final active targets:   90
+2026-03-01 11:25:52,440 [INFO] pipeline: 
+  Service Distribution:
+2026-03-01 11:25:52,440 [INFO] pipeline:     R&D Tax Credits: 29
+2026-03-01 11:25:52,440 [INFO] pipeline:     Cost Segregation: 14
+2026-03-01 11:25:52,440 [INFO] pipeline:     Sales & Use Tax: 13
+2026-03-01 11:25:52,440 [INFO] pipeline:     Work Opportunity Tax Credits: 9
+2026-03-01 11:25:52,440 [INFO] pipeline: 
+  Top States:
+2026-03-01 11:25:52,440 [INFO] pipeline:     PA: 28
+2026-03-01 11:25:52,440 [INFO] pipeline:     GA: 19
+2026-03-01 11:25:52,440 [INFO] pipeline:     CA: 19
+2026-03-01 11:25:52,440 [INFO] pipeline:     MA: 8
+2026-03-01 11:25:52,440 [INFO] pipeline:     TX: 8
+2026-03-01 11:25:52,440 [INFO] pipeline:     IL: 3
+2026-03-01 11:25:52,440 [INFO] pipeline:     OH: 1
+2026-03-01 11:25:52,440 [INFO] pipeline:     NY: 1
+2026-03-01 11:25:52,440 [INFO] pipeline:     UT: 1
+2026-03-01 11:25:52,440 [INFO] pipeline: 
+  Data Coverage:
+2026-03-01 11:25:52,440 [INFO] pipeline:     With website:   84/90 (93%)
+2026-03-01 11:25:52,440 [INFO] pipeline:     With revenue:   0/90 (0%)
+2026-03-01 11:25:52,440 [INFO] pipeline:     With employees: 25/90 (28%)
+2026-03-01 11:25:52,440 [INFO] pipeline:     With contact:   3/90 (3%)
+2026-03-01 11:25:52,440 [INFO] pipeline: 
+============================================================
+2026-03-01 11:25:52,440 [INFO] pipeline: Database: data/companies.db
+2026-03-01 11:25:52,440 [INFO] pipeline: CSV Export: data/companies.csv
+2026-03-01 11:25:52,440 [INFO] pipeline: JSON Export: data/companies.json
+2026-03-01 11:25:52,440 [INFO] pipeline: ============================================================
+2026-03-01 11:55:29,364 [INFO] __main__: API Keys configured:
+2026-03-01 11:55:29,365 [INFO] __main__:   Google Places: ✓
+2026-03-01 11:55:29,365 [INFO] __main__:   SerpAPI:       ✓
+2026-03-01 11:55:29,372 [INFO] pipeline: ============================================================
+2026-03-01 11:55:29,372 [INFO] pipeline: Pipeline started: Specialty Tax Advisory Services
+2026-03-01 11:55:29,372 [INFO] pipeline: Target services: ['R&D Tax Credits', 'Cost Segregation', 'Work Opportunity Tax Credits', 'Sales & Use Tax']
+2026-03-01 11:55:29,372 [INFO] pipeline: ============================================================
+2026-03-01 11:55:29,372 [INFO] pipeline: 
+📡 STEP 1: Collecting data from sources...
+2026-03-01 11:55:29,372 [INFO] scrapers.google_places: Google Places: Running 50 search queries (randomized for balanced coverage)...
+2026-03-01 11:55:29,372 [INFO] scrapers.google_places:   [1/50] Searching: 'sales and use tax consulting' near 'Atlanta, GA'
+2026-03-01 11:55:30,307 [INFO] scrapers.google_places:   [2/50] Searching: 'cost segregation company' near 'Dallas, TX'
+2026-03-01 11:55:31,061 [INFO] scrapers.google_places:   [3/50] Searching: 'cost segregation company' near 'Seattle, WA'
+2026-03-01 11:55:32,032 [INFO] scrapers.google_places:   [4/50] Searching: 'WOTC tax credit services' near 'Chicago, IL'
+2026-03-01 11:55:32,959 [INFO] scrapers.google_places:   [5/50] Searching: 'specialty tax advisory firm' near 'Dallas, TX'
+2026-03-01 11:55:33,909 [INFO] scrapers.google_places:   [6/50] Searching: 'WOTC tax credit services' near 'Atlanta, GA'
+2026-03-01 11:55:34,936 [INFO] scrapers.google_places:   [7/50] Searching: 'specialty tax advisory firm' near 'Seattle, WA'
+2026-03-01 11:55:35,953 [INFO] scrapers.google_places:   [8/50] Searching: 'sales and use tax consulting' near 'San Francisco, CA'
+2026-03-01 11:55:37,064 [INFO] scrapers.google_places: Reached max company cap, stopping.
+2026-03-01 11:55:37,065 [INFO] scrapers.google_places: Google Places: Found 100 unique companies
+2026-03-01 11:55:37,065 [INFO] scrapers.google_places:   Service distribution: R&D=0, CostSeg=5, WOTC=32, SUT=23
+2026-03-01 11:55:37,065 [INFO] pipeline:   → Google Places: 100 companies
+2026-03-01 11:55:37,067 [INFO] scrapers.clutch_directory: Clutch Directory: Searching 4 categories...
+2026-03-01 11:55:37,228 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-consulting: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-consulting
+2026-03-01 11:55:38,200 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-advisory: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-advisory
+2026-03-01 11:55:39,216 [ERROR] scrapers.clutch_directory: Error scraping page 0 of accounting-firms/tax-services: 403 Client Error: Forbidden for url: https://clutch.co/directory/accounting-firms/tax-services
+2026-03-01 11:55:40,201 [ERROR] scrapers.clutch_directory: Error scraping page 0 of business-services/tax-preparation: 403 Client Error: Forbidden for url: https://clutch.co/directory/business-services/tax-preparation
+2026-03-01 11:55:40,201 [INFO] scrapers.clutch_directory: Clutch Directory: Found 0 companies
+2026-03-01 11:55:40,201 [INFO] pipeline:   → Clutch Directory: 0 companies
+2026-03-01 11:55:40,201 [INFO] pipeline:   → SerpAPI: Disabled (using Google Places only)
+2026-03-01 11:55:40,201 [INFO] pipeline: 
+  Total raw results: 100
+2026-03-01 11:55:40,202 [INFO] pipeline: 
+🔄 STEP 2: Deduplicating records...
+2026-03-01 11:55:40,202 [INFO] dedup: Deduplication: Starting with 100 companies
+2026-03-01 11:55:40,202 [INFO] dedup:   After domain dedup: 100
+2026-03-01 11:55:40,254 [INFO] dedup:   After name dedup: 98
+2026-03-01 11:55:40,254 [INFO] dedup: Deduplication: Final count = 98
+2026-03-01 11:55:40,254 [INFO] pipeline:   → After dedup: 98 companies
+2026-03-01 11:55:40,254 [INFO] pipeline: 
+🔍 STEP 3: Enriching from company websites...
+2026-03-01 11:55:40,254 [INFO] pipeline:   → Fetching website URLs from Google Places...
+2026-03-01 11:56:29,388 [INFO] pipeline:   → Found 81 websites
+2026-03-01 11:56:29,390 [INFO] pipeline:   → Visiting websites for enrichment...
+2026-03-01 11:56:29,390 [INFO] pipeline:   [1/98] Enriching: Advisors Professional Services Inc (https://advisorstaxpro.com)
+2026-03-01 11:56:29,391 [INFO] enrichers.website: Enriching Advisors Professional Services Inc from https://advisorstaxpro.com
+2026-03-01 11:56:31,182 [INFO] pipeline:   [2/98] Enriching: W3 Business & Tax Consultants, Inc. (https://warrenlee3.net)
+2026-03-01 11:56:31,183 [INFO] enrichers.website: Enriching W3 Business & Tax Consultants, Inc. from https://warrenlee3.net
+2026-03-01 11:56:31,830 [INFO] pipeline:   [3/98] Enriching: Levy Tax & Consulting LLC (https://levycpafirm.com)
+2026-03-01 11:56:31,831 [INFO] enrichers.website: Enriching Levy Tax & Consulting LLC from https://levycpafirm.com
+2026-03-01 11:56:32,381 [INFO] pipeline:   [4/98] Enriching: Distinct Tax Consulting Group (https://distincttax.com)
+2026-03-01 11:56:32,382 [INFO] enrichers.website: Enriching Distinct Tax Consulting Group from https://distincttax.com
+2026-03-01 11:56:32,799 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/22311119
+2026-03-01 11:56:34,830 [INFO] enrichers.website: ✓ Distinct Tax Consulting Group: Extracted linkedin_url
+2026-03-01 11:56:34,830 [INFO] pipeline:   [5/98] Enriching: Clarke CPA LLC (https://clarkecpallc.com)
+2026-03-01 11:56:34,830 [INFO] enrichers.website: Enriching Clarke CPA LLC from https://clarkecpallc.com
+2026-03-01 11:56:35,134 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/clarkecpallc
+2026-03-01 11:56:36,830 [INFO] enrichers.website: ✓ Clarke CPA LLC: Extracted linkedin_url, employees
+2026-03-01 11:56:36,830 [INFO] pipeline:   [6/98] Enriching: The Peck Group, LC (https://pecklc.com)
+2026-03-01 11:56:36,830 [INFO] enrichers.website: Enriching The Peck Group, LC from https://pecklc.com
+2026-03-01 11:56:39,331 [INFO] pipeline:   [7/98] Enriching: Taxes David (https://taxesdavid.com)
+2026-03-01 11:56:39,332 [INFO] enrichers.website: Enriching Taxes David from https://taxesdavid.com
+2026-03-01 11:56:40,042 [INFO] pipeline:   [8/98] Enriching: Cumberland Law Group, LLC | Tax Attorney (https://cumberlandlawatlanta.com/?utm_source=gbp-atlanta)
+2026-03-01 11:56:40,042 [INFO] enrichers.website: Enriching Cumberland Law Group, LLC | Tax Attorney from https://cumberlandlawatlanta.com/?utm_source=gbp-atlanta
+2026-03-01 11:56:43,843 [INFO] enrichers.website: ✓ Cumberland Law Group, LLC | Tax Attorney: Extracted employees
+2026-03-01 11:56:43,844 [INFO] pipeline:   [9/98] Enriching: Manay CPA Inc. (https://manaycpa.com)
+2026-03-01 11:56:43,845 [INFO] enrichers.website: Enriching Manay CPA Inc. from https://manaycpa.com
+2026-03-01 11:56:46,777 [INFO] enrichers.website: ✓ LinkedIn URL: https://tr.linkedin.com/company/manay-cpa
+2026-03-01 11:57:05,628 [INFO] enrichers.website: ✓ Manay CPA Inc.: Extracted linkedin_url, employees
+2026-03-01 11:57:05,628 [INFO] pipeline:   [10/98] Enriching: Carter & Company Business Accounting Firm Atlanta CPA (https://cartercompanycpa.com)
+2026-03-01 11:57:05,628 [INFO] enrichers.website: Enriching Carter & Company Business Accounting Firm Atlanta CPA from https://cartercompanycpa.com
+2026-03-01 11:57:06,019 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/carter-company
+2026-03-01 11:57:07,330 [INFO] enrichers.website: ✓ Carter & Company Business Accounting Firm Atlanta CPA: Extracted linkedin_url
+2026-03-01 11:57:07,330 [INFO] pipeline:   [11/98] Enriching: King of Kings Firm LLC (https://kingofkingsllc.com/?utm_source=gbp&utm_medium=organic)
+2026-03-01 11:57:07,330 [INFO] enrichers.website: Enriching King of Kings Firm LLC from https://kingofkingsllc.com/?utm_source=gbp&utm_medium=organic
+2026-03-01 11:57:07,577 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/king-of-kings-firm-llc
+2026-03-01 11:57:08,683 [INFO] enrichers.website: ✓ King of Kings Firm LLC: Extracted linkedin_url, employees
+2026-03-01 11:57:08,683 [INFO] pipeline:   [12/98] Enriching: Eleven30 Financial Group (https://eleven30fg.com)
+2026-03-01 11:57:08,683 [INFO] enrichers.website: Enriching Eleven30 Financial Group from https://eleven30fg.com
+2026-03-01 11:57:10,866 [INFO] pipeline:   [13/98] Enriching: Tax Solutions Atlanta USA (https://taxsolutionsatlanta.net)
+2026-03-01 11:57:10,867 [INFO] enrichers.website: Enriching Tax Solutions Atlanta USA from https://taxsolutionsatlanta.net
+2026-03-01 11:57:21,525 [INFO] enrichers.website: ✓ Tax Solutions Atlanta USA: Extracted contact
+2026-03-01 11:57:21,526 [INFO] pipeline:   [14/98] Enriching: Maven Cost Segregation Tax Advisors (https://mavencostseg.com)
+2026-03-01 11:57:21,526 [INFO] enrichers.website: Enriching Maven Cost Segregation Tax Advisors from https://mavencostseg.com
+2026-03-01 11:57:22,410 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/mavencostseg
+2026-03-01 11:57:26,591 [INFO] enrichers.website: ✓ Maven Cost Segregation Tax Advisors: Extracted linkedin_url
+2026-03-01 11:57:26,591 [INFO] pipeline:   [15/98] Enriching: KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) (https://kbkg.com)
+2026-03-01 11:57:26,591 [INFO] enrichers.website: Enriching KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) from https://kbkg.com
+2026-03-01 11:57:27,877 [INFO] pipeline:   [16/98] Enriching: Cost Segregation Consultants, LLC (https://costsegconsultants.com)
+2026-03-01 11:57:27,878 [INFO] enrichers.website: Enriching Cost Segregation Consultants, LLC from https://costsegconsultants.com
+2026-03-01 11:57:36,875 [INFO] pipeline:   [17/98] Enriching: Kevin Cawley - Cost Segregation Services Inc. (https://kevincawley.costsegregationservices.com)
+2026-03-01 11:57:36,875 [INFO] enrichers.website: Enriching Kevin Cawley - Cost Segregation Services Inc. from https://kevincawley.costsegregationservices.com
+2026-03-01 11:57:37,504 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/cost-segregation-services-inc-
+2026-03-01 11:57:38,869 [INFO] enrichers.website: ✓ Kevin Cawley - Cost Segregation Services Inc.: Extracted linkedin_url
+2026-03-01 11:57:38,870 [INFO] pipeline:   [19/98] Enriching: CDC Tax Professional & Services Inc. (https://cdctaxservices.com/english)
+2026-03-01 11:57:38,870 [INFO] enrichers.website: Enriching CDC Tax Professional & Services Inc. from https://cdctaxservices.com/english
+2026-03-01 11:57:41,489 [INFO] pipeline:   [20/98] Enriching: W.E.D. Tax and Accounting Services Inc (https://wedtax.com)
+2026-03-01 11:57:41,489 [INFO] enrichers.website: Enriching W.E.D. Tax and Accounting Services Inc from https://wedtax.com
+2026-03-01 11:58:05,139 [INFO] pipeline:   [23/98] Enriching: Jeffrey R. Wolfe Accounting & Tax Services (https://jeffreyrwolfeaccountingandtaxservices.com)
+2026-03-01 11:58:05,139 [INFO] enrichers.website: Enriching Jeffrey R. Wolfe Accounting & Tax Services from https://jeffreyrwolfeaccountingandtaxservices.com
+2026-03-01 11:58:06,599 [INFO] enrichers.website: ✓ Jeffrey R. Wolfe Accounting & Tax Services: Extracted contact
+2026-03-01 11:58:06,600 [INFO] pipeline:   [26/98] Enriching: Porte Brown (https://portebrown.com)
+2026-03-01 11:58:06,600 [INFO] enrichers.website: Enriching Porte Brown from https://portebrown.com
+2026-03-01 11:58:07,260 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/porte-brown-llc
+2026-03-01 11:58:09,627 [INFO] enrichers.website: ✓ Porte Brown: Extracted linkedin_url, employees
+2026-03-01 11:58:09,627 [INFO] pipeline:   [27/98] Enriching: Windy City Tax Relief (https://windycitytaxrelief.com/?utm_source=gbp&utm_medium=google&utm_campaign=click)
+2026-03-01 11:58:09,627 [INFO] enrichers.website: Enriching Windy City Tax Relief from https://windycitytaxrelief.com/?utm_source=gbp&utm_medium=google&utm_campaign=click
+2026-03-01 11:58:10,804 [INFO] pipeline:   [29/98] Enriching: TRI-MERIT SPECIALTY TAX PROFESSIONALS (https://tri-merit.com)
+2026-03-01 11:58:10,804 [INFO] enrichers.website: Enriching TRI-MERIT SPECIALTY TAX PROFESSIONALS from https://tri-merit.com
+2026-03-01 11:58:10,998 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/2289094
+2026-03-01 11:58:17,020 [INFO] enrichers.website: ✓ TRI-MERIT SPECIALTY TAX PROFESSIONALS: Extracted linkedin_url
+2026-03-01 11:58:17,022 [INFO] pipeline:   [30/98] Enriching: H&R Block (https://hrblock.com/tax-office-near-me/illinois/chicago/13375/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 11:58:17,022 [INFO] enrichers.website: Enriching H&R Block from https://hrblock.com/tax-office-near-me/illinois/chicago/13375/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local
+2026-03-01 11:58:19,616 [INFO] pipeline:   [32/98] Enriching: TC Services USA Inc (https://tcservicesusa.com)
+2026-03-01 11:58:19,616 [INFO] enrichers.website: Enriching TC Services USA Inc from https://tcservicesusa.com
+2026-03-01 11:58:20,434 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/wotccom
+2026-03-01 11:58:27,376 [INFO] enrichers.website: ✓ TC Services USA Inc: Extracted linkedin_url
+2026-03-01 11:58:27,376 [INFO] pipeline:   [34/98] Enriching: VMR Financial Strategies (https://vmrtaxservice.com)
+2026-03-01 11:58:27,376 [INFO] enrichers.website: Enriching VMR Financial Strategies from https://vmrtaxservice.com
+2026-03-01 11:58:27,454 [INFO] pipeline:   [37/98] Enriching: TAX ACCOUNTING SERVICES (https://windycityaccountingservices.com)
+2026-03-01 11:58:27,454 [INFO] enrichers.website: Enriching TAX ACCOUNTING SERVICES from https://windycityaccountingservices.com
+2026-03-01 11:58:31,517 [INFO] pipeline:   [38/98] Enriching: Tax Advisors Group Inc (https://taxadvisorsgroup.com)
+2026-03-01 11:58:31,517 [INFO] enrichers.website: Enriching Tax Advisors Group Inc from https://taxadvisorsgroup.com
+2026-03-01 11:58:35,102 [INFO] pipeline:   [39/98] Enriching: Hegwood Group, LP (https://hegwoodgroup.com)
+2026-03-01 11:58:35,103 [INFO] enrichers.website: Enriching Hegwood Group, LP from https://hegwoodgroup.com
+2026-03-01 11:59:08,347 [INFO] enrichers.website: ✓ Hegwood Group, LP: Extracted employees
+2026-03-01 11:59:08,347 [INFO] pipeline:   [40/98] Enriching: H & M Tax Group (https://hmtaxgroup.com)
+2026-03-01 11:59:08,347 [INFO] enrichers.website: Enriching H & M Tax Group from https://hmtaxgroup.com
+2026-03-01 11:59:09,295 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/h-m-tax-group
+2026-03-01 11:59:17,471 [INFO] enrichers.website: ✓ H & M Tax Group: Extracted linkedin_url, contact
+2026-03-01 11:59:17,472 [INFO] pipeline:   [41/98] Enriching: Mostafa Ibrahim Sabry CPA, LLC - Mostafa Ibrahim CPA (https://mostafaibrahimcpa.com)
+2026-03-01 11:59:17,472 [INFO] enrichers.website: Enriching Mostafa Ibrahim Sabry CPA, LLC - Mostafa Ibrahim CPA from https://mostafaibrahimcpa.com
+2026-03-01 11:59:23,096 [INFO] enrichers.website: ✓ Mostafa Ibrahim Sabry CPA, LLC - Mostafa Ibrahim CPA: Extracted contact
+2026-03-01 11:59:23,096 [INFO] pipeline:   [42/98] Enriching: IRSProb.com (https://irsprob.com)
+2026-03-01 11:59:23,096 [INFO] enrichers.website: Enriching IRSProb.com from https://irsprob.com
+2026-03-01 11:59:24,231 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/irsprob
+2026-03-01 11:59:37,385 [INFO] enrichers.website: ✓ IRSProb.com: Extracted linkedin_url, employees
+2026-03-01 11:59:37,385 [INFO] pipeline:   [43/98] Enriching: J Chester & Associates, Inc Dallas CPA Firm (https://jchestercpa.com)
+2026-03-01 11:59:37,385 [INFO] enrichers.website: Enriching J Chester & Associates, Inc Dallas CPA Firm from https://jchestercpa.com
+2026-03-01 11:59:40,788 [INFO] enrichers.website: ✓ J Chester & Associates, Inc Dallas CPA Firm: Extracted contact
+2026-03-01 11:59:40,789 [INFO] pipeline:   [44/98] Enriching: Hammer Tax & Advisory, PLLC (https://htaxadvisory.com)
+2026-03-01 11:59:40,789 [INFO] enrichers.website: Enriching Hammer Tax & Advisory, PLLC from https://htaxadvisory.com
+2026-03-01 11:59:44,307 [INFO] enrichers.website: ✓ Hammer Tax & Advisory, PLLC: Extracted contact
+2026-03-01 11:59:44,308 [INFO] pipeline:   [45/98] Enriching: SST Accountants & Consultants (https://sst.cpa)
+2026-03-01 11:59:44,308 [INFO] enrichers.website: Enriching SST Accountants & Consultants from https://sst.cpa
+2026-03-01 11:59:45,602 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/salmon-sims-thomas-&-associates
+2026-03-01 11:59:54,303 [INFO] enrichers.website: ✓ SST Accountants & Consultants: Extracted linkedin_url, contact
+2026-03-01 11:59:54,304 [INFO] pipeline:   [46/98] Enriching: Truth Induced Financial (https://truthinduced.biz)
+2026-03-01 11:59:54,304 [INFO] enrichers.website: Enriching Truth Induced Financial from https://truthinduced.biz
+2026-03-01 11:59:59,134 [INFO] pipeline:   [47/98] Enriching: Duke Tax (https://duke.tax)
+2026-03-01 11:59:59,135 [INFO] enrichers.website: Enriching Duke Tax from https://duke.tax
+2026-03-01 12:00:05,068 [INFO] pipeline:   [48/98] Enriching: L&H CPAs and Advisors - Dallas CPA Firm (https://lhcpafirm.com)
+2026-03-01 12:00:05,069 [INFO] enrichers.website: Enriching L&H CPAs and Advisors - Dallas CPA Firm from https://lhcpafirm.com
+2026-03-01 12:00:05,782 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/16163509/admin
+2026-03-01 12:00:12,594 [INFO] enrichers.website: ✓ L&H CPAs and Advisors - Dallas CPA Firm: Extracted linkedin_url
+2026-03-01 12:00:12,595 [INFO] pipeline:   [49/98] Enriching: Saville CPAs & Advisors (https://savillecpa.com)
+2026-03-01 12:00:12,595 [INFO] enrichers.website: Enriching Saville CPAs & Advisors from https://savillecpa.com
+2026-03-01 12:00:13,079 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/saville-dodgen-&-co-
+2026-03-01 12:00:15,431 [INFO] enrichers.website: ✓ Saville CPAs & Advisors: Extracted linkedin_url
+2026-03-01 12:00:15,431 [INFO] pipeline:   [51/98] Enriching: Cohesion Co. (https://cohesionco.com)
+2026-03-01 12:00:15,431 [INFO] enrichers.website: Enriching Cohesion Co. from https://cohesionco.com
+2026-03-01 12:00:30,547 [INFO] pipeline:   [52/98] Enriching: Al Freideman, CPA | Tax & Accounting Firm (https://agfreideman.com/?utm_campaign=gmb)
+2026-03-01 12:00:30,547 [INFO] enrichers.website: Enriching Al Freideman, CPA | Tax & Accounting Firm from https://agfreideman.com/?utm_campaign=gmb
+2026-03-01 12:00:30,817 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/a-g-freideman
+2026-03-01 12:00:31,968 [INFO] enrichers.website: ✓ Al Freideman, CPA | Tax & Accounting Firm: Extracted linkedin_url, employees, contact
+2026-03-01 12:00:31,969 [INFO] pipeline:   [53/98] Enriching: Dan Jefferson Tax and Financial Consulting, Inc. (https://danjeffersonpc.com)
+2026-03-01 12:00:31,969 [INFO] enrichers.website: Enriching Dan Jefferson Tax and Financial Consulting, Inc. from https://danjeffersonpc.com
+2026-03-01 12:00:38,250 [INFO] pipeline:   [54/98] Enriching: EW Tax and Valuation Group, LLP (https://ew.tax)
+2026-03-01 12:00:38,251 [INFO] enrichers.website: Enriching EW Tax and Valuation Group, LLP from https://ew.tax
+2026-03-01 12:00:39,034 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/ew-tax 
+2026-03-01 12:00:41,404 [INFO] enrichers.website: ✓ EW Tax and Valuation Group, LLP: Extracted linkedin_url
+2026-03-01 12:00:41,405 [INFO] pipeline:   [55/98] Enriching: Haynie & Company (https://hayniecpas.com/dallas-texas/?utm_source=core70&utm_medium=organic&utm_campaign=websiteurl)
+2026-03-01 12:00:41,405 [INFO] enrichers.website: Enriching Haynie & Company from https://hayniecpas.com/dallas-texas/?utm_source=core70&utm_medium=organic&utm_campaign=websiteurl
+2026-03-01 12:00:44,240 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/haynie-&-company
+2026-03-01 12:01:11,714 [INFO] enrichers.website: ✓ Haynie & Company: Extracted linkedin_url, employees
+2026-03-01 12:01:11,715 [INFO] pipeline:   [56/98] Enriching: Patten and Company LLC (https://ptcpas.com)
+2026-03-01 12:01:11,715 [INFO] enrichers.website: Enriching Patten and Company LLC from https://ptcpas.com
+2026-03-01 12:01:11,978 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/pattenandcompany
+2026-03-01 12:01:19,513 [INFO] enrichers.website: ✓ Patten and Company LLC: Extracted linkedin_url
+2026-03-01 12:01:19,514 [INFO] pipeline:   [57/98] Enriching: Perkins Dexter Sinopoli & Hamm (https://pdshcpas.com)
+2026-03-01 12:01:19,514 [INFO] enrichers.website: Enriching Perkins Dexter Sinopoli & Hamm from https://pdshcpas.com
+2026-03-01 12:01:20,169 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/perkins-dexter-sinopoli-&-hamm-pc
+2026-03-01 12:01:21,638 [INFO] enrichers.website: ✓ Perkins Dexter Sinopoli & Hamm: Extracted linkedin_url
+2026-03-01 12:01:21,638 [INFO] pipeline:   [58/98] Enriching: TW Tax & Credit Services (https://twtaxcreditservices.com)
+2026-03-01 12:01:21,638 [INFO] enrichers.website: Enriching TW Tax & Credit Services from https://twtaxcreditservices.com
+2026-03-01 12:01:43,570 [INFO] pipeline:   [59/98] Enriching: Wynter Financial Services, Inc. (https://wynterfinancialservice.com)
+2026-03-01 12:01:43,573 [INFO] enrichers.website: Enriching Wynter Financial Services, Inc. from https://wynterfinancialservice.com
+2026-03-01 12:01:47,687 [INFO] enrichers.website: ✓ Wynter Financial Services, Inc.: Extracted contact
+2026-03-01 12:01:47,688 [INFO] pipeline:   [60/98] Enriching: WDA FINANCIAL (https://wdafinancial.org)
+2026-03-01 12:01:47,688 [INFO] enrichers.website: Enriching WDA FINANCIAL from https://wdafinancial.org
+2026-03-01 12:01:47,812 [INFO] pipeline:   [61/98] Enriching: ATC Income Tax (https://atcincometax.com)
+2026-03-01 12:01:47,812 [INFO] enrichers.website: Enriching ATC Income Tax from https://atcincometax.com
+2026-03-01 12:02:03,115 [INFO] enrichers.website: ✓ ATC Income Tax: Extracted employees
+2026-03-01 12:02:03,115 [INFO] pipeline:   [62/98] Enriching: Atc Financial L Lc (https://atcincometax.com)
+2026-03-01 12:02:03,115 [INFO] enrichers.website: Enriching Atc Financial L Lc from https://atcincometax.com
+2026-03-01 12:02:45,124 [INFO] enrichers.website: ✓ Atc Financial L Lc: Extracted employees
+2026-03-01 12:02:45,125 [INFO] pipeline:   [64/98] Enriching: Total Choice Financial Solutions Group (https://choicefinancialcoaching.org)
+2026-03-01 12:02:45,125 [INFO] enrichers.website: Enriching Total Choice Financial Solutions Group from https://choicefinancialcoaching.org
+2026-03-01 12:02:47,086 [INFO] pipeline:   [66/98] Enriching: Costwise Tax and Business Services (https://costwisetaxservices.com)
+2026-03-01 12:02:47,086 [INFO] enrichers.website: Enriching Costwise Tax and Business Services from https://costwisetaxservices.com
+2026-03-01 12:02:56,975 [INFO] pipeline:   [67/98] Enriching: W Systems & Trading PC (https://wsprofessionals.com)
+2026-03-01 12:02:56,976 [INFO] enrichers.website: Enriching W Systems & Trading PC from https://wsprofessionals.com
+2026-03-01 12:03:05,503 [INFO] pipeline:   [68/98] Enriching: WTS Financial & Lighthouse Tax Service (https://wtsfinancial.com)
+2026-03-01 12:03:05,505 [INFO] enrichers.website: Enriching WTS Financial & Lighthouse Tax Service from https://wtsfinancial.com
+2026-03-01 12:03:07,833 [INFO] pipeline:   [69/98] Enriching: Seattle Tax Group LLC (https://seattletaxgroup.com)
+2026-03-01 12:03:07,834 [INFO] enrichers.website: Enriching Seattle Tax Group LLC from https://seattletaxgroup.com
+2026-03-01 12:03:08,801 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/seattle-tax-group-llc
+2026-03-01 12:03:11,329 [INFO] enrichers.website: ✓ Seattle Tax Group LLC: Extracted linkedin_url
+2026-03-01 12:03:11,329 [INFO] pipeline:   [70/98] Enriching: Aldaris CPA Group (https://aldariscpa.com)
+2026-03-01 12:03:11,329 [INFO] enrichers.website: Enriching Aldaris CPA Group from https://aldariscpa.com
+2026-03-01 12:03:32,059 [INFO] pipeline:   [71/98] Enriching: HAAS CPA, PLLC (https://haascpas.com)
+2026-03-01 12:03:32,060 [INFO] enrichers.website: Enriching HAAS CPA, PLLC from https://haascpas.com
+2026-03-01 12:03:33,193 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/haas-cpa-pllc
+2026-03-01 12:03:36,188 [INFO] enrichers.website: ✓ HAAS CPA, PLLC: Extracted linkedin_url, employees
+2026-03-01 12:03:36,188 [INFO] pipeline:   [72/98] Enriching: Jacobson Lawrence & Company (https://jacobsonlawrence.com)
+2026-03-01 12:03:36,188 [INFO] enrichers.website: Enriching Jacobson Lawrence & Company from https://jacobsonlawrence.com
+2026-03-01 12:03:36,500 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/jacobson-lawrence-company
+2026-03-01 12:03:38,100 [INFO] enrichers.website: ✓ Jacobson Lawrence & Company: Extracted linkedin_url, contact
+2026-03-01 12:03:38,101 [INFO] pipeline:   [73/98] Enriching: Erickson Wealth & Tax Management (https://curtcpa.com)
+2026-03-01 12:03:38,101 [INFO] enrichers.website: Enriching Erickson Wealth & Tax Management from https://curtcpa.com
+2026-03-01 12:03:43,736 [INFO] pipeline:   [74/98] Enriching: Raymond Lyle CPA PLLC (https://raymondlylecpa.com)
+2026-03-01 12:03:43,736 [INFO] enrichers.website: Enriching Raymond Lyle CPA PLLC from https://raymondlylecpa.com
+2026-03-01 12:03:44,585 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/raymond-lyle-cpa-pllc
+2026-03-01 12:03:47,130 [INFO] enrichers.website: ✓ Raymond Lyle CPA PLLC: Extracted linkedin_url
+2026-03-01 12:03:47,131 [INFO] pipeline:   [75/98] Enriching: Joseph & Hetrick, LLC (https://josephandhetrick.com)
+2026-03-01 12:03:47,131 [INFO] enrichers.website: Enriching Joseph & Hetrick, LLC from https://josephandhetrick.com
+2026-03-01 12:03:53,479 [INFO] pipeline:   [76/98] Enriching: Block Advisors (https://blockadvisors.com/tax-office-near-me/washington/seattle/63680/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 12:03:53,480 [INFO] enrichers.website: Enriching Block Advisors from https://blockadvisors.com/tax-office-near-me/washington/seattle/63680/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local
+2026-03-01 12:03:56,141 [INFO] pipeline:   [77/98] Enriching: Accountability Services PLLC (https://accountabilityservices.com)
+2026-03-01 12:03:56,141 [INFO] enrichers.website: Enriching Accountability Services PLLC from https://accountabilityservices.com
+2026-03-01 12:03:56,928 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/accountabilityservices
+2026-03-01 12:04:03,411 [INFO] enrichers.website: ✓ Accountability Services PLLC: Extracted linkedin_url, contact
+2026-03-01 12:04:03,412 [INFO] pipeline:   [79/98] Enriching: Tax Resolution and Representation LLC (https://leadmetotaxrelief.com)
+2026-03-01 12:04:03,412 [INFO] enrichers.website: Enriching Tax Resolution and Representation LLC from https://leadmetotaxrelief.com
+2026-03-01 12:04:07,395 [INFO] enrichers.website: ✓ Tax Resolution and Representation LLC: Extracted contact
+2026-03-01 12:04:07,395 [INFO] pipeline:   [80/98] Enriching: Tremper & Co., LLP (https://tremperco.com)
+2026-03-01 12:04:07,395 [INFO] enrichers.website: Enriching Tremper & Co., LLP from https://tremperco.com
+2026-03-01 12:04:07,772 [INFO] enrichers.website: ✓ LinkedIn URL: http://www.linkedin.com/company/1340251
+2026-03-01 12:04:09,962 [INFO] enrichers.website: ✓ Tremper & Co., LLP: Extracted linkedin_url
+2026-03-01 12:04:09,962 [INFO] pipeline:   [81/98] Enriching: Taxman Associates (https://taxman.cc)
+2026-03-01 12:04:09,962 [INFO] enrichers.website: Enriching Taxman Associates from https://taxman.cc
+2026-03-01 12:04:10,462 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/taxman-associates
+2026-03-01 12:04:14,260 [INFO] enrichers.website: ✓ Taxman Associates: Extracted linkedin_url
+2026-03-01 12:04:14,262 [INFO] pipeline:   [82/98] Enriching: Seattle CPA Professionals LLC (https://seattlecpaprofessionals.com)
+2026-03-01 12:04:14,262 [INFO] enrichers.website: Enriching Seattle CPA Professionals LLC from https://seattlecpaprofessionals.com
+2026-03-01 12:04:17,591 [INFO] pipeline:   [83/98] Enriching: CPA Seattle PS (https://cpaseattle.com)
+2026-03-01 12:04:17,592 [INFO] enrichers.website: Enriching CPA Seattle PS from https://cpaseattle.com
+2026-03-01 12:04:21,571 [INFO] pipeline:   [84/98] Enriching: Termulo and Associates PLLC (https://termulocpa.com)
+2026-03-01 12:04:21,572 [INFO] enrichers.website: Enriching Termulo and Associates PLLC from https://termulocpa.com
+2026-03-01 12:04:25,265 [INFO] enrichers.website: ✓ Termulo and Associates PLLC: Extracted contact
+2026-03-01 12:04:25,265 [INFO] pipeline:   [85/98] Enriching: Northwest Tax Advisors LLC (https://nw-tax.com)
+2026-03-01 12:04:25,265 [INFO] enrichers.website: Enriching Northwest Tax Advisors LLC from https://nw-tax.com
+2026-03-01 12:04:25,685 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/nwta
+2026-03-01 12:04:27,133 [INFO] enrichers.website: ✓ Northwest Tax Advisors LLC: Extracted linkedin_url
+2026-03-01 12:04:27,133 [INFO] pipeline:   [86/98] Enriching: USA Tax Gurus LLC (https://usataxgurus.com)
+2026-03-01 12:04:27,133 [INFO] enrichers.website: Enriching USA Tax Gurus LLC from https://usataxgurus.com
+2026-03-01 12:04:51,890 [INFO] enrichers.website: ✓ USA Tax Gurus LLC: Extracted contact
+2026-03-01 12:04:51,891 [INFO] pipeline:   [87/98] Enriching: Francis & Company (https://francis-company.com/?y_source=1_mte1nja2ndgtnze1lwxvy2f0aw9ulndlynnpdgu%3d)
+2026-03-01 12:04:51,891 [INFO] enrichers.website: Enriching Francis & Company from https://francis-company.com/?y_source=1_mte1nja2ndgtnze1lwxvy2f0aw9ulndlynnpdgu%3d
+2026-03-01 12:04:54,381 [INFO] enrichers.website: ✓ Francis & Company: Extracted employees, contact
+2026-03-01 12:04:54,381 [INFO] pipeline:   [88/98] Enriching: Ranta CPA (https://ranta-cpa.com)
+2026-03-01 12:04:54,381 [INFO] enrichers.website: Enriching Ranta CPA from https://ranta-cpa.com
+2026-03-01 12:04:56,880 [INFO] pipeline:   [89/98] Enriching: Flex Tax and Consulting Group (https://flextcg.com)
+2026-03-01 12:04:56,880 [INFO] enrichers.website: Enriching Flex Tax and Consulting Group from https://flextcg.com
+2026-03-01 12:05:30,730 [INFO] pipeline:   [90/98] Enriching: Tony Quach & Co. CPA (https://tonyquach.com)
+2026-03-01 12:05:30,732 [INFO] enrichers.website: Enriching Tony Quach & Co. CPA from https://tonyquach.com
+2026-03-01 12:05:36,116 [INFO] pipeline:   [91/98] Enriching: Kruze Consulting (https://kruzeconsulting.com)
+2026-03-01 12:05:36,117 [INFO] enrichers.website: Enriching Kruze Consulting from https://kruzeconsulting.com
+2026-03-01 12:05:36,857 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/kruze-consulting
+2026-03-01 12:05:55,747 [INFO] enrichers.website: ✓ Kruze Consulting: Extracted linkedin_url
+2026-03-01 12:05:55,748 [INFO] pipeline:   [93/98] Enriching: BASTA & COMPANY (https://bastacpa.com/?utm_source=web&utm_medium=googlebusinesspage)
+2026-03-01 12:05:55,748 [INFO] enrichers.website: Enriching BASTA & COMPANY from https://bastacpa.com/?utm_source=web&utm_medium=googlebusinesspage
+2026-03-01 12:06:00,621 [INFO] enrichers.website: ✓ LinkedIn URL: https://linkedin.com/company/basta-company
+2026-03-01 12:06:14,443 [INFO] enrichers.website: ✓ BASTA & COMPANY: Extracted linkedin_url, employees
+2026-03-01 12:06:14,445 [INFO] pipeline:   [95/98] Enriching: Izella Tax Relief - Tax Relief Settlement | Tax Consulting I Tax Attorney I Tax Planning | San Francisco & Daly City, CA (https://irstaxrelief.tax)
+2026-03-01 12:06:14,445 [INFO] enrichers.website: Enriching Izella Tax Relief - Tax Relief Settlement | Tax Consulting I Tax Attorney I Tax Planning | San Francisco & Daly City, CA from https://irstaxrelief.tax
+2026-03-01 12:06:14,663 [INFO] enrichers.website: ✓ LinkedIn URL: http://www.linkedin.com/company/izella-tax-relief-inc
+2026-03-01 12:06:23,851 [INFO] enrichers.website: ✓ Izella Tax Relief - Tax Relief Settlement | Tax Consulting I Tax Attorney I Tax Planning | San Francisco & Daly City, CA: Extracted linkedin_url
+2026-03-01 12:06:23,851 [INFO] pipeline:   [97/98] Enriching: Block Advisors (https://blockadvisors.com/tax-office-near-me/california/san-francisco/3543/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 12:06:23,851 [INFO] enrichers.website: Enriching Block Advisors from https://blockadvisors.com/tax-office-near-me/california/san-francisco/3543/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local
+2026-03-01 12:06:26,560 [INFO] pipeline:   [98/98] Enriching: Cortes Tax Service (https://cortestaxservice.com)
+2026-03-01 12:06:26,560 [INFO] enrichers.website: Enriching Cortes Tax Service from https://cortestaxservice.com
+2026-03-01 12:06:30,712 [INFO] pipeline:   → Enriched 81 companies from websites
+2026-03-01 12:06:30,713 [INFO] pipeline: 
+📊 STEP 4: Scoring companies...
+2026-03-01 12:06:30,714 [INFO] pipeline: 
+🏷️  STEP 5: Applying thesis filters...
+2026-03-01 12:06:30,714 [INFO] pipeline:   → Excluded: 7 companies
+2026-03-01 12:06:30,714 [INFO] pipeline:     - TRI-MERIT SPECIALTY TAX PROFESSIONALS: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 12:06:30,714 [INFO] pipeline:     - TC Services USA Inc: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 12:06:30,714 [INFO] pipeline:     - Hegwood Group, LP: Exclusively focused on Property Tax consulting
+2026-03-01 12:06:30,715 [INFO] pipeline:     - J Chester & Associates, Inc Dallas CPA Firm: Exclusively focused on Property Tax consulting
+2026-03-01 12:06:30,715 [INFO] pipeline:     - Jacobson Lawrence & Company: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 12:06:30,715 [INFO] pipeline:     - Tax Advisors Group Inc: Exclusively focused on Property Tax consulting
+2026-03-01 12:06:30,715 [INFO] pipeline:     - Mostafa Ibrahim Sabry CPA, LLC - Mostafa Ibrahim CPA: Exclusively focused on Property Tax consulting
+2026-03-01 12:06:30,715 [INFO] pipeline:   → Active targets: 91 companies
+2026-03-01 12:06:30,715 [INFO] pipeline: 
+💾 STEP 6: Saving to database...
+2026-03-01 12:06:30,956 [INFO] pipeline:   → Saved 98 companies to database
+2026-03-01 12:06:30,956 [INFO] pipeline: 
+📁 STEP 7: Exporting data...
+2026-03-01 12:06:30,962 [INFO] pipeline:   → Exported CSV: data/companies.csv
+2026-03-01 12:06:30,969 [INFO] pipeline:   → Exported JSON: data/companies.json
+2026-03-01 12:06:30,970 [INFO] pipeline: 
+============================================================
+2026-03-01 12:06:30,970 [INFO] pipeline: PIPELINE SUMMARY
+2026-03-01 12:06:30,972 [INFO] pipeline: ============================================================
+2026-03-01 12:06:30,972 [INFO] pipeline:   Raw results collected:  100
+2026-03-01 12:06:30,972 [INFO] pipeline:   After deduplication:    98
+2026-03-01 12:06:30,972 [INFO] pipeline:   Excluded:               7
+2026-03-01 12:06:30,972 [INFO] pipeline:   Final active targets:   91
+2026-03-01 12:06:30,972 [INFO] pipeline: 
+  Service Distribution:
+2026-03-01 12:06:30,973 [INFO] pipeline:     Work Opportunity Tax Credits: 28
+2026-03-01 12:06:30,973 [INFO] pipeline:     Sales & Use Tax: 26
+2026-03-01 12:06:30,973 [INFO] pipeline:     Cost Segregation: 7
+2026-03-01 12:06:30,973 [INFO] pipeline:     R&D Tax Credits: 4
+2026-03-01 12:06:30,973 [INFO] pipeline: 
+  Top States:
+2026-03-01 12:06:30,973 [INFO] pipeline:     GA: 23
+2026-03-01 12:06:30,973 [INFO] pipeline:     WA: 19
+2026-03-01 12:06:30,973 [INFO] pipeline:     IL: 18
+2026-03-01 12:06:30,973 [INFO] pipeline:     TX: 16
+2026-03-01 12:06:30,973 [INFO] pipeline:     CA: 11
+2026-03-01 12:06:30,973 [INFO] pipeline:     MD: 2
+2026-03-01 12:06:30,973 [INFO] pipeline:     MI: 1
+2026-03-01 12:06:30,973 [INFO] pipeline:     UT: 1
+2026-03-01 12:06:30,973 [INFO] pipeline: 
+  Data Coverage:
+2026-03-01 12:06:30,973 [INFO] pipeline:     With website:   74/91 (81%)
+2026-03-01 12:06:30,973 [INFO] pipeline:     With revenue:   0/91 (0%)
+2026-03-01 12:06:30,973 [INFO] pipeline:     With employees: 13/91 (14%)
+2026-03-01 12:06:30,973 [INFO] pipeline:     With contact:   2/91 (2%)
+2026-03-01 12:06:30,973 [INFO] pipeline: 
+============================================================
+2026-03-01 12:06:30,973 [INFO] pipeline: Database: data/companies.db
+2026-03-01 12:06:30,973 [INFO] pipeline: CSV Export: data/companies.csv
+2026-03-01 12:06:30,973 [INFO] pipeline: JSON Export: data/companies.json
+2026-03-01 12:06:30,973 [INFO] pipeline: ============================================================
+2026-03-01 12:10:25,303 [INFO] __main__: API Keys configured:
+2026-03-01 12:10:25,303 [INFO] __main__:   Google Places: ✓
+2026-03-01 12:10:25,304 [INFO] __main__:   SerpAPI:       ✓
+2026-03-01 12:10:25,306 [INFO] pipeline: ============================================================
+2026-03-01 12:10:25,306 [INFO] pipeline: Pipeline started: Specialty Tax Advisory Services
+2026-03-01 12:10:25,306 [INFO] pipeline: Target services: ['R&D Tax Credits', 'Cost Segregation', 'Work Opportunity Tax Credits', 'Sales & Use Tax']
+2026-03-01 12:10:25,306 [INFO] pipeline: ============================================================
+2026-03-01 12:10:25,307 [INFO] pipeline: 
+📡 STEP 1: Collecting data from sources...
+2026-03-01 12:10:25,307 [INFO] scrapers.google_places: Google Places: Running 50 search queries (randomized for balanced coverage)...
+2026-03-01 12:10:25,307 [INFO] scrapers.google_places:   [1/50] Searching: 'specialty tax advisory firm' near 'New York, NY'
+2026-03-01 12:10:26,386 [INFO] scrapers.google_places:   [2/50] Searching: 'specialty tax advisory firm' near 'San Francisco, CA'
+2026-03-01 12:10:27,357 [INFO] scrapers.google_places:   [3/50] Searching: 'specialty tax advisory firm' near 'Boston, MA'
+2026-03-01 12:10:28,355 [INFO] scrapers.google_places:   [4/50] Searching: 'cost segregation company' near 'Boston, MA'
+2026-03-01 12:10:29,127 [INFO] scrapers.google_places:   [5/50] Searching: 'specialty tax advisory firm' near 'Philadelphia, PA'
+2026-03-01 12:10:30,132 [INFO] scrapers.google_places:   [6/50] Searching: 'R&D tax credit consulting' near 'Los Angeles, CA'
+2026-03-01 12:10:30,615 [INFO] scrapers.google_places:   [7/50] Searching: 'R&D tax credit consulting' near 'Seattle, WA'
+2026-03-01 12:10:31,183 [INFO] scrapers.google_places:   [8/50] Searching: 'R&D tax credit consulting' near 'San Francisco, CA'
+2026-03-01 12:10:32,269 [INFO] scrapers.google_places: Reached max company cap, stopping.
+2026-03-01 12:10:32,270 [INFO] scrapers.google_places: Google Places: Found 100 unique companies
+2026-03-01 12:10:32,270 [INFO] scrapers.google_places:   Service distribution: R&D=16, CostSeg=5, WOTC=0, SUT=0
+2026-03-01 12:10:32,270 [INFO] pipeline:   → Google Places: 100 companies
+2026-03-01 12:10:32,272 [INFO] scrapers.clutch_directory: Clutch Directory: Searching 4 categories...
+2026-03-01 12:10:32,402 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-consulting: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-consulting
+2026-03-01 12:10:33,394 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-advisory: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-advisory
+2026-03-01 12:10:34,398 [ERROR] scrapers.clutch_directory: Error scraping page 0 of accounting-firms/tax-services: 403 Client Error: Forbidden for url: https://clutch.co/directory/accounting-firms/tax-services
+2026-03-01 12:10:35,398 [ERROR] scrapers.clutch_directory: Error scraping page 0 of business-services/tax-preparation: 403 Client Error: Forbidden for url: https://clutch.co/directory/business-services/tax-preparation
+2026-03-01 12:10:35,399 [INFO] scrapers.clutch_directory: Clutch Directory: Found 0 companies
+2026-03-01 12:10:35,399 [INFO] pipeline:   → Clutch Directory: 0 companies
+2026-03-01 12:10:35,399 [INFO] pipeline:   → SerpAPI: Disabled (using Google Places only)
+2026-03-01 12:10:35,399 [INFO] pipeline: 
+  Total raw results: 100
+2026-03-01 12:10:35,399 [INFO] pipeline: 
+🔄 STEP 2: Deduplicating records...
+2026-03-01 12:10:35,399 [INFO] dedup: Deduplication: Starting with 100 companies
+2026-03-01 12:10:35,400 [INFO] dedup:   After domain dedup: 100
+2026-03-01 12:10:35,461 [INFO] dedup:   After name dedup: 99
+2026-03-01 12:10:35,461 [INFO] dedup: Deduplication: Final count = 99
+2026-03-01 12:10:35,461 [INFO] pipeline:   → After dedup: 99 companies
+2026-03-01 12:10:35,461 [INFO] pipeline: 
+🔍 STEP 3: Enriching from company websites...
+2026-03-01 12:10:35,461 [INFO] pipeline:   → Fetching website URLs from Google Places...
+2026-03-01 12:11:24,986 [INFO] pipeline:   → Found 95 websites
+2026-03-01 12:11:24,987 [INFO] pipeline:   → Visiting websites for enrichment...
+2026-03-01 12:11:24,988 [INFO] pipeline:   [1/99] Enriching: George Dimov CPA (https://nycaccountingconsulting.com/cpa-services-in-new-york/?utm_campaign=gmb)
+2026-03-01 12:11:24,988 [INFO] enrichers.website: Enriching George Dimov CPA from https://nycaccountingconsulting.com/cpa-services-in-new-york/?utm_campaign=gmb
+2026-03-01 12:11:26,044 [INFO] pipeline:   [2/99] Enriching: Timur Knyazev, CPA (https://tk.cpa)
+2026-03-01 12:11:26,044 [INFO] enrichers.website: Enriching Timur Knyazev, CPA from https://tk.cpa
+2026-03-01 12:11:26,305 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/cpainc
+2026-03-01 12:11:27,412 [INFO] enrichers.website: ✓ Timur Knyazev, CPA: Extracted linkedin_url, employees
+2026-03-01 12:11:27,412 [INFO] pipeline:   [3/99] Enriching: CPA Advisory Group, LLC (https://tax1394.com)
+2026-03-01 12:11:27,412 [INFO] enrichers.website: Enriching CPA Advisory Group, LLC from https://tax1394.com
+2026-03-01 12:11:31,442 [INFO] pipeline:   [4/99] Enriching: Johan Tax & Accounting LLC (https://johantaxcpa.com)
+2026-03-01 12:11:31,442 [INFO] enrichers.website: Enriching Johan Tax & Accounting LLC from https://johantaxcpa.com
+2026-03-01 12:11:31,839 [INFO] enrichers.website: ✓ LinkedIn URL: https://linkedin.com/company/johan-tax-&-accounting-llc
+2026-03-01 12:11:33,074 [INFO] enrichers.website: ✓ Johan Tax & Accounting LLC: Extracted linkedin_url, employees
+2026-03-01 12:11:33,076 [INFO] pipeline:   [5/99] Enriching: LUO CPA PLLC (https://luocpapllc.com/?utm_source=google&utm_medium=google_business_profile&utm_campaign=website_click)
+2026-03-01 12:11:33,077 [INFO] enrichers.website: Enriching LUO CPA PLLC from https://luocpapllc.com/?utm_source=google&utm_medium=google_business_profile&utm_campaign=website_click
+2026-03-01 12:11:34,030 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/luo-cpa-pllc
+2026-03-01 12:11:37,816 [INFO] enrichers.website: ✓ LUO CPA PLLC: Extracted linkedin_url, employees
+2026-03-01 12:11:37,818 [INFO] pipeline:   [6/99] Enriching: Presti & Naegele Accounting and Advisory Services (https://pntax.com)
+2026-03-01 12:11:37,818 [INFO] enrichers.website: Enriching Presti & Naegele Accounting and Advisory Services from https://pntax.com
+2026-03-01 12:11:38,213 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/presti-naegele-accounting-offices
+2026-03-01 12:11:39,911 [INFO] enrichers.website: ✓ Presti & Naegele Accounting and Advisory Services: Extracted linkedin_url
+2026-03-01 12:11:39,912 [INFO] pipeline:   [7/99] Enriching: Ariel Joudai, CPA (https://aajcpa.com)
+2026-03-01 12:11:39,912 [INFO] enrichers.website: Enriching Ariel Joudai, CPA from https://aajcpa.com
+2026-03-01 12:11:42,368 [INFO] pipeline:   [8/99] Enriching: JVS Tax Services LLC (https://jvstaxservices.com)
+2026-03-01 12:11:42,368 [INFO] enrichers.website: Enriching JVS Tax Services LLC from https://jvstaxservices.com
+2026-03-01 12:11:44,728 [INFO] pipeline:   [9/99] Enriching: Taxes for Expats (TFX) (https://taxesforexpats.com/?utm_source=gmb&utm_medium=organic&utm_campaign=gmb_profile_link)
+2026-03-01 12:11:44,728 [INFO] enrichers.website: Enriching Taxes for Expats (TFX) from https://taxesforexpats.com/?utm_source=gmb&utm_medium=organic&utm_campaign=gmb_profile_link
+2026-03-01 12:11:47,657 [INFO] pipeline:   [10/99] Enriching: Mark E. Feinsot, CPA (https://midtowncpafirm.com)
+2026-03-01 12:11:47,658 [INFO] enrichers.website: Enriching Mark E. Feinsot, CPA from https://midtowncpafirm.com
+2026-03-01 12:11:49,955 [INFO] pipeline:   [11/99] Enriching: Your Tax Advisor, LLC. (Abic CPA Associates) (https://yourtaxadvisor.com)
+2026-03-01 12:11:49,955 [INFO] enrichers.website: Enriching Your Tax Advisor, LLC. (Abic CPA Associates) from https://yourtaxadvisor.com
+2026-03-01 12:11:55,827 [INFO] pipeline:   [12/99] Enriching: Upside Tax and Financial - Andrew Donoghue CPA CFP (https://upsidetax.com)
+2026-03-01 12:11:55,827 [INFO] enrichers.website: Enriching Upside Tax and Financial - Andrew Donoghue CPA CFP from https://upsidetax.com
+2026-03-01 12:11:59,871 [INFO] pipeline:   [13/99] Enriching: 212 Tax (https://212tax.com)
+2026-03-01 12:11:59,871 [INFO] enrichers.website: Enriching 212 Tax from https://212tax.com
+2026-03-01 12:12:22,847 [INFO] enrichers.website: ✓ 212 Tax: Extracted contact
+2026-03-01 12:12:22,848 [INFO] pipeline:   [14/99] Enriching: Haque CPA (https://nyc-cpafirm.com)
+2026-03-01 12:12:22,848 [INFO] enrichers.website: Enriching Haque CPA from https://nyc-cpafirm.com
+2026-03-01 12:12:25,037 [INFO] pipeline:   [15/99] Enriching: Inemer, Cohen & Wolf LLP (https://nyc-cpa.com)
+2026-03-01 12:12:25,038 [INFO] enrichers.website: Enriching Inemer, Cohen & Wolf LLP from https://nyc-cpa.com
+2026-03-01 12:12:25,652 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/97388312/admin/feed/posts
+2026-03-01 12:12:27,085 [INFO] enrichers.website: ✓ Inemer, Cohen & Wolf LLP: Extracted linkedin_url
+2026-03-01 12:12:27,085 [INFO] pipeline:   [16/99] Enriching: Tax Accountant - Fincadia (https://fincadiatax.com/taxaccountant-nyc/?utm_campaign=gmb&utm_medium=tax_accountant_nyc)
+2026-03-01 12:12:27,085 [INFO] enrichers.website: Enriching Tax Accountant - Fincadia from https://fincadiatax.com/taxaccountant-nyc/?utm_campaign=gmb&utm_medium=tax_accountant_nyc
+2026-03-01 12:12:28,972 [INFO] pipeline:   [17/99] Enriching: RSM US LLP (https://rsmus.com)
+2026-03-01 12:12:28,972 [INFO] enrichers.website: Enriching RSM US LLP from https://rsmus.com
+2026-03-01 12:12:29,399 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/rsm-us-llp
+2026-03-01 12:12:38,333 [INFO] enrichers.website: ✓ RSM US LLP: Extracted linkedin_url
+2026-03-01 12:12:38,334 [INFO] pipeline:   [18/99] Enriching: Goldfine Tax Accountants and Consultants (https://goldfinecpa.com)
+2026-03-01 12:12:38,335 [INFO] enrichers.website: Enriching Goldfine Tax Accountants and Consultants from https://goldfinecpa.com
+2026-03-01 12:12:42,147 [INFO] pipeline:   [19/99] Enriching: T3 Acccounting Services (https://t3taxcpa.com)
+2026-03-01 12:12:42,147 [INFO] enrichers.website: Enriching T3 Acccounting Services from https://t3taxcpa.com
+2026-03-01 12:12:46,033 [INFO] pipeline:   [20/99] Enriching: Roger Advisory Services (https://rogeradvisory.com/contact.php)
+2026-03-01 12:12:46,034 [INFO] enrichers.website: Enriching Roger Advisory Services from https://rogeradvisory.com/contact.php
+2026-03-01 12:13:06,910 [INFO] pipeline:   [21/99] Enriching: Flex Tax and Consulting Group (https://flextcg.com)
+2026-03-01 12:13:06,910 [INFO] enrichers.website: Enriching Flex Tax and Consulting Group from https://flextcg.com
+2026-03-01 12:13:40,443 [INFO] pipeline:   [22/99] Enriching: BASTA & COMPANY (https://bastacpa.com/?utm_source=web&utm_medium=googlebusinesspage)
+2026-03-01 12:13:40,445 [INFO] enrichers.website: Enriching BASTA & COMPANY from https://bastacpa.com/?utm_source=web&utm_medium=googlebusinesspage
+2026-03-01 12:13:42,523 [INFO] enrichers.website: ✓ LinkedIn URL: https://linkedin.com/company/basta-company
+2026-03-01 12:13:55,321 [INFO] enrichers.website: ✓ BASTA & COMPANY: Extracted linkedin_url, employees
+2026-03-01 12:13:55,323 [INFO] pipeline:   [23/99] Enriching: B.O.L. Global, Inc. (https://bolglobalcpa.com)
+2026-03-01 12:13:55,323 [INFO] enrichers.website: Enriching B.O.L. Global, Inc. from https://bolglobalcpa.com
+2026-03-01 12:13:56,337 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/b-o-l-global-inc
+2026-03-01 12:13:58,656 [INFO] enrichers.website: ✓ B.O.L. Global, Inc.: Extracted linkedin_url
+2026-03-01 12:13:58,656 [INFO] pipeline:   [24/99] Enriching: Kruze Consulting (https://kruzeconsulting.com)
+2026-03-01 12:13:58,656 [INFO] enrichers.website: Enriching Kruze Consulting from https://kruzeconsulting.com
+2026-03-01 12:13:59,145 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/kruze-consulting
+2026-03-01 12:14:01,156 [INFO] enrichers.website: ✓ Kruze Consulting: Extracted linkedin_url
+2026-03-01 12:14:01,156 [INFO] pipeline:   [25/99] Enriching: Tony Quach & Co. CPA (https://tonyquach.com)
+2026-03-01 12:14:01,156 [INFO] enrichers.website: Enriching Tony Quach & Co. CPA from https://tonyquach.com
+2026-03-01 12:14:06,675 [INFO] pipeline:   [26/99] Enriching: Steve Rabin CPA (https://taxservice2u.com)
+2026-03-01 12:14:06,675 [INFO] enrichers.website: Enriching Steve Rabin CPA from https://taxservice2u.com
+2026-03-01 12:14:07,069 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/steve-rabin-cpa
+2026-03-01 12:14:08,394 [INFO] enrichers.website: ✓ Steve Rabin CPA: Extracted linkedin_url
+2026-03-01 12:14:08,394 [INFO] pipeline:   [27/99] Enriching: Scott Porter, CPA (https://baycpafirm.com)
+2026-03-01 12:14:08,394 [INFO] enrichers.website: Enriching Scott Porter, CPA from https://baycpafirm.com
+2026-03-01 12:14:08,957 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/scott-porter-corporation-pc
+2026-03-01 12:14:10,657 [INFO] enrichers.website: ✓ Scott Porter, CPA: Extracted linkedin_url
+2026-03-01 12:14:10,657 [INFO] pipeline:   [28/99] Enriching: Priority Tax Relief (https://prioritytaxrelief.com)
+2026-03-01 12:14:10,657 [INFO] enrichers.website: Enriching Priority Tax Relief from https://prioritytaxrelief.com
+2026-03-01 12:14:50,001 [INFO] enrichers.website: ✓ Priority Tax Relief: Extracted employees
+2026-03-01 12:14:50,002 [INFO] pipeline:   [29/99] Enriching: Swanson Reed | Specialist R&D Tax Advisors (https://swansonreed.com/california)
+2026-03-01 12:14:50,002 [INFO] enrichers.website: Enriching Swanson Reed | Specialist R&D Tax Advisors from https://swansonreed.com/california
+2026-03-01 12:16:37,332 [INFO] enrichers.website: ✓ Swanson Reed | Specialist R&D Tax Advisors: Extracted contact
+2026-03-01 12:16:37,333 [INFO] pipeline:   [30/99] Enriching: Withum (https://withum.com/our-locations/san-francisco-ca/?utm_source=gmb&utm_medium=referral&utm_campaign=san%20francisco)
+2026-03-01 12:16:37,333 [INFO] enrichers.website: Enriching Withum from https://withum.com/our-locations/san-francisco-ca/?utm_source=gmb&utm_medium=referral&utm_campaign=san%20francisco
+2026-03-01 12:16:37,870 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/withumsmith-brown
+2026-03-01 12:16:40,203 [INFO] enrichers.website: ✓ Withum: Extracted linkedin_url, employees
+2026-03-01 12:16:40,203 [INFO] pipeline:   [31/99] Enriching: SD Mayer & Associates (https://sdmayer.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb&utm_content=san-francisco)
+2026-03-01 12:16:40,203 [INFO] enrichers.website: Enriching SD Mayer & Associates from https://sdmayer.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb&utm_content=san-francisco
+2026-03-01 12:16:40,860 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/sdmayerllp
+2026-03-01 12:16:43,544 [INFO] enrichers.website: ✓ SD Mayer & Associates: Extracted linkedin_url, contact
+2026-03-01 12:16:43,545 [INFO] pipeline:   [32/99] Enriching: theTaxGuySF (https://thetaxguysf.com)
+2026-03-01 12:16:43,545 [INFO] enrichers.website: Enriching theTaxGuySF from https://thetaxguysf.com
+2026-03-01 12:16:46,353 [INFO] pipeline:   [33/99] Enriching: Why Blu (https://whyblu.com)
+2026-03-01 12:16:46,354 [INFO] enrichers.website: Enriching Why Blu from https://whyblu.com
+2026-03-01 12:16:47,349 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/whyblu
+2026-03-01 12:16:50,725 [INFO] enrichers.website: ✓ Why Blu: Extracted linkedin_url
+2026-03-01 12:16:50,725 [INFO] pipeline:   [34/99] Enriching: ASAM LLP (https://asamllp.com)
+2026-03-01 12:16:50,725 [INFO] enrichers.website: Enriching ASAM LLP from https://asamllp.com
+2026-03-01 12:17:03,289 [INFO] pipeline:   [35/99] Enriching: Block Advisors (https://blockadvisors.com/tax-office-near-me/california/san-francisco/6189/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 12:17:03,289 [INFO] enrichers.website: Enriching Block Advisors from https://blockadvisors.com/tax-office-near-me/california/san-francisco/6189/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local
+2026-03-01 12:17:06,141 [INFO] pipeline:   [36/99] Enriching: Kaufmann Advisors (https://kaufmannadvisors.com)
+2026-03-01 12:17:06,141 [INFO] enrichers.website: Enriching Kaufmann Advisors from https://kaufmannadvisors.com
+2026-03-01 12:17:10,002 [INFO] enrichers.website: ✓ Kaufmann Advisors: Extracted revenue
+2026-03-01 12:17:10,002 [INFO] pipeline:   [37/99] Enriching: Grant Thornton (https://grantthornton.com/offices/california/san-francisco)
+2026-03-01 12:17:10,002 [INFO] enrichers.website: Enriching Grant Thornton from https://grantthornton.com/offices/california/san-francisco
+2026-03-01 12:17:10,204 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/grant-thornton-us
+2026-03-01 12:17:12,465 [INFO] enrichers.website: ✓ Grant Thornton: Extracted linkedin_url, employees
+2026-03-01 12:17:12,465 [INFO] pipeline:   [38/99] Enriching: Safe Harbor, CPA and Accountants (https://safeharborcpa.com)
+2026-03-01 12:17:12,465 [INFO] enrichers.website: Enriching Safe Harbor, CPA and Accountants from https://safeharborcpa.com
+2026-03-01 12:17:13,627 [INFO] enrichers.website: ✓ LinkedIn URL: http://www.linkedin.com/company/safe-harbor-llp
+2026-03-01 12:17:38,860 [INFO] enrichers.website: ✓ Safe Harbor, CPA and Accountants: Extracted linkedin_url
+2026-03-01 12:17:38,862 [INFO] pipeline:   [39/99] Enriching: Leung, Louie, Ip & Co. LLP (https://llicocpa.com)
+2026-03-01 12:17:38,863 [INFO] enrichers.website: Enriching Leung, Louie, Ip & Co. LLP from https://llicocpa.com
+2026-03-01 12:17:49,501 [INFO] enrichers.website: ✓ Leung, Louie, Ip & Co. LLP: Extracted contact
+2026-03-01 12:17:49,501 [INFO] pipeline:   [40/99] Enriching: Moskowitz LLP (https://moskowitzllp.com/?utm_source=google-business-profile&utm_medium=organic&utm_campaign=branded)
+2026-03-01 12:17:49,502 [INFO] enrichers.website: Enriching Moskowitz LLP from https://moskowitzllp.com/?utm_source=google-business-profile&utm_medium=organic&utm_campaign=branded
+2026-03-01 12:17:51,334 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/moskowitz-llp
+2026-03-01 12:18:18,623 [INFO] enrichers.website: ✓ Moskowitz LLP: Extracted linkedin_url, employees
+2026-03-01 12:18:18,623 [INFO] pipeline:   [41/99] Enriching: Hajiani CPA LLC (https://alamircpa.com)
+2026-03-01 12:18:18,623 [INFO] enrichers.website: Enriching Hajiani CPA LLC from https://alamircpa.com
+2026-03-01 12:18:19,232 [INFO] pipeline:   [42/99] Enriching: Velasquez Tax & Business Services (https://velasqueztaxbizsvcs.com)
+2026-03-01 12:18:19,232 [INFO] enrichers.website: Enriching Velasquez Tax & Business Services from https://velasqueztaxbizsvcs.com
+2026-03-01 12:18:20,630 [INFO] pipeline:   [43/99] Enriching: Seaport Financial Partners LLC (https://seaportpartners.com)
+2026-03-01 12:18:20,630 [INFO] enrichers.website: Enriching Seaport Financial Partners LLC from https://seaportpartners.com
+2026-03-01 12:18:23,542 [INFO] pipeline:   [44/99] Enriching: Richard Hassey, CPA., LLC. (https://richardhasseycpa.com)
+2026-03-01 12:18:23,543 [INFO] enrichers.website: Enriching Richard Hassey, CPA., LLC. from https://richardhasseycpa.com
+2026-03-01 12:20:16,658 [INFO] pipeline:   [45/99] Enriching: John Schachter + Associates, Inc. (https://johnschachter.com)
+2026-03-01 12:20:16,659 [INFO] enrichers.website: Enriching John Schachter + Associates, Inc. from https://johnschachter.com
+2026-03-01 12:20:17,238 [INFO] enrichers.website: ✓ LinkedIn URL: http://linkedin.com/company/john-schachter---associates-inc
+2026-03-01 12:20:20,066 [INFO] enrichers.website: ✓ John Schachter + Associates, Inc.: Extracted linkedin_url
+2026-03-01 12:20:20,066 [INFO] pipeline:   [46/99] Enriching: Cloud9 Advisory, Inc. (https://cloud9advisory.io)
+2026-03-01 12:20:20,067 [INFO] enrichers.website: Enriching Cloud9 Advisory, Inc. from https://cloud9advisory.io
+2026-03-01 12:20:20,260 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/c9advisory
+2026-03-01 12:20:21,129 [INFO] enrichers.website: ✓ Cloud9 Advisory, Inc.: Extracted linkedin_url
+2026-03-01 12:20:21,129 [INFO] pipeline:   [47/99] Enriching: Grant Thornton (https://grantthornton.com/offices/massachusetts/boston)
+2026-03-01 12:20:21,130 [INFO] enrichers.website: Enriching Grant Thornton from https://grantthornton.com/offices/massachusetts/boston
+2026-03-01 12:20:21,267 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/grant-thornton-us
+2026-03-01 12:20:22,284 [INFO] enrichers.website: ✓ Grant Thornton: Extracted linkedin_url
+2026-03-01 12:20:22,285 [INFO] pipeline:   [48/99] Enriching: Baystate Advisors (https://baystateadvisorsgroup.com)
+2026-03-01 12:20:22,285 [INFO] enrichers.website: Enriching Baystate Advisors from https://baystateadvisorsgroup.com
+2026-03-01 12:20:23,153 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/baystate-advisors-group
+2026-03-01 12:20:26,525 [INFO] enrichers.website: ✓ Baystate Advisors: Extracted linkedin_url, employees
+2026-03-01 12:20:26,526 [INFO] pipeline:   [49/99] Enriching: Walter Shuffain (https://wsadvisors.com)
+2026-03-01 12:20:26,526 [INFO] enrichers.website: Enriching Walter Shuffain from https://wsadvisors.com
+2026-03-01 12:20:26,831 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/wscpaboston
+2026-03-01 12:20:30,695 [INFO] enrichers.website: ✓ Walter Shuffain: Extracted linkedin_url, employees
+2026-03-01 12:20:30,695 [INFO] pipeline:   [50/99] Enriching: Quality Tax And Business Partners (https://qtbp.net)
+2026-03-01 12:20:30,695 [INFO] enrichers.website: Enriching Quality Tax And Business Partners from https://qtbp.net
+2026-03-01 12:20:33,066 [INFO] pipeline:   [51/99] Enriching: RSM US LLP (https://rsmus.com)
+2026-03-01 12:20:33,066 [INFO] enrichers.website: Enriching RSM US LLP from https://rsmus.com
+2026-03-01 12:20:33,435 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/rsm-us-llp
+2026-03-01 12:20:41,446 [INFO] enrichers.website: ✓ RSM US LLP: Extracted linkedin_url
+2026-03-01 12:20:41,447 [INFO] pipeline:   [52/99] Enriching: Jackman Professional Accounting & Financial Services (https://jackmanprofaccount.com)
+2026-03-01 12:20:41,447 [INFO] enrichers.website: Enriching Jackman Professional Accounting & Financial Services from https://jackmanprofaccount.com
+2026-03-01 12:23:21,683 [INFO] pipeline:   [53/99] Enriching: CohnReznick LLP (https://cohnreznick.com)
+2026-03-01 12:23:21,686 [INFO] enrichers.website: Enriching CohnReznick LLP from https://cohnreznick.com
+2026-03-01 12:23:23,169 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/cohnreznick-llp
+2026-03-01 12:23:30,118 [INFO] enrichers.website: ✓ CohnReznick LLP: Extracted linkedin_url
+2026-03-01 12:23:30,119 [INFO] pipeline:   [54/99] Enriching: Blais Halpert Tax Partners LLP (https://blaistaxlaw.com)
+2026-03-01 12:23:30,119 [INFO] enrichers.website: Enriching Blais Halpert Tax Partners LLP from https://blaistaxlaw.com
+2026-03-01 12:23:31,044 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/igloo-products-corp
+2026-03-01 12:23:35,622 [INFO] enrichers.website: ✓ Blais Halpert Tax Partners LLP: Extracted linkedin_url, revenue, employees, contact
+2026-03-01 12:23:35,622 [INFO] pipeline:   [55/99] Enriching: EisnerAmper (https://eisneramper.com)
+2026-03-01 12:23:35,622 [INFO] enrichers.website: Enriching EisnerAmper from https://eisneramper.com
+2026-03-01 12:23:35,848 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/162443
+2026-03-01 12:23:37,192 [INFO] enrichers.website: ✓ EisnerAmper: Extracted linkedin_url, contact
+2026-03-01 12:23:37,193 [INFO] pipeline:   [56/99] Enriching: Dimov Associates (https://dimovassociates.com/cpa-services-in-boston/?utm_campaign=gmb)
+2026-03-01 12:23:37,193 [INFO] enrichers.website: Enriching Dimov Associates from https://dimovassociates.com/cpa-services-in-boston/?utm_campaign=gmb
+2026-03-01 12:23:37,966 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/dimov-associates-boston
+2026-03-01 12:23:39,907 [INFO] enrichers.website: ✓ Dimov Associates: Extracted linkedin_url, employees, contact
+2026-03-01 12:23:39,907 [INFO] pipeline:   [57/99] Enriching: Complex Consulting (https://complexconsulting.net)
+2026-03-01 12:23:39,907 [INFO] enrichers.website: Enriching Complex Consulting from https://complexconsulting.net
+2026-03-01 12:23:40,509 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/complexconsultingllc/people
+2026-03-01 12:23:42,174 [INFO] enrichers.website: ✓ Complex Consulting: Extracted linkedin_url
+2026-03-01 12:23:42,174 [INFO] pipeline:   [58/99] Enriching: Crowe LLP (https://crowe.com/about-us/our-offices/boston?utm_source=gmb&utm_medium=yext)
+2026-03-01 12:23:42,174 [INFO] enrichers.website: Enriching Crowe LLP from https://crowe.com/about-us/our-offices/boston?utm_source=gmb&utm_medium=yext
+2026-03-01 12:23:45,030 [INFO] pipeline:   [60/99] Enriching: Cost Segregation Consultants, LLC (https://costsegconsultants.com)
+2026-03-01 12:23:45,031 [INFO] enrichers.website: Enriching Cost Segregation Consultants, LLC from https://costsegconsultants.com
+2026-03-01 12:23:52,807 [INFO] pipeline:   [61/99] Enriching: Maven Cost Segregation Tax Advisors (https://mavencostseg.com)
+2026-03-01 12:23:52,808 [INFO] enrichers.website: Enriching Maven Cost Segregation Tax Advisors from https://mavencostseg.com
+2026-03-01 12:23:53,541 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/mavencostseg
+2026-03-01 12:23:58,264 [INFO] enrichers.website: ✓ Maven Cost Segregation Tax Advisors: Extracted linkedin_url, employees
+2026-03-01 12:23:58,264 [INFO] pipeline:   [63/99] Enriching: KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) (https://kbkg.com)
+2026-03-01 12:23:58,264 [INFO] enrichers.website: Enriching KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) from https://kbkg.com
+2026-03-01 12:23:58,866 [INFO] pipeline:   [64/99] Enriching: Baker Newman Noyes (https://bnncpa.com)
+2026-03-01 12:23:58,866 [INFO] enrichers.website: Enriching Baker Newman Noyes from https://bnncpa.com
+2026-03-01 12:23:59,377 [INFO] enrichers.website: ✓ LinkedIn URL:  https://www.linkedin.com/company/baker-newman-noyes
+2026-03-01 12:24:06,960 [INFO] enrichers.website: ✓ Baker Newman Noyes: Extracted linkedin_url
+2026-03-01 12:24:06,960 [INFO] pipeline:   [65/99] Enriching: Precision Tax & Advisory (https://precisiontaxadvisory.com)
+2026-03-01 12:24:06,960 [INFO] enrichers.website: Enriching Precision Tax & Advisory from https://precisiontaxadvisory.com
+2026-03-01 12:24:08,949 [INFO] enrichers.website: ✓ Precision Tax & Advisory: Extracted contact
+2026-03-01 12:24:08,949 [INFO] pipeline:   [66/99] Enriching: Kim Yeung Ling P.C. (https://kimlingcpa.net)
+2026-03-01 12:24:08,949 [INFO] enrichers.website: Enriching Kim Yeung Ling P.C. from https://kimlingcpa.net
+2026-03-01 12:24:12,685 [INFO] enrichers.website: ✓ Kim Yeung Ling P.C.: Extracted employees, contact
+2026-03-01 12:24:12,686 [INFO] pipeline:   [67/99] Enriching: NB Advisors Small Business Accountant - Philadelphia Location (https://nbcpa.us/small-business-accountant-philadelphia)
+2026-03-01 12:24:12,686 [INFO] enrichers.website: Enriching NB Advisors Small Business Accountant - Philadelphia Location from https://nbcpa.us/small-business-accountant-philadelphia
+2026-03-01 12:24:16,984 [INFO] pipeline:   [68/99] Enriching: Parker Financial Services (https://lesstax123.com)
+2026-03-01 12:24:16,984 [INFO] enrichers.website: Enriching Parker Financial Services from https://lesstax123.com
+2026-03-01 12:24:17,770 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/parker-tax-service
+2026-03-01 12:24:20,165 [INFO] enrichers.website: ✓ Parker Financial Services: Extracted linkedin_url
+2026-03-01 12:24:20,167 [INFO] pipeline:   [69/99] Enriching: Internal Tax Service, LLC (https://bestphillycpa.com)
+2026-03-01 12:24:20,167 [INFO] enrichers.website: Enriching Internal Tax Service, LLC from https://bestphillycpa.com
+2026-03-01 12:24:22,649 [INFO] pipeline:   [70/99] Enriching: Amro Azazi CPA, PC (https://amroazazi.com)
+2026-03-01 12:24:22,649 [INFO] enrichers.website: Enriching Amro Azazi CPA, PC from https://amroazazi.com
+2026-03-01 12:24:24,880 [INFO] pipeline:   [71/99] Enriching: Stanton Financial Management (https://stanton-financial.com)
+2026-03-01 12:24:24,880 [INFO] enrichers.website: Enriching Stanton Financial Management from https://stanton-financial.com
+2026-03-01 12:24:25,795 [INFO] pipeline:   [72/99] Enriching: Centri Business Consulting (https://centriconsulting.com/locations/philadelphia/?utm_source=google&utm_medium=organic&utm_campaign=local_philly)
+2026-03-01 12:24:25,795 [INFO] enrichers.website: Enriching Centri Business Consulting from https://centriconsulting.com/locations/philadelphia/?utm_source=google&utm_medium=organic&utm_campaign=local_philly
+2026-03-01 12:24:26,144 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/centri-business-consulting-llc
+2026-03-01 12:24:27,186 [INFO] enrichers.website: ✓ Centri Business Consulting: Extracted linkedin_url, contact
+2026-03-01 12:24:27,186 [INFO] pipeline:   [73/99] Enriching: Spina McCarthy & Company, LLC (https://spinacpa.com)
+2026-03-01 12:24:27,186 [INFO] enrichers.website: Enriching Spina McCarthy & Company, LLC from https://spinacpa.com
+2026-03-01 12:24:30,805 [INFO] pipeline:   [74/99] Enriching: EisnerAmper (https://eisneramper.com)
+2026-03-01 12:24:30,805 [INFO] enrichers.website: Enriching EisnerAmper from https://eisneramper.com
+2026-03-01 12:24:32,924 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/162443
+2026-03-01 12:24:34,115 [INFO] enrichers.website: ✓ EisnerAmper: Extracted linkedin_url, contact
+2026-03-01 12:24:34,116 [INFO] pipeline:   [75/99] Enriching: JMS Tax & Business Solutions (https://jmstaxsolutions.com)
+2026-03-01 12:24:34,116 [INFO] enrichers.website: Enriching JMS Tax & Business Solutions from https://jmstaxsolutions.com
+2026-03-01 12:24:34,890 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/98908641/admin/feed/posts
+2026-03-01 12:24:37,007 [INFO] enrichers.website: ✓ JMS Tax & Business Solutions: Extracted linkedin_url
+2026-03-01 12:24:37,011 [INFO] pipeline:   [76/99] Enriching: Keystone Tax Service, Inc (https://keystonetax.com)
+2026-03-01 12:24:37,011 [INFO] enrichers.website: Enriching Keystone Tax Service, Inc from https://keystonetax.com
+2026-03-01 12:24:47,391 [INFO] enrichers.website: ✓ Keystone Tax Service, Inc: Extracted employees, contact
+2026-03-01 12:24:47,392 [INFO] pipeline:   [77/99] Enriching: Friendly Tax Advisors LLC Philadelphia (https://ftaphiladelphia.com)
+2026-03-01 12:24:47,392 [INFO] enrichers.website: Enriching Friendly Tax Advisors LLC Philadelphia from https://ftaphiladelphia.com
+2026-03-01 12:24:50,895 [INFO] pipeline:   [78/99] Enriching: Steve Goldflam & Associates LLC (https://cpagame.com)
+2026-03-01 12:24:50,895 [INFO] enrichers.website: Enriching Steve Goldflam & Associates LLC from https://cpagame.com
+2026-03-01 12:25:08,988 [INFO] enrichers.website: ✓ Steve Goldflam & Associates LLC: Extracted contact
+2026-03-01 12:25:08,988 [INFO] pipeline:   [79/99] Enriching: Mac Alpine Carll & Co (https://macalpinecarll.com)
+2026-03-01 12:25:08,988 [INFO] enrichers.website: Enriching Mac Alpine Carll & Co from https://macalpinecarll.com
+2026-03-01 12:25:09,749 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/macalpine-carll-&-company
+2026-03-01 12:25:12,209 [INFO] enrichers.website: ✓ Mac Alpine Carll & Co: Extracted linkedin_url
+2026-03-01 12:25:12,209 [INFO] pipeline:   [80/99] Enriching: JBB & Associates, LLC (https://jbbandassociates.com)
+2026-03-01 12:25:12,209 [INFO] enrichers.website: Enriching JBB & Associates, LLC from https://jbbandassociates.com
+2026-03-01 12:25:13,158 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/jbbassoc
+2026-03-01 12:25:17,802 [INFO] enrichers.website: ✓ JBB & Associates, LLC: Extracted linkedin_url
+2026-03-01 12:25:17,802 [INFO] pipeline:   [81/99] Enriching: BDO (https://bdo.com/locations/bdo-philadelphia-office)
+2026-03-01 12:25:17,802 [INFO] enrichers.website: Enriching BDO from https://bdo.com/locations/bdo-philadelphia-office
+2026-03-01 12:25:18,499 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/bdo-usa-llp
+2026-03-01 12:25:24,472 [INFO] enrichers.website: ✓ BDO: Extracted linkedin_url
+2026-03-01 12:25:24,473 [INFO] pipeline:   [82/99] Enriching: SD Associates, P.C. (https://sdaccounting.com)
+2026-03-01 12:25:24,473 [INFO] enrichers.website: Enriching SD Associates, P.C. from https://sdaccounting.com
+2026-03-01 12:25:24,951 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/siegal-&-drossner
+2026-03-01 12:25:26,666 [INFO] enrichers.website: ✓ SD Associates, P.C.: Extracted linkedin_url
+2026-03-01 12:25:26,667 [INFO] pipeline:   [83/99] Enriching: Christopher J. Keiluhn, CPA LLC (https://phillytaxcpa.com)
+2026-03-01 12:25:26,667 [INFO] enrichers.website: Enriching Christopher J. Keiluhn, CPA LLC from https://phillytaxcpa.com
+2026-03-01 12:25:27,711 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/keiluhncpa
+2026-03-01 12:25:30,718 [INFO] enrichers.website: ✓ Christopher J. Keiluhn, CPA LLC: Extracted linkedin_url, contact
+2026-03-01 12:25:30,719 [INFO] pipeline:   [84/99] Enriching: Wipfli (https://wipfli.com/about-wipfli/locations/pennsylvania/pa-philadelphia?utm_source=gmb&utm_medium=organic)
+2026-03-01 12:25:30,719 [INFO] enrichers.website: Enriching Wipfli from https://wipfli.com/about-wipfli/locations/pennsylvania/pa-philadelphia?utm_source=gmb&utm_medium=organic
+2026-03-01 12:25:32,494 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/wipfli
+2026-03-01 12:25:50,943 [INFO] enrichers.website: ✓ Wipfli: Extracted linkedin_url, contact
+2026-03-01 12:25:50,944 [INFO] pipeline:   [85/99] Enriching: Energy Tax Savers / R&D Tax Savers (https://energytaxsavers.com)
+2026-03-01 12:25:50,944 [INFO] enrichers.website: Enriching Energy Tax Savers / R&D Tax Savers from https://energytaxsavers.com
+2026-03-01 12:25:54,947 [INFO] pipeline:   [86/99] Enriching: RND Consulting Inc (https://rndcredits.com)
+2026-03-01 12:25:54,948 [INFO] enrichers.website: Enriching RND Consulting Inc from https://rndcredits.com
+2026-03-01 12:25:55,387 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/rnd-consulting-inc-
+2026-03-01 12:25:56,738 [INFO] enrichers.website: ✓ RND Consulting Inc: Extracted linkedin_url, contact
+2026-03-01 12:25:56,738 [INFO] pipeline:   [87/99] Enriching: Alexander Clifford - R&D Tax Credit Specialists (https://alexanderclifford.co.uk)
+2026-03-01 12:25:56,738 [INFO] enrichers.website: Enriching Alexander Clifford - R&D Tax Credit Specialists from https://alexanderclifford.co.uk
+2026-03-01 12:25:58,160 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/alexander-clifford-co
+2026-03-01 12:26:06,801 [INFO] enrichers.website: ✓ Alexander Clifford - R&D Tax Credit Specialists: Extracted linkedin_url, employees
+2026-03-01 12:26:06,803 [INFO] pipeline:   [88/99] Enriching: Research Tax Credits, LLC (https://researchtaxcreditsllc.com/about-us)
+2026-03-01 12:26:06,803 [INFO] enrichers.website: Enriching Research Tax Credits, LLC from https://researchtaxcreditsllc.com/about-us
+2026-03-01 12:26:09,738 [INFO] pipeline:   [89/99] Enriching: RCS Tax Solutions (https://rcstax.com)
+2026-03-01 12:26:09,738 [INFO] enrichers.website: Enriching RCS Tax Solutions from https://rcstax.com
+2026-03-01 12:26:11,351 [INFO] pipeline:   [90/99] Enriching: TRI-MERIT SPECIALTY TAX PROFESSIONALS (https://tri-merit.com)
+2026-03-01 12:26:11,351 [INFO] enrichers.website: Enriching TRI-MERIT SPECIALTY TAX PROFESSIONALS from https://tri-merit.com
+2026-03-01 12:26:11,540 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/2289094
+2026-03-01 12:26:20,147 [INFO] enrichers.website: ✓ TRI-MERIT SPECIALTY TAX PROFESSIONALS: Extracted linkedin_url
+2026-03-01 12:26:20,148 [INFO] pipeline:   [91/99] Enriching: Aldaris CPA Group (https://aldariscpa.com)
+2026-03-01 12:26:20,148 [INFO] enrichers.website: Enriching Aldaris CPA Group from https://aldariscpa.com
+2026-03-01 12:26:34,166 [INFO] pipeline:   [92/99] Enriching: Burkland Associates (https://burklandassociates.com)
+2026-03-01 12:26:34,167 [INFO] enrichers.website: Enriching Burkland Associates from https://burklandassociates.com
+2026-03-01 12:26:34,682 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/burkland-associates
+2026-03-01 12:26:37,908 [INFO] enrichers.website: ✓ Burkland Associates: Extracted linkedin_url, employees
+2026-03-01 12:26:37,908 [INFO] pipeline:   [93/99] Enriching: Credit Advisors Council-Credit Repair San Francisco (https://creditadvisorscouncil.com/credit-services/partners/california/san-francisco)
+2026-03-01 12:26:37,909 [INFO] enrichers.website: Enriching Credit Advisors Council-Credit Repair San Francisco from https://creditadvisorscouncil.com/credit-services/partners/california/san-francisco
+2026-03-01 12:26:51,968 [INFO] pipeline:   [94/99] Enriching: Finvisor (https://finvisor.com/?y_source=1_ndg4ndy0ntktnze1lwxvy2f0aw9ulndlynnpdgu%3d)
+2026-03-01 12:26:51,970 [INFO] enrichers.website: Enriching Finvisor from https://finvisor.com/?y_source=1_ndg4ndy0ntktnze1lwxvy2f0aw9ulndlynnpdgu%3d
+2026-03-01 12:27:09,019 [INFO] enrichers.website: ✓ Finvisor: Extracted revenue, contact
+2026-03-01 12:27:09,020 [INFO] pipeline:   [95/99] Enriching: BPM LLP (https://bpm.com)
+2026-03-01 12:27:09,020 [INFO] enrichers.website: Enriching BPM LLP from https://bpm.com
+2026-03-01 12:27:09,891 [INFO] enrichers.website: ✓ LinkedIn URL: https://linkedin.com/company/bpmllp
+2026-03-01 12:27:20,414 [INFO] enrichers.website: ✓ BPM LLP: Extracted linkedin_url, employees
+2026-03-01 12:27:20,416 [INFO] pipeline:   [97/99] Enriching: RD's Tax Strategies, Inc. (https://rdstax.com)
+2026-03-01 12:27:20,417 [INFO] enrichers.website: Enriching RD's Tax Strategies, Inc. from https://rdstax.com
+2026-03-01 12:27:23,145 [INFO] pipeline:   [99/99] Enriching: JLK Rosenberger, LLP (https://jlkrosenberger.com)
+2026-03-01 12:27:23,145 [INFO] enrichers.website: Enriching JLK Rosenberger, LLP from https://jlkrosenberger.com
+2026-03-01 12:27:23,569 [INFO] enrichers.website: ✓ LinkedIn URL: https://www.linkedin.com/company/jlk-rosenberger-llp-cpa's
+2026-03-01 12:27:31,680 [INFO] enrichers.website: ✓ JLK Rosenberger, LLP: Extracted linkedin_url, employees
+2026-03-01 12:27:31,681 [INFO] pipeline:   → Enriched 95 companies from websites
+2026-03-01 12:27:31,681 [INFO] pipeline: 
+📊 STEP 4: Scoring companies...
+2026-03-01 12:27:31,683 [INFO] pipeline: 
+🏷️  STEP 5: Applying thesis filters...
+2026-03-01 12:27:31,683 [INFO] pipeline:   → Excluded: 7 companies
+2026-03-01 12:27:31,683 [INFO] pipeline:     - BPM LLP: Exclusively focused on Property Tax consulting
+2026-03-01 12:27:31,683 [INFO] pipeline:     - TRI-MERIT SPECIALTY TAX PROFESSIONALS: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 12:27:31,683 [INFO] pipeline:     - SD Mayer & Associates: Exclusively focused on Property Tax consulting
+2026-03-01 12:27:31,683 [INFO] pipeline:     - RD's Tax Strategies, Inc.: Exclusively focused on Property Tax consulting
+2026-03-01 12:27:31,683 [INFO] pipeline:     - Moskowitz LLP: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 12:27:31,683 [INFO] pipeline:     - SD Associates, P.C.: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 12:27:31,683 [INFO] pipeline:     - Christopher J. Keiluhn, CPA LLC: Exclusively focused on Property Tax consulting
+2026-03-01 12:27:31,683 [INFO] pipeline:   → Active targets: 92 companies
+2026-03-01 12:27:31,683 [INFO] pipeline: 
+💾 STEP 6: Saving to database...
+2026-03-01 12:27:31,954 [INFO] pipeline:   → Saved 99 companies to database
+2026-03-01 12:27:31,954 [INFO] pipeline: 
+📁 STEP 7: Exporting data...
+2026-03-01 12:27:31,972 [INFO] pipeline:   → Exported CSV: data/companies.csv
+2026-03-01 12:27:31,983 [INFO] pipeline:   → Exported JSON: data/companies.json
+2026-03-01 12:27:31,984 [INFO] pipeline: 
+============================================================
+2026-03-01 12:27:31,984 [INFO] pipeline: PIPELINE SUMMARY
+2026-03-01 12:27:31,984 [INFO] pipeline: ============================================================
+2026-03-01 12:27:31,984 [INFO] pipeline:   Raw results collected:  100
+2026-03-01 12:27:31,984 [INFO] pipeline:   After deduplication:    99
+2026-03-01 12:27:31,984 [INFO] pipeline:   Excluded:               7
+2026-03-01 12:27:31,984 [INFO] pipeline:   Final active targets:   92
+2026-03-01 12:27:31,985 [INFO] pipeline: 
+  Service Distribution:
+2026-03-01 12:27:31,985 [INFO] pipeline:     R&D Tax Credits: 18
+2026-03-01 12:27:31,985 [INFO] pipeline:     Cost Segregation: 11
+2026-03-01 12:27:31,985 [INFO] pipeline: 
+  Top States:
+2026-03-01 12:27:31,985 [INFO] pipeline:     CA: 25
+2026-03-01 12:27:31,985 [INFO] pipeline:     NY: 21
+2026-03-01 12:27:31,985 [INFO] pipeline:     MA: 20
+2026-03-01 12:27:31,985 [INFO] pipeline:     PA: 19
+2026-03-01 12:27:31,985 [INFO] pipeline:     WA: 2
+2026-03-01 12:27:31,985 [INFO] pipeline:     MI: 1
+2026-03-01 12:27:31,985 [INFO] pipeline:     UT: 1
+2026-03-01 12:27:31,985 [INFO] pipeline:     OH: 1
+2026-03-01 12:27:31,985 [INFO] pipeline:     MD: 1
+2026-03-01 12:27:31,985 [INFO] pipeline: 
+  Data Coverage:
+2026-03-01 12:27:31,985 [INFO] pipeline:     With website:   88/92 (96%)
+2026-03-01 12:27:31,985 [INFO] pipeline:     With revenue:   3/92 (3%)
+2026-03-01 12:27:31,985 [INFO] pipeline:     With employees: 17/92 (18%)
+2026-03-01 12:27:31,985 [INFO] pipeline:     With contact:   4/92 (4%)
+2026-03-01 12:27:31,985 [INFO] pipeline: 
+============================================================
+2026-03-01 12:27:31,985 [INFO] pipeline: Database: data/companies.db
+2026-03-01 12:27:31,985 [INFO] pipeline: CSV Export: data/companies.csv
+2026-03-01 12:27:31,985 [INFO] pipeline: JSON Export: data/companies.json
+2026-03-01 12:27:31,985 [INFO] pipeline: ============================================================

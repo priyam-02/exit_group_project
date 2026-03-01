@@ -8,7 +8,7 @@ A sophisticated, Bloomberg Terminal-inspired dashboard built with React, TypeScr
 
 **Backend API Documentation:** See [backend/README.md](../backend/README.md) for full API reference.
 
-![Stack](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-3-blue) ![Vite](https://img.shields.io/badge/Vite-7-purple)
+![Stack](https://img.shields.io/badge/React-19-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-3-blue) ![Vite](https://img.shields.io/badge/Vite-7-purple)
 
 ---
 
@@ -20,6 +20,14 @@ A sophisticated, Bloomberg Terminal-inspired dashboard built with React, TypeScr
 ✅ **Interactive charts** - Service distribution and geographic breakdown with Recharts
 ✅ **Service filters** - Multi-select filtering by R&D Credits, Cost Seg, WOTC, Sales & Use Tax
 ✅ **Company detail modal** - Full profile view with contact info, data provenance, and source attribution
+
+**KPI Metrics:**
+1. **Total Companies** - Count with exclusion indicator
+2. **Avg Confidence** - Thesis fit score (0-1 range)
+3. **Ownership Identified** - % with known ownership type (tracks PE-backed, family-owned, corporate)
+4. **Avg Revenue** - Mean estimated revenue
+5. **Geographic Coverage** - Number of states represented
+6. **Top Service** - Most common service type
 
 ### Bonus Features (Included)
 ✅ **CSV Export** - Download filtered company list
@@ -111,7 +119,7 @@ frontend/
 
 | Technology | Purpose |
 |------------|---------|
-| **React 18** | UI framework |
+| **React 19** | UI framework |
 | **TypeScript** | Type safety |
 | **Vite** | Build tool |
 | **Tailwind CSS** | Styling |
@@ -121,6 +129,20 @@ frontend/
 | **Axios** | API client |
 | **Framer Motion** | Animations |
 | **Lucide React** | Icons |
+
+### Animations
+
+**Staggered Card Entrance:**
+- KPI cards animate with sequential delays (0-0.5s)
+- Delay increments: 0.1s per card (0, 0.1, 0.2, 0.3, 0.4, 0.5)
+- Creates professional cascade effect on page load
+- Implementation: `KPIGrid.tsx` delay prop
+
+**Framer Motion Features:**
+- Initial state: opacity 0, y offset 20
+- Animate to: opacity 1, y offset 0
+- Duration: 0.5s with easeOut transition
+- Hover effects: scale(1.02) on cards
 
 ---
 
@@ -271,7 +293,7 @@ Built for **The Exit Group's 3rd Round Skills Assessment** (March 2026).
 - **React 19 with TypeScript** - Latest React with full type safety
 - **React Query** - Efficient state management with 5-minute caching
 - **Tailwind CSS** - Custom Bloomberg Terminal theme with glass morphism
-- **Framer Motion** - Professional animations and transitions
+- **Framer Motion** - Professional staggered animations (0-0.5s delay cascade) and transitions
 - **Production-grade error handling** - Retry logic and user-friendly error states
 - **Performance optimized** - Initial load < 2s, filter/sort < 100ms
 - **Clean architecture** - Component composition, custom hooks, service layer

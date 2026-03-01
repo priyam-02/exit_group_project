@@ -59,7 +59,7 @@ export const KPIGrid: React.FC<KPIGridProps> = ({ kpis }) => {
       <KPICard
         title="Geographic Coverage"
         value={`${stateCount} states`}
-        subtitle={topState ? `${topState[0]} leads with ${topState[1]}` : 'N/A'}
+        subtitle={topState ? `${topState[0]}: ${topState[1]} companies` : 'N/A'}
         icon={MapPin}
         delay={0.4}
       />

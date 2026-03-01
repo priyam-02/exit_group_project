@@ -23,7 +23,7 @@ import {
   formatNumber,
   formatConfidenceScore,
   formatDateTime,
-  getConfidenceBadgeClass,
+  getConfidenceBadgeVariant,
   getServiceColor,
 } from '../../utils/formatters';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -64,16 +64,16 @@ export const CompanyDetail: React.FC<CompanyDetailProps> = ({
                 <div className="flex-1">
                   <h2 className="text-2xl font-bold text-white mb-2">{company.name}</h2>
                   <div className="flex flex-wrap items-center gap-3">
-                    <Badge variant={getConfidenceBadgeClass(company.confidence_score).replace('badge-', '') as any}>
+                    <Badge variant={getConfidenceBadgeVariant(company.confidence_score)}>
                       {formatConfidenceScore(company.confidence_score)} Confidence
                     </Badge>
-                    {company.is_pe_backed && (
+                    {!!company.is_pe_backed && (
                       <Badge variant="red">PE-Backed</Badge>
                     )}
-                    {company.needs_review && (
+                    {!!company.needs_review && (
                       <Badge variant="yellow">Needs Review</Badge>
                     )}
-                    {company.is_excluded && (
+                    {!!company.is_excluded && (
                       <Badge variant="red">Excluded</Badge>
                     )}
                   </div>

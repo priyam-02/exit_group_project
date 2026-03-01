@@ -152,13 +152,19 @@ export const CompanyFilters: React.FC<CompanyFiltersProps> = ({
                 <input
                   type="number"
                   placeholder="0"
-                  value={filters.min_revenue || ''}
-                  onChange={(e) =>
+                  min="0"
+                  max="1000"
+                  step="0.5"
+                  value={filters.min_revenue ? filters.min_revenue / 1_000_000 : ''}
+                  onChange={(e) => {
+                    const value = e.target.value ? Number(e.target.value) : undefined;
+                    // Validate: max 1000M ($1B), min 0
+                    if (value !== undefined && (value < 0 || value > 1000)) return;
                     onFiltersChange({
                       ...filters,
-                      min_revenue: e.target.value ? Number(e.target.value) * 1_000_000 : undefined,
-                    })
-                  }
+                      min_revenue: value !== undefined ? value * 1_000_000 : undefined,
+                    });
+                  }}
                   className="input"
                 />
               </div>
@@ -170,13 +176,19 @@ export const CompanyFilters: React.FC<CompanyFiltersProps> = ({
                 <input
                   type="number"
                   placeholder="0"
+                  min="0"
+                  max="10000"
+                  step="1"
                   value={filters.min_employees || ''}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    const value = e.target.value ? Number(e.target.value) : undefined;
+                    // Validate: max 10000 employees, min 0
+                    if (value !== undefined && (value < 0 || value > 10000)) return;
                     onFiltersChange({
                       ...filters,
-                      min_employees: e.target.value ? Number(e.target.value) : undefined,
-                    })
-                  }
+                      min_employees: value,
+                    });
+                  }}
                   className="input"
                 />
               </div>

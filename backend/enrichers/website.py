@@ -65,8 +65,26 @@ class WebsiteEnricher:
         if not company.website:
             return company
 
+        logger.info(f"Enriching {company.name} from {company.website}")
+
+        # Track what we extract (for metrics)
+        extracted = {
+            "linkedin_url": False,
+            "revenue": False,
+            "employees": False,
+            "contact": False,
+        }
+
         base_url = company.website.rstrip("/")
         all_text = ""
+
+        # Phase 1: Extract LinkedIn URL first (before text cleanup removes footers)
+        if not company.linkedin_url:
+            linkedin_url = self._find_linkedin_url_across_site(base_url)
+            if linkedin_url:
+                company.linkedin_url = linkedin_url
+                extracted["linkedin_url"] = True
+                logger.info(f"✓ LinkedIn URL: {linkedin_url}")
 
         for page_path in TARGET_PAGES:
             url = f"{base_url}{page_path}"
@@ -98,19 +116,6 @@ class WebsiteEnricher:
             if "website" not in company.data_sources:
                 company.data_sources.append("website")
 
-        # Try to find LinkedIn URL if not already set
-        if not company.linkedin_url:
-            try:
-                # Check homepage for LinkedIn link
-                text, soup = self._fetch_page(company.website)
-                if soup:
-                    linkedin_link = self._extract_linkedin_url(soup)
-                    if linkedin_link:
-                        company.linkedin_url = linkedin_link
-                        logger.debug(f"Found LinkedIn URL for {company.name}: {linkedin_link}")
-            except Exception as e:
-                logger.debug(f"Error finding LinkedIn URL for {company.name}: {e}")
-
         # Try LinkedIn enrichment if we have a LinkedIn URL
         # (LinkedIn provides reliable employee count ranges)
         if company.linkedin_url:
@@ -118,6 +123,30 @@ class WebsiteEnricher:
                 self._enrich_from_linkedin(company)
             except Exception as e:
                 logger.debug(f"LinkedIn enrichment failed for {company.name}: {e}")
+
+        # Convert employee ranges to midpoint estimates (authentic data transformation)
+        self._convert_employee_ranges(company)
+
+        # Track what was extracted
+        if company.estimated_revenue and not extracted["revenue"]:
+            extracted["revenue"] = True
+        if company.employee_count and not extracted["employees"]:
+            extracted["employees"] = True
+        if company.key_contact_name or company.key_contact_email:
+            extracted["contact"] = True
+
+        # Log summary
+        extracted_fields = [k for k, v in extracted.items() if v]
+        if extracted_fields:
+            logger.info(f"✓ {company.name}: Extracted {', '.join(extracted_fields)}")
+            if company.estimated_revenue:
+                logger.debug(f"  Revenue: ${company.estimated_revenue:,} ({company.revenue_source or 'unknown'})")
+            if company.employee_count:
+                logger.debug(f"  Employees: {company.employee_count} ({company.employee_count_source or 'unknown'})")
+            if company.key_contact_name:
+                logger.debug(f"  Contact: {company.key_contact_name} - {company.key_contact_title or 'Unknown Title'}")
+        else:
+            logger.debug(f"✗ {company.name}: No new data extracted")
 
         return company
 
@@ -130,13 +159,23 @@ class WebsiteEnricher:
 
             soup = BeautifulSoup(resp.text, "html.parser")
 
-            # Remove script and style elements
-            for element in soup(["script", "style", "nav", "footer", "header"]):
+            # Extract footer text BEFORE removing (often contains employee counts)
+            footer_text = ""
+            for footer in soup.find_all(["footer", "div"], class_=lambda x: x and "footer" in str(x).lower()):
+                footer_text += " " + footer.get_text(separator=" ", strip=True)
+
+            # Remove script and style elements (but keep nav/header/footer for now)
+            for element in soup(["script", "style"]):
                 element.decompose()
 
+            # Get main text
             text = soup.get_text(separator=" ", strip=True)
             # Clean up whitespace
             text = re.sub(r"\s+", " ", text)
+
+            # Append footer text (it might have employee counts like "© 2024 - 50+ professionals")
+            if footer_text:
+                text += " " + footer_text
 
             return text, soup
 
@@ -189,9 +228,29 @@ class WebsiteEnricher:
         if company.key_contact_name:
             return  # Already have a contact
 
-        # Look for leadership titles
+        # Pattern 1: Founder narrative (About page style)
+        founder_narrative_patterns = [
+            r"founded\s+(?:in\s+\d{4}\s+)?by\s+([A-Z][a-z]+\s+(?:[A-Z]\.?\s+)?[A-Z][a-z]+)",
+            r"([A-Z][a-z]+\s+(?:[A-Z]\.?\s+)?[A-Z][a-z]+)\s+founded\s+(?:the\s+)?(?:company|firm)",
+            r"under\s+the\s+leadership\s+of\s+([A-Z][a-z]+\s+(?:[A-Z]\.?\s+)?[A-Z][a-z]+)",
+            r"(?:CEO|President|Founder)[:,]?\s+([A-Z][a-z]+\s+(?:[A-Z]\.?\s+)?[A-Z][a-z]+)",
+        ]
+
+        for pattern in founder_narrative_patterns:
+            match = re.search(pattern, text)
+            if match:
+                name = match.group(1).strip()
+                # Validate it's a real name (2-4 words)
+                name_parts = name.split()
+                if 2 <= len(name_parts) <= 4:
+                    company.key_contact_name = name
+                    company.key_contact_title = "Founder" if "found" in pattern else "CEO"
+                    logger.debug(f"Found {company.key_contact_title} from narrative: {name}")
+                    return
+
+        # Pattern 2: Look for leadership titles with names
         title_patterns = [
-            r"(?:CEO|President|Founder|Managing\s+Partner|Principal|Owner|Director)",
+            r"(?:CEO|President|Founder|Managing\s+Partner|Principal|Owner|Managing\s+Director)",
         ]
 
         # Try to find name-title pairs
@@ -204,9 +263,10 @@ class WebsiteEnricher:
             if match:
                 company.key_contact_name = match.group(1).strip()
                 company.key_contact_title = re.search(pattern, match.group(0)).group(0)
-                break
+                logger.debug(f"Found contact: {company.key_contact_name} - {company.key_contact_title}")
+                return
 
-            # Reverse: Title - Name
+            # Reverse: Title - Name or Title: Name
             match = re.search(
                 rf"{pattern}\s*[,\-–:]\s*([A-Z][a-z]+\s+(?:[A-Z]\.?\s+)?[A-Z][a-z]+)",
                 text
@@ -214,7 +274,8 @@ class WebsiteEnricher:
             if match:
                 company.key_contact_name = match.group(1).strip()
                 company.key_contact_title = re.search(pattern, match.group(0)).group(0)
-                break
+                logger.debug(f"Found contact: {company.key_contact_name} - {company.key_contact_title}")
+                return
 
         # Count team members as a rough employee count indicator
         if not company.employee_count:
@@ -244,14 +305,11 @@ class WebsiteEnricher:
                 raw = phone_match.group(0)
                 company.phone = BaseScraper.normalize_phone(raw)
 
-        # Email
+        # Email - search all pages, prefer personal emails over generic
         if not company.key_contact_email:
-            email_match = re.search(r"[\w.+-]+@[\w-]+\.[\w.]+", text)
-            if email_match:
-                email = email_match.group(0).lower()
-                # Skip generic emails
-                if not any(prefix in email for prefix in ["info@", "admin@", "support@", "noreply@"]):
-                    company.key_contact_email = email
+            emails = self._extract_emails_from_page(text, soup)
+            if emails:
+                company.key_contact_email = emails[0]  # Already sorted by preference
 
         # Address for city/state if missing
         if not company.state:
@@ -262,6 +320,10 @@ class WebsiteEnricher:
             city = BaseScraper.extract_city_from_address(text)
             if city:
                 company.city = city
+
+        # Extract from schema.org structured data
+        if soup:
+            self._extract_from_structured_data(company, soup)
 
     def _analyze_full_text(self, company: Company, all_text: str):
         """Run aggregate analysis on all text from the website."""
@@ -294,12 +356,14 @@ class WebsiteEnricher:
             company.estimated_revenue = self._estimate_revenue(all_text)
             if company.estimated_revenue:
                 company.revenue_source = "website_text_inference"
+                logger.debug(f"Extracted revenue: ${company.estimated_revenue:,}")
 
         # Employee count estimation
         if not company.employee_count:
             company.employee_count = self._estimate_employees(all_text)
             if company.employee_count:
                 company.employee_count_source = "website_text_inference"
+                logger.debug(f"Extracted employees: {company.employee_count}")
 
     @staticmethod
     def _estimate_revenue(text: str) -> Optional[int]:
@@ -309,16 +373,40 @@ class WebsiteEnricher:
         """
         text_lower = text.lower()
 
-        # Direct revenue mentions (expanded patterns)
-        patterns = [
-            r"\$(\d+(?:\.\d+)?)\s*(?:m|million)\s*(?:in\s+)?(?:revenue|sales|billing|annual\s+revenue)",
-            r"revenue\s+(?:of\s+|exceeding\s+|over\s+|:\s*)?\$(\d+(?:\.\d+)?)\s*(?:m|million)",
-            r"(\d+(?:\.\d+)?)\s*(?:m|million)\s*(?:dollar)?\s*(?:in\s+)?(?:revenue|firm|business|company)",
-            r"annual\s+(?:revenue|sales)\s+(?:of\s+)?\$(\d+(?:\.\d+)?)\s*(?:m|million)",
-            r"\$(\d+(?:\.\d+)?)\s*(?:m|million)\s+(?:annual\s+)?(?:revenue|sales)",
-            r"generates?\s+(?:over\s+)?\$(\d+(?:\.\d+)?)\s*(?:m|million)\s+(?:in\s+)?(?:revenue|annually)",
+        # Pattern 1: Revenue ranges (e.g., "$5-10M in revenue") - take midpoint
+        range_patterns = [
+            r"\$(\d+(?:\.\d+)?)\s*-\s*\$?(\d+(?:\.\d+)?)\s*(?:m|million)\s*(?:in\s+)?(?:revenue|sales|annual|turnover)",
+            r"revenue\s+(?:of\s+)?\$(\d+(?:\.\d+)?)\s*-\s*\$?(\d+(?:\.\d+)?)\s*(?:m|million)",
+            r"(?:generates?|sales)\s+\$(\d+(?:\.\d+)?)\s*-\s*\$?(\d+(?:\.\d+)?)\s*(?:m|million)",
         ]
-        for pattern in patterns:
+        for pattern in range_patterns:
+            match = re.search(pattern, text_lower)
+            if match:
+                try:
+                    low = float(match.group(1))
+                    high = float(match.group(2))
+                    if 1 <= low <= high <= 500:
+                        # Take midpoint of range
+                        midpoint = (low + high) / 2
+                        return int(midpoint * 1_000_000)
+                except (ValueError, IndexError):
+                    continue
+
+        # Pattern 2: Direct revenue mentions (expanded patterns)
+        direct_patterns = [
+            # Standard formats
+            r"\$(\d+(?:\.\d+)?)\s*(?:m|million|mn)\s*(?:in\s+)?(?:revenue|sales|billing|annual\s+revenue|turnover)",
+            r"revenue\s*(?:of\s+|exceeding\s+|over\s+|:\s*)?\$?(\d+(?:\.\d+)?)\s*(?:m|million|mn)",
+            r"(?:annual\s+)?(?:revenue|sales|turnover)\s*(?:of\s+|is\s+|:\s*)?\$?(\d+(?:\.\d+)?)\s*(?:m|million|mn)",
+            r"\$(\d+(?:\.\d+)?)\s*(?:m|million|mn)\s+(?:annual\s+)?(?:revenue|sales|firm|business)",
+            r"generates?\s+(?:over\s+|approximately\s+)?\$?(\d+(?:\.\d+)?)\s*(?:m|million|mn)\s*(?:in\s+)?(?:revenue|annually|per\s+year)?",
+            # Without dollar sign
+            r"(?:revenue|sales|turnover)\s+(?:of\s+)?(\d+(?:\.\d+)?)\s*(?:m|million)\s*(?:dollars?)?",
+            r"(\d+(?:\.\d+)?)\s*(?:m|million)\s+(?:in\s+)?(?:annual\s+)?(?:revenue|sales)",
+            # With "approximately", "over", "exceeding"
+            r"(?:approximately|about|around|over|exceeding)\s+\$?(\d+(?:\.\d+)?)\s*(?:m|million)\s*(?:in\s+)?(?:revenue|sales)",
+        ]
+        for pattern in direct_patterns:
             match = re.search(pattern, text_lower)
             if match:
                 try:
@@ -328,21 +416,43 @@ class WebsiteEnricher:
                 except ValueError:
                     continue
 
-        # Tax credit amounts processed (rough revenue indicator)
+        # Pattern 3: Billion-scale revenues
+        billion_patterns = [
+            r"\$(\d+(?:\.\d+)?)\s*(?:b|billion)\s*(?:in\s+)?(?:revenue|sales|annual|turnover)",
+            r"revenue\s*(?:of\s+)?\$?(\d+(?:\.\d+)?)\s*(?:b|billion)",
+            r"(\d+(?:\.\d+)?)\s*(?:b|billion)\s+(?:in\s+)?(?:annual\s+)?revenue",
+        ]
+        for pattern in billion_patterns:
+            match = re.search(pattern, text_lower)
+            if match:
+                try:
+                    amount = float(match.group(1))
+                    if 0.1 <= amount <= 100:  # Reasonable range in billions
+                        return int(amount * 1_000_000_000)
+                except ValueError:
+                    continue
+
+        # Pattern 4: Tax credit amounts processed (rough revenue indicator)
         credit_patterns = [
-            r"\$(\d+(?:\.\d+)?)\s*(?:b|billion)\s*(?:in\s+)?(?:credit|tax\s+saving|tax\s+benefit)",
-            r"(?:secured|identified|generated)\s+(?:over\s+)?\$(\d+(?:\.\d+)?)\s*(?:m|million)",
+            r"\$(\d+(?:\.\d+)?)\s*(?:b|billion)\s*(?:in\s+)?(?:credit|tax\s+saving|tax\s+benefit|credits?\s+processed)",
+            r"(?:secured|identified|generated|claimed|processed)\s+(?:over\s+)?\$(\d+(?:\.\d+)?)\s*(?:b|billion)\s*(?:in\s+)?(?:credits?|tax\s+benefits?)",
+            r"(?:secured|identified|generated|claimed)\s+(?:over\s+)?\$(\d+(?:\.\d+)?)\s*(?:m|million)\s*(?:in\s+)?(?:credits?|tax\s+savings?)",
         ]
         for pattern in credit_patterns:
             match = re.search(pattern, text_lower)
             if match:
-                # If they process billions in credits, they're likely >$10M revenue
+                # If they process billions in credits, they're likely $50M+ revenue firm
+                # If they process $100M+ in credits, they're likely $10M+ revenue
                 try:
                     amount = float(match.group(1))
-                    if "billion" in text_lower[match.start():match.end()+10]:
+                    # Check if it's billions or millions
+                    context = text_lower[max(0, match.start()-20):min(len(text_lower), match.end()+20)]
+                    if "billion" in context or " b " in context:
                         return 50_000_000  # Conservative estimate for billion-dollar processors
-                    elif amount > 100:
-                        return 10_000_000
+                    elif amount > 100:  # $100M+ in credits
+                        return 10_000_000  # Likely $10M+ revenue firm
+                    elif amount > 20:  # $20M+ in credits
+                        return 5_000_000  # Likely $5M+ revenue firm
                 except ValueError:
                     continue
 
@@ -356,48 +466,109 @@ class WebsiteEnricher:
         """
         text_lower = text.lower()
 
-        patterns = [
-            r"(\d+)\+?\s*(?:employees|team\s+members|professionals|consultants|staff)",
-            r"team\s+of\s+(\d+)\+?",
-            r"(?:over|more\s+than|approximately)\s+(\d+)\+?\s+(?:employees|people|professionals)",
-            r"(\d+)\s*(?:\+|plus)\s*(?:employees|people|professionals|staff)",
-            r"staff\s+of\s+(\d+)",
-            r"(\d+)\s+experienced\s+(?:professionals|consultants|tax\s+experts)",
+        # Pattern 1: Employee ranges (e.g., "10-20 employees") - take midpoint
+        range_patterns = [
+            r"(\d+)\s*-\s*(\d+)\s+(?:employees|people|staff|professionals|team\s+members)",
+            r"(?:team|staff)\s+(?:of\s+)?(\d+)\s*-\s*(\d+)",
+            r"(\d+)\s*-\s*(\d+)\s+(?:person|member)\s+(?:team|firm|company)",
         ]
-        for pattern in patterns:
+        for pattern in range_patterns:
+            match = re.search(pattern, text_lower)
+            if match:
+                try:
+                    low = int(match.group(1))
+                    high = int(match.group(2))
+                    if 1 <= low <= high <= 10000:
+                        # Take midpoint of range
+                        return (low + high) // 2
+                except (ValueError, IndexError):
+                    continue
+
+        # Pattern 2: Exact counts with various phrasings
+        exact_patterns = [
+            r"(\d+)\+?\s*(?:employees|team\s+members|professionals|consultants|staff|people)",
+            r"team\s+of\s+(\d+)\+?(?:\s+(?:professionals|consultants|experts))?",
+            r"(?:over|more\s+than|approximately|about)\s+(\d+)\+?\s+(?:employees|people|professionals|staff)",
+            r"(\d+)\s*(?:\+|plus)\s*(?:employees|people|professionals|staff|team\s+members)",
+            r"staff\s+of\s+(\d+)\+?",
+            r"(\d+)\s+(?:experienced|dedicated|skilled)\s+(?:professionals|consultants|tax\s+experts|cpas?|accountants?)",
+            r"(?:firm|company|practice)\s+of\s+(\d+)\+?\s+(?:professionals|people|employees)",
+            r"(\d+)\s+(?:member|person)\s+(?:team|firm|practice)",
+        ]
+        for pattern in exact_patterns:
             match = re.search(pattern, text_lower)
             if match:
                 try:
                     count = int(match.group(1))
                     if 2 <= count <= 10000:  # Reasonable range
                         # If pattern has "+", add 20% to account for "50+" meaning ~60
-                        if "+" in match.group(0) or "plus" in match.group(0) or "over" in match.group(0):
+                        if "+" in match.group(0) or "plus" in match.group(0) or "over" in match.group(0) or "more than" in match.group(0):
                             count = int(count * 1.2)
                         return count
                 except ValueError:
                     continue
 
-        # Office locations as a proxy (multiple offices = likely > 5 employees)
-        office_count = len(re.findall(r"(?:office|location)\s+(?:in|:)", text_lower))
-        if office_count >= 3:
-            return max(15, office_count * 5)  # Conservative estimate
+        return None
+
+    def _find_linkedin_url_across_site(self, base_url: str) -> Optional[str]:
+        """
+        Search for LinkedIn URL across multiple pages of the website.
+        Checks homepage, about page, and contact page for LinkedIn links.
+        """
+        # Pages most likely to have LinkedIn links (footer/social icons)
+        search_paths = ["", "/about", "/about-us", "/contact", "/contact-us"]
+
+        for path in search_paths:
+            try:
+                url = f"{base_url}{path}"
+                # Fetch with raw HTML (don't remove footer/header)
+                resp = self.session.get(url, timeout=self.timeout, allow_redirects=True)
+                if resp.status_code == 200:
+                    soup = BeautifulSoup(resp.text, "html.parser")
+                    linkedin_url = self._extract_linkedin_url(soup)
+                    if linkedin_url:
+                        logger.debug(f"Found LinkedIn URL on {url}")
+                        return linkedin_url
+            except Exception as e:
+                logger.debug(f"Error searching for LinkedIn on {url}: {e}")
+                continue
 
         return None
 
     @staticmethod
     def _extract_linkedin_url(soup: BeautifulSoup) -> Optional[str]:
-        """Extract LinkedIn company page URL from website."""
+        """Extract LinkedIn company page URL from website HTML."""
         if not soup:
             return None
 
         # Look for LinkedIn links in the page
         for link in soup.find_all("a", href=True):
             href = link["href"]
+
+            # Check for company page
             if "linkedin.com/company/" in href:
-                # Clean up the URL
-                if "?" in href:
-                    href = href.split("?")[0]
+                # Clean up the URL (remove query params, tracking codes)
+                href = href.split("?")[0].split("#")[0]
                 return href.rstrip("/")
+
+            # Check for personal profiles (CEO/founder LinkedIn)
+            # We'll use this as fallback to find company
+            if "linkedin.com/in/" in href or "linkedin.com/pub/" in href:
+                # Clean up the URL
+                href = href.split("?")[0].split("#")[0]
+                # Only use as last resort (prefer company pages)
+                continue
+
+        # Fallback: look for personal profiles if no company page found
+        for link in soup.find_all("a", href=True):
+            href = link["href"]
+            if "linkedin.com/in/" in href or "linkedin.com/pub/" in href:
+                # Check if it's a founder/CEO profile (often linked prominently)
+                link_text = link.get_text(strip=True).lower()
+                if any(title in link_text for title in ["ceo", "founder", "president", "owner"]):
+                    href = href.split("?")[0].split("#")[0]
+                    logger.debug(f"Found LinkedIn profile (founder/CEO): {href}")
+                    return href.rstrip("/")
 
         return None
 
@@ -493,6 +664,119 @@ class WebsiteEnricher:
 
         except Exception as e:
             logger.debug(f"LinkedIn parsing error for {company.name}: {e}")
+
+    def _extract_emails_from_page(self, text: str, soup: BeautifulSoup) -> list[str]:
+        """
+        Extract emails from page text, prioritizing personal emails over generic ones.
+        Returns list of emails sorted by preference (personal first).
+        """
+        # Find all email addresses
+        email_pattern = r"[\w.+-]+@[\w-]+\.[\w.]+"
+        all_emails = re.findall(email_pattern, text.lower())
+
+        if not all_emails:
+            return []
+
+        # Filter and score emails
+        generic_prefixes = [
+            "info@", "contact@", "admin@", "support@", "noreply@", "no-reply@",
+            "sales@", "marketing@", "hr@", "jobs@", "careers@", "help@",
+            "webmaster@", "hello@", "general@", "team@", "office@"
+        ]
+
+        personal_indicators = [
+            # First name patterns
+            r"^[a-z]+@",  # john@
+            r"^[a-z]+\.[a-z]+@",  # john.smith@
+            r"^[a-z][a-z]+@",  # jsmith@
+        ]
+
+        scored_emails = []
+        for email in set(all_emails):  # Remove duplicates
+            # Skip obvious generic emails
+            if any(email.startswith(prefix) for prefix in generic_prefixes):
+                continue
+
+            # Score email (higher = more likely to be personal)
+            score = 0
+            for pattern in personal_indicators:
+                if re.match(pattern, email):
+                    score += 1
+
+            # Prefer emails with names in them
+            if re.match(r"^[a-z]+\.[a-z]+@", email):
+                score += 2  # firstname.lastname@ is highly preferred
+
+            scored_emails.append((score, email))
+
+        # Sort by score (highest first) and return emails
+        scored_emails.sort(reverse=True, key=lambda x: x[0])
+        return [email for score, email in scored_emails if score > 0] or [scored_emails[0][1]] if scored_emails else []
+
+    @staticmethod
+    def _convert_employee_ranges(company: Company):
+        """
+        Convert employee count ranges to midpoint estimates.
+        This is authentic data transformation, not synthetic estimation.
+        E.g., "11-50 employees" → 30 employees
+        """
+        # Only convert if we have a range but no exact count
+        if company.employee_count_min and company.employee_count_max and not company.employee_count:
+            midpoint = (company.employee_count_min + company.employee_count_max) // 2
+            company.employee_count = midpoint
+            company.employee_count_source = "range_midpoint"
+            logger.debug(f"Converted range {company.employee_count_min}-{company.employee_count_max} to midpoint: {midpoint}")
+
+    def _extract_from_structured_data(self, company: Company, soup: BeautifulSoup):
+        """Extract data from schema.org structured data (JSON-LD)."""
+        if not soup:
+            return
+
+        # Look for JSON-LD schema.org markup
+        for script in soup.find_all("script", type="application/ld+json"):
+            try:
+                import json
+                data = json.loads(script.string)
+
+                # Handle both single objects and arrays
+                items = data if isinstance(data, list) else [data]
+
+                for item in items:
+                    # Organization schema
+                    if item.get("@type") in ["Organization", "LocalBusiness", "ProfessionalService"]:
+                        # Founder name
+                        if not company.key_contact_name and "founder" in item:
+                            founders = item["founder"]
+                            if isinstance(founders, dict) and "name" in founders:
+                                company.key_contact_name = founders["name"]
+                                company.key_contact_title = "Founder"
+                                logger.debug(f"Schema.org: Found founder {company.key_contact_name}")
+                            elif isinstance(founders, list) and len(founders) > 0 and "name" in founders[0]:
+                                company.key_contact_name = founders[0]["name"]
+                                company.key_contact_title = "Founder"
+                                logger.debug(f"Schema.org: Found founder {company.key_contact_name}")
+
+                        # Employee count
+                        if not company.employee_count and "numberOfEmployees" in item:
+                            try:
+                                count = int(item["numberOfEmployees"])
+                                if 1 <= count <= 10000:
+                                    company.employee_count = count
+                                    company.employee_count_source = "schema_org"
+                                    logger.debug(f"Schema.org: Found {count} employees")
+                            except (ValueError, TypeError):
+                                pass
+
+                        # Email
+                        if not company.key_contact_email and "email" in item:
+                            email = item["email"].lower()
+                            if not any(prefix in email for prefix in ["info@", "admin@", "support@"]):
+                                company.key_contact_email = email
+                                logger.debug(f"Schema.org: Found email {email}")
+
+            except (json.JSONDecodeError, TypeError, KeyError) as e:
+                logger.debug(f"Error parsing schema.org data: {e}")
+                continue
 
     def _extract_linkedin_leadership(self, company: Company, text: str, soup: BeautifulSoup):
         """Extract leadership information from LinkedIn company page."""

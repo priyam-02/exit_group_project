@@ -37,6 +37,12 @@ export const getConfidenceBadgeClass = (score: number): string => {
   return 'badge-red';
 };
 
+export const getConfidenceBadgeVariant = (score: number): 'green' | 'yellow' | 'red' => {
+  if (score >= 0.8) return 'green';
+  if (score >= 0.6) return 'yellow';
+  return 'red';
+};
+
 export const formatDate = (dateString: string | null | undefined): string => {
   if (!dateString) return 'N/A';
   const date = new Date(dateString);
