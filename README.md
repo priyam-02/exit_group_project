@@ -16,7 +16,7 @@ The system combines web scraping, intelligent deduplication, data enrichment, an
 
 - 🔍 **Automated data collection** from 5+ sources (Google Places, web scraping, LinkedIn, state filings, Clutch directory)
 - 🧹 **Intelligent deduplication** using domain-based and fuzzy name matching
-- 📊 **ML-based confidence scoring** (0-1 range) with weighted algorithm
+- 📊 **Confidence scoring** (0-1 range) with weighted algorithm
 - 🚀 **REST API** with 8 endpoints for filtering, sorting, and exporting
 - 💼 **Bloomberg Terminal-inspired dashboard** with real-time data visualization
 - 📁 **CSV/JSON export** capabilities for Excel analysis and data integration
