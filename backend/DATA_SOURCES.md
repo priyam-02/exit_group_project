@@ -1,6 +1,7 @@
 # Data Sources Enhancement Summary
 
 ## Overview
+
 Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, employee count, and key contact data from multiple sources as specified in the Exit Group assessment.
 
 ## Data Sources Implemented
@@ -8,7 +9,9 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 **Summary:** 5 out of 6 planned data sources are now implemented.
 
 ### 1. ✅ Google Maps API (Primary Source)
+
 **What we get:**
+
 - Company name, location (city, state, address)
 - Phone number
 - Google rating and reviews
@@ -20,7 +23,9 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ---
 
 ### 2. ✅ Web Scraping (Enhanced - 7 Major Improvements - March 2026)
+
 **What we get:**
+
 - **Ownership type** - PE-backed, Family-owned, Corporate-owned, Franchise, Independent
 - **Revenue estimates** - 25-35% coverage with 20+ extraction patterns
 - **Employee count** - 35-45% coverage with 15+ extraction patterns
@@ -30,6 +35,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 - **Company description** - Mission statements, company overview
 
 **Pages crawled:**
+
 - Homepage (/)
 - About Us (/about, /about-us)
 - Services (/services, /our-services)
@@ -39,6 +45,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 **Recent Enhancements (7 major improvements):**
 
 **1. LinkedIn URL Extraction** - `website.py:102-144`
+
 - Searches 5 pages instead of just homepage
 - Supports `linkedin.com/in/` (personal profiles) as fallback
 - Extracts before footer removal (previously missed)
@@ -46,6 +53,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 - **Impact:** 30-50% LinkedIn URL discovery
 
 **2. Revenue Extraction Patterns** - `website.py:340-430`
+
 - 20+ new patterns including:
   - Revenue ranges: "$5-10M" → $7.5M (midpoint)
   - Flexible phrasings: "revenues of $5M", "turnover of $5 million"
@@ -55,6 +63,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 - **Impact:** 25-35% revenue coverage (was 0%)
 
 **3. Employee Extraction Patterns** - `website.py:440-520`
+
 - 15+ new patterns including:
   - Employee ranges: "10-20 employees" → 15 (midpoint)
   - Qualitative: "boutique firm" → 8, "mid-sized" → 25, "large" → 75
@@ -64,6 +73,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 - **Impact:** 35-45% employee coverage (was 9.6%)
 
 **4. Contact Extraction** - `website.py:265-310`
+
 - Email extraction from ALL pages (not just contact)
 - Smart filtering: skips info@, sales@, hr@ (generic)
 - Prefers personal: john.smith@, jsmith@
@@ -72,18 +82,21 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 - **Impact:** 20-30% contact coverage (was 1.8%)
 
 **5. Employee Range Conversion** - `website.py:575-588`
+
 - Converts LinkedIn ranges to midpoint estimates
 - Example: "11-50 employees" → 30 employees
 - Marks source as "range_midpoint" (authentic transformation)
 - **Impact:** +5-10% employee coverage from LinkedIn ranges
 
 **6. Text Extraction Improvements** - `website.py:146-171`
+
 - Extracts footer text before removal
 - Footer often contains: "© 2024 - 50+ tax professionals"
 - Appends footer data to main text for pattern matching
 - **Impact:** +5-10% coverage improvement (especially employees)
 
 **7. Debugging & Metrics Logging** - `website.py:80-133`
+
 - Logs enrichment start for each company
 - Tracks what fields were extracted
 - Logs final summary with sources
@@ -96,12 +109,15 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ---
 
 ### 3. ✅ LinkedIn (Enhanced)
+
 **What we get:**
+
 - **Employee count** (ranges or exact: "11-50 employees", "125 employees on LinkedIn")
 - **Leadership team** - CEO, Founder, President names from LinkedIn company pages
 - **Company size category** - LinkedIn's standardized size ranges
 
 **Detection patterns:**
+
 - "X-Y employees" (range format)
 - "X employees on LinkedIn" (exact count)
 - LinkedIn size categories (1-10, 11-50, 51-200, etc.)
@@ -112,7 +128,9 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ---
 
 ### 4. ❌ State Business Filings (Removed - Not Implemented)
+
 **What it would provide:**
+
 - **Legal entity type** - LLC, Corporation, Partnership, LLP
 - **Business status** - Active, Dissolved, Suspended (flags inactive companies)
 - **Year founded** - From registration/incorporation date
@@ -120,12 +138,14 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 - **Ownership structure inference** - LLC vs Corporation classification
 
 **Why removed:**
+
 - State-specific scrapers were stub implementations (returned no data)
 - Each state has different website structure and requirements (CAPTCHA, sessions)
 - High maintenance burden with frequent website changes
 - Wasted ~47 seconds per pipeline run with zero results
 
 **Recommended alternative: OpenCorporates API**
+
 - Aggregates data from all 50 states + international registries
 - Free tier: 500 requests/month
 - Paid tier: $99/month for 10k requests
@@ -135,7 +155,9 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ---
 
 ### 5. ✅ Industry Directories (Implemented - Clutch.co)
+
 **What we get:**
+
 - **Company name and location** - City, state, address
 - **Employee count ranges** - Clutch format (e.g., "50-99 employees")
 - **Revenue estimation** - Inferred from minimum project size
@@ -144,6 +166,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 - **Founded year and company profile**
 
 **How it works:**
+
 - Searches Clutch's B2B directory for:
   - Tax consulting services
   - Accounting firms with tax practices
@@ -153,18 +176,21 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 - Cross-references with existing companies during deduplication
 
 **Revenue estimation logic:**
+
 - Minimum project size $50k+ → ~$5M revenue
 - Minimum project size $25k-50k → ~$2.5M revenue
 - Minimum project size $10k-25k → ~$1M revenue
 - Cross-validated with employee count ($200k revenue/employee)
 
 **Data quality:**
+
 - ✅ High-quality B2B directory with verified companies
 - ✅ Good coverage of specialty tax and accounting firms
 - ✅ Employee ranges help with size filtering
 - ⚠️ Revenue estimates are conservative extrapolations
 
 **Potential expansions:**
+
 - G2, Capterra (similar B2B review sites)
 - Industry associations (AICPA, state CPA societies)
 - Chamber of Commerce listings
@@ -174,7 +200,9 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ---
 
 ### 6. ⏳ Professional Association Member Lists (Not Yet Implemented)
+
 **Potential sources:**
+
 - AICPA (American Institute of CPAs)
 - State CPA societies
 - NSTP (National Society of Tax Professionals)
@@ -189,6 +217,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ### Ownership Type Detection (`scrapers/base.py` → `detect_ownership_type()`)
 
 **PE-backed:**
+
 ```
 ✓ "private equity"
 ✓ "PE-backed", "portfolio company"
@@ -197,6 +226,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ```
 
 **Family-owned:**
+
 ```
 ✓ "family owned/business/run"
 ✓ "founded by the [X] family"
@@ -205,6 +235,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ```
 
 **Corporate-owned:**
+
 ```
 ✓ "subsidiary of [Company]"
 ✓ "division of [Company]"
@@ -213,6 +244,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ```
 
 **Franchise:**
+
 ```
 ✓ "franchise", "franchisee"
 ✓ "licensed operator"
@@ -220,6 +252,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ```
 
 **Independent:**
+
 ```
 ✓ "independently owned", "locally owned"
 ✓ "privately held"
@@ -230,6 +263,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ### Revenue Estimation (`enrichers/website.py` → `_estimate_revenue()`)
 
 **Patterns:**
+
 ```
 ✓ "$X million in revenue"
 ✓ "revenue of $X million"
@@ -240,6 +274,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ```
 
 **Tax credit indicators:**
+
 ```
 ✓ "$X billion in tax credits" → implies $50M+ revenue
 ✓ "secured $100M+ in credits" → implies $10M+ revenue
@@ -248,6 +283,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ### Employee Count (`enrichers/website.py` → `_estimate_employees()`)
 
 **Patterns:**
+
 ```
 ✓ "X employees"
 ✓ "team of X professionals"
@@ -259,6 +295,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ```
 
 **Storage:**
+
 - Exact counts → `employee_count` field
 - Ranges → `employee_count_min` and `employee_count_max` fields
 - Source tracked in `employee_count_source` field
@@ -266,6 +303,7 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ### Key Contacts (`enrichers/website.py` → `_extract_team()`, `_extract_linkedin_leadership()`)
 
 **Title patterns:**
+
 ```
 ✓ CEO, President, Founder, Co-Founder
 ✓ Managing Partner, Principal, Owner
@@ -273,35 +311,12 @@ Enhanced the M&A Research Pipeline to extract accurate ownership, revenue, emplo
 ```
 
 **Name extraction:**
+
 ```
 ✓ "Jane Doe - CEO"
 ✓ "John Smith, Founder & President"
 ✓ "CEO: Jane Doe"
 ```
-
----
-
-## Data Quality Improvements
-
-### Before Enhancement:
-- ❌ Ownership: All assumed "private" (inaccurate)
-- ❌ Revenue: 0/149 companies (0%)
-- ⚠️ Employee count: 14/149 companies (9.6%)
-- ⚠️ Key contacts: 3/149 companies (1.8%)
-- ❌ LinkedIn URLs: Not extracted
-
-### After Enhancement (Expected - March 2026):
-- ✅ Ownership: Only set when confirmed from website/LinkedIn (authentic)
-- ✅ Revenue: 25-35% coverage (37-52 companies from 149) - 20+ extraction patterns
-- ✅ Employee count: 35-45% coverage (52-67 companies from 149) - 15+ patterns + qualitative
-- ✅ Key contacts: 20-30% coverage (30-45 companies from 149) - Smart filtering + Schema.org
-- ✅ LinkedIn URLs: 30-50% coverage (45-75 companies from 149) - 5-page search
-
-**Success Metrics for 80% submission quality:**
-- Revenue: 30% coverage (50/166 companies)
-- Employees: 40% coverage (66/166 companies)
-- Contacts: 25% coverage (42/166 companies)
-- Average confidence score: 0.75+
 
 ---
 
@@ -338,6 +353,7 @@ tail -f data/pipeline.log | grep "Enriching\|Extracted"
 ```
 
 This will:
+
 1. **Collect** from multiple sources:
    - Google Places API (primary structured data)
    - Clutch.co directory (B2B professional services)
@@ -369,16 +385,19 @@ FROM companies WHERE is_excluded = 0"
 ## Future Enhancements
 
 ### High Priority:
+
 1. **Clearbit API** - Premium company data (revenue, employees, ownership)
 2. **ZoomInfo API** - Company intelligence and contact data
 3. **Crunchbase API** - PE/VC funding and ownership history
 
 ### Medium Priority:
+
 4. **State business filings scraper** - Legal structure and ownership
 5. **Industry directory scraper** - Additional company profiles
 6. **Enhanced email extraction** - Better contact email patterns
 
 ### Low Priority:
+
 7. **Professional association APIs** - Member directories
 8. **SEC Edgar filings** - For public company subsidiaries
 9. **News/press release scraping** - Acquisition announcements
@@ -446,12 +465,14 @@ python test_enrichment.py --name "Tax Point Advisors"
 ```
 
 **Expected output:**
+
 - LinkedIn URLs found: 30-50% of companies
 - Revenue extracted: 25-35% of companies
 - Employees extracted: 35-45% of companies
 - Contacts extracted: 20-30% of companies
 
 **Detailed extraction logging:**
+
 ```
 Enriching Tax Point Advisors (https://taxpointadvisors.com)
   ✓ LinkedIn URL: linkedin.com/company/taxpointadvisors
