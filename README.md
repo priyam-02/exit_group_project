@@ -75,7 +75,7 @@ The system combines web scraping, intelligent deduplication, data enrichment, an
 
 - **Python 3.9+**
 - **Node.js 20+**
-- **(Optional)** Google Places API key - [Get key](https://developers.google.com/maps/documentation/places/web-service/get-api-key)
+- **(Required)** Google Places API key - [Get key](https://developers.google.com/maps/documentation/places/web-service/get-api-key)
 - **(Optional)** SerpAPI key - [Get key](https://serpapi.com/)
 
 ### Installation
@@ -95,9 +95,9 @@ cd backend
 # Install dependencies
 pip install -r requirements.txt
 
-# Configure environment (optional for demo mode)
+# Configure environment
 cp .env.example .env
-# Edit .env to add your API keys if available
+# Edit .env to add your API keys
 ```
 
 #### 3. Frontend Setup
