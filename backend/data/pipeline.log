@@ -1,0 +1,787 @@
+2026-03-01 00:16:48,648 [INFO] __main__: API Keys configured:
+2026-03-01 00:16:48,648 [INFO] __main__:   Google Places: ✓
+2026-03-01 00:16:48,648 [INFO] __main__:   SerpAPI:       ✓
+2026-03-01 00:16:48,653 [INFO] pipeline: ============================================================
+2026-03-01 00:16:48,653 [INFO] pipeline: Pipeline started: Specialty Tax Advisory Services
+2026-03-01 00:16:48,653 [INFO] pipeline: Target services: ['R&D Tax Credits', 'Cost Segregation', 'Work Opportunity Tax Credits', 'Sales & Use Tax']
+2026-03-01 00:16:48,653 [INFO] pipeline: ============================================================
+2026-03-01 00:16:48,653 [INFO] pipeline: 
+📡 STEP 1: Collecting data from sources...
+2026-03-01 00:16:48,653 [INFO] scrapers.google_places: Google Places: Running 50 search queries (randomized for balanced coverage)...
+2026-03-01 00:16:48,653 [INFO] scrapers.google_places:   [1/50] Searching: 'WOTC tax credit services' near 'Philadelphia, PA'
+2026-03-01 00:16:49,488 [INFO] scrapers.google_places:   [2/50] Searching: 'WOTC tax credit services' near 'Los Angeles, CA'
+2026-03-01 00:16:50,266 [INFO] scrapers.google_places:   [3/50] Searching: 'R&D tax credit consulting' near 'San Francisco, CA'
+2026-03-01 00:16:51,105 [INFO] scrapers.google_places:   [4/50] Searching: 'R&D tax credit consulting' near 'New York, NY'
+2026-03-01 00:16:51,876 [INFO] scrapers.google_places:   [5/50] Searching: 'R&D tax credit consulting' near 'Philadelphia, PA'
+2026-03-01 00:16:52,658 [INFO] scrapers.google_places:   [6/50] Searching: 'specialty tax advisory firm' near 'Dallas, TX'
+2026-03-01 00:16:53,397 [INFO] scrapers.google_places:   [7/50] Searching: 'specialty tax advisory firm' near 'Chicago, IL'
+2026-03-01 00:16:54,227 [INFO] scrapers.google_places:   [8/50] Searching: 'specialty tax advisory firm' near 'Seattle, WA'
+2026-03-01 00:16:55,242 [INFO] scrapers.google_places: Reached max company cap, stopping.
+2026-03-01 00:16:55,242 [INFO] scrapers.google_places: Google Places: Found 100 unique companies
+2026-03-01 00:16:55,242 [INFO] scrapers.google_places:   Service distribution: R&D=28, CostSeg=0, WOTC=26, SUT=0
+2026-03-01 00:16:55,243 [INFO] pipeline:   → Google Places: 100 companies
+2026-03-01 00:16:55,243 [INFO] pipeline:   → SerpAPI: Disabled (using Google Places only)
+2026-03-01 00:16:55,243 [INFO] pipeline: 
+  Total raw results: 100
+2026-03-01 00:16:55,243 [INFO] pipeline: 
+🔄 STEP 2: Deduplicating records...
+2026-03-01 00:16:55,243 [INFO] dedup: Deduplication: Starting with 100 companies
+2026-03-01 00:16:55,243 [INFO] dedup:   After domain dedup: 100
+2026-03-01 00:16:55,297 [INFO] dedup:   After name dedup: 100
+2026-03-01 00:16:55,298 [INFO] dedup: Deduplication: Final count = 100
+2026-03-01 00:16:55,298 [INFO] pipeline:   → After dedup: 100 companies
+2026-03-01 00:16:55,298 [INFO] pipeline: 
+🔍 STEP 3: Enriching from company websites...
+2026-03-01 00:16:55,298 [INFO] pipeline:   → Fetching website URLs from Google Places...
+2026-03-01 00:17:45,354 [INFO] pipeline:   → Found 89 websites
+2026-03-01 00:17:45,355 [INFO] pipeline:   → Visiting websites for enrichment...
+2026-03-01 00:17:45,355 [INFO] pipeline:   [1/100] Enriching: Worry Free Tax & Financial Solutions, LLC (https://wftfs.com)
+2026-03-01 00:17:53,640 [INFO] pipeline:   [2/100] Enriching: Woodwee Financial Services (https://woodweefinancial.com)
+2026-03-01 00:17:54,121 [INFO] pipeline:   [3/100] Enriching: Philadelphia Department of Revenue-Center City Philadelphia (https://phila.gov/revenue)
+2026-03-01 00:17:56,486 [INFO] pipeline:   [4/100] Enriching: Wise Financial Profit Inc (https://wisefinancialinc.com)
+2026-03-01 00:18:05,136 [INFO] pipeline:   [5/100] Enriching: Victor's Office - VJP Services (https://vjpservices.com)
+2026-03-01 00:18:07,711 [INFO] pipeline:   [6/100] Enriching: Revenue Collection Bureau (https://revenuecollections.com)
+2026-03-01 00:18:11,294 [INFO] pipeline:   [7/100] Enriching: TC Services USA Inc (https://tcservicesusa.com)
+2026-03-01 00:18:18,877 [INFO] pipeline:   [8/100] Enriching: Wiser Tax Solutions LLC (https://wisertaxsolutions.com)
+2026-03-01 00:18:36,207 [INFO] pipeline:   [10/100] Enriching: White Oak Tax and Advisory (https://woaccounting.com)
+2026-03-01 00:18:37,899 [INFO] pipeline:   [11/100] Enriching: Accountants For You & OfficeStaff For You (https://accountantsforyou.com)
+2026-03-01 00:18:39,430 [INFO] pipeline:   [12/100] Enriching: Maurice Joffe Tax Services (https://joffetax.net)
+2026-03-01 00:18:42,666 [INFO] pipeline:   [14/100] Enriching: Choice Tax Relief (https://choicetaxrelief.com)
+2026-03-01 00:18:47,013 [INFO] pipeline:   [16/100] Enriching: loto income tax (https://lotoincometax.com)
+2026-03-01 00:18:59,745 [INFO] pipeline:   [18/100] Enriching: Free Tax Prep LA (https://freetaxprepla.org)
+2026-03-01 00:19:01,619 [INFO] pipeline:   [19/100] Enriching: ATC Accounting & Insurance Services (https://atc-accounting.com)
+2026-03-01 00:19:03,360 [INFO] pipeline:   [21/100] Enriching: HCVT West Los Angeles (https://hcvt.com/offices-west-los-angeles)
+2026-03-01 00:19:06,331 [INFO] pipeline:   [22/100] Enriching: Economy Tax Services (https://economytax.com)
+2026-03-01 00:19:06,928 [INFO] pipeline:   [23/100] Enriching: H&R Block (https://hrblock.com/tax-office-near-me/california/los-angeles/6409/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 00:19:08,898 [INFO] pipeline:   [25/100] Enriching: Orocovis Service Co (https://orocovisservice.com)
+2026-03-01 00:19:10,968 [INFO] pipeline:   [27/100] Enriching: Swanson Reed | Specialist R&D Tax Advisors (https://swansonreed.com/california)
+2026-03-01 00:20:00,554 [INFO] pipeline:   [28/100] Enriching: Kruze Consulting (https://kruzeconsulting.com)
+2026-03-01 00:20:02,905 [INFO] pipeline:   [29/100] Enriching: Burkland Associates (https://burklandassociates.com)
+2026-03-01 00:20:06,948 [INFO] pipeline:   [30/100] Enriching: SD Mayer & Associates (https://sdmayer.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb&utm_content=san-francisco)
+2026-03-01 00:20:10,097 [INFO] pipeline:   [31/100] Enriching: Finvisor (https://finvisor.com/?y_source=1_ndg4ndy0ntktnze1lwxvy2f0aw9ulndlynnpdgu%3d)
+2026-03-01 00:20:27,439 [INFO] pipeline:   [32/100] Enriching: Energy Tax Savers / R&D Tax Savers (https://energytaxsavers.com)
+2026-03-01 00:20:30,664 [INFO] pipeline:   [33/100] Enriching: KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) (https://kbkg.com)
+2026-03-01 00:20:31,057 [INFO] pipeline:   [34/100] Enriching: RND Consulting Inc (https://rndcredits.com)
+2026-03-01 00:20:32,639 [INFO] pipeline:   [35/100] Enriching: TRI-MERIT SPECIALTY TAX PROFESSIONALS (https://tri-merit.com)
+2026-03-01 00:20:41,770 [INFO] pipeline:   [36/100] Enriching: RCK Partners (https://rck.partners)
+2026-03-01 00:20:44,267 [INFO] pipeline:   [37/100] Enriching: Strategic Tax Planning, LLC (https://strategictaxplanning.net)
+2026-03-01 00:20:45,074 [INFO] pipeline:   [39/100] Enriching: Research Tax Credits, LLC (https://researchtaxcreditsllc.com/about-us)
+2026-03-01 00:20:47,494 [INFO] pipeline:   [40/100] Enriching: Tax Point Advisors (https://taxpointadvisors.com)
+2026-03-01 00:20:51,076 [INFO] pipeline:   [41/100] Enriching: Reliant Tax Consulting, Inc. (https://reliantez.com)
+2026-03-01 00:20:54,120 [INFO] pipeline:   [42/100] Enriching: Anchin (https://anchin.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb)
+2026-03-01 00:20:56,260 [INFO] pipeline:   [43/100] Enriching: RÖDL USA - Rödl Langford de Kock LLP (https://roedl.com/us/locations/new_york.html)
+2026-03-01 00:21:10,301 [INFO] pipeline:   [44/100] Enriching: Kruze Consulting (https://kruzeconsulting.com/new-york-city)
+2026-03-01 00:21:12,984 [INFO] pipeline:   [45/100] Enriching: L&D Tax Prep & Consulting (https://ldtaxconsulting.com)
+2026-03-01 00:21:14,477 [INFO] pipeline:   [47/100] Enriching: RAC Solutions Inc. (https://racsolutionsinc.com)
+2026-03-01 00:21:16,137 [INFO] pipeline:   [48/100] Enriching: R&D Legal Bookkeeping (https://rdlegalbookkeeping.com/outsourced-bookkeeping)
+2026-03-01 00:21:35,818 [INFO] pipeline:   [49/100] Enriching: D & D Consulting (https://ddtax.net)
+2026-03-01 00:21:37,747 [INFO] pipeline:   [50/100] Enriching: KB Tax Deviser CPAs (https://kbtaxdevisers.com)
+2026-03-01 00:22:03,945 [INFO] pipeline:   [51/100] Enriching: Precision Tax & Advisory (https://precisiontaxadvisory.com)
+2026-03-01 00:22:05,911 [INFO] pipeline:   [53/100] Enriching: SD Associates, P.C. (https://sdaccounting.com)
+2026-03-01 00:22:07,623 [INFO] pipeline:   [54/100] Enriching: D & R Tax Services (https://drtaxserv.com)
+2026-03-01 00:22:09,735 [INFO] pipeline:   [56/100] Enriching: Tax Advisors Group Inc (https://taxadvisorsgroup.com)
+2026-03-01 00:22:12,815 [INFO] pipeline:   [57/100] Enriching: L&H CPAs and Advisors - Dallas CPA Firm (https://lhcpafirm.com)
+2026-03-01 00:22:19,884 [INFO] pipeline:   [58/100] Enriching: Hegwood Group, LP (https://hegwoodgroup.com)
+2026-03-01 00:22:51,094 [INFO] pipeline:   [59/100] Enriching: SST Accountants & Consultants (https://sst.cpa)
+2026-03-01 00:23:00,278 [INFO] pipeline:   [60/100] Enriching: EisnerAmper (https://eisneramper.com)
+2026-03-01 00:23:01,833 [INFO] pipeline:   [61/100] Enriching: J Chester & Associates, Inc Dallas CPA Firm (https://jchestercpa.com)
+2026-03-01 00:23:04,984 [INFO] pipeline:   [62/100] Enriching: Duke Tax (https://duke.tax)
+2026-03-01 00:23:09,880 [INFO] pipeline:   [63/100] Enriching: Saville CPAs & Advisors (https://savillecpa.com)
+2026-03-01 00:23:12,304 [INFO] pipeline:   [64/100] Enriching: Hammer Tax & Advisory, PLLC (https://htaxadvisory.com)
+2026-03-01 00:23:14,982 [INFO] pipeline:   [65/100] Enriching: Dallas Tax Advisors (https://dfw-taxadvisors.com)
+2026-03-01 00:23:18,437 [INFO] pipeline:   [66/100] Enriching: Green Tax and Business Advisors (https://greentaxandbusinessadvisors.com)
+2026-03-01 00:23:22,430 [INFO] pipeline:   [67/100] Enriching: Mostafa Ibrahim Sabry CPA, LLC - Mostafa Ibrahim CPA (https://mostafaibrahimcpa.com)
+2026-03-01 00:23:27,295 [INFO] pipeline:   [68/100] Enriching: Law Office of Tiffany L. Hamil, PLLC (https://dfwtaxadvisor.com)
+2026-03-01 00:23:33,941 [INFO] pipeline:   [69/100] Enriching: Cohesion Co. (https://cohesionco.com)
+2026-03-01 00:23:46,238 [INFO] pipeline:   [70/100] Enriching: SDO CPA: Tax Preparation, Accounting, & Bookkeeping (https://sdocpa.com)
+2026-03-01 00:23:53,326 [INFO] pipeline:   [71/100] Enriching: Dan Jefferson Tax and Financial Consulting, Inc. (https://danjeffersonpc.com)
+2026-03-01 00:23:58,885 [INFO] pipeline:   [72/100] Enriching: Block Advisors (https://blockadvisors.com/tax-office-near-me/texas/dallas/40754/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 00:24:01,237 [INFO] pipeline:   [73/100] Enriching: Tax Preparation Services in Dallas | Apex Income Tax & Multiservice LLC. (https://apexincometax.com)
+2026-03-01 00:24:02,276 [INFO] pipeline:   [74/100] Enriching: Evans Sternau CPA - CPA Firm in Dallas, Texas (https://es.cpa/cpa-firm-dallas)
+2026-03-01 00:24:10,687 [INFO] pipeline:   [75/100] Enriching: Stenger Tax Advisory | Chicago Accountant (https://stengertax.com/chicago-accountant)
+2026-03-01 00:24:13,366 [INFO] pipeline:   [76/100] Enriching: Pasquesi Partners (https://pasquesipartners.com)
+2026-03-01 00:24:17,750 [INFO] pipeline:   [77/100] Enriching: Cendrowski Corporate Advisors (https://cca-advisors.com)
+2026-03-01 00:24:28,693 [INFO] pipeline:   [78/100] Enriching: Zhou Agency (https://zhouagency.com)
+2026-03-01 00:24:31,592 [INFO] pipeline:   [79/100] Enriching: W.E.D. Tax and Accounting Services Inc (https://wedtax.com)
+2026-03-01 00:24:41,943 [INFO] pipeline:   [80/100] Enriching: Strategic Tax Consultants (https://staxc.com)
+2026-03-01 00:24:43,088 [INFO] pipeline:   [81/100] Enriching: Patriot Tax Group (https://patriottaxgroup.com)
+2026-03-01 00:26:43,238 [INFO] pipeline:   [82/100] Enriching: The A.C.T. Group, LLC (https://actgroupllc.com)
+2026-03-01 00:26:45,627 [INFO] pipeline:   [83/100] Enriching: Wilson & Associates, CPAs (https://wilsonandassociatescpas.com/?utm_source=gmb&utm_medium=organic&utm_campaign=2025)
+2026-03-01 00:29:08,899 [INFO] pipeline:   [84/100] Enriching: APA Financial Services (https://apataxes.com)
+2026-03-01 00:29:10,137 [INFO] pipeline:   [85/100] Enriching: Sheikh Osher & Scott CPAs & Advisors, P.C. (https://soscpas.com)
+2026-03-01 00:29:22,061 [INFO] pipeline:   [86/100] Enriching: Odoni Partners CPAs - Chicago (https://odonipartners.com/locations/chicago)
+2026-03-01 00:29:22,477 [INFO] pipeline:   [87/100] Enriching: Chicago Accounting & Tax Services (https://chicagoaccounting.net)
+2026-03-01 00:29:23,254 [INFO] pipeline:   [88/100] Enriching: Chicagoland CPAs (https://cpa-in-chicago.com)
+2026-03-01 00:29:44,990 [INFO] pipeline:   [89/100] Enriching: Smart Solutions CPA (https://smartsolutionscpa.com)
+2026-03-01 00:29:48,316 [INFO] pipeline:   [90/100] Enriching: Hechtman Group (https://thehechtmangroup.com)
+2026-03-01 00:30:34,578 [INFO] pipeline:   [91/100] Enriching: Hankewych & Associates Inc (https://hankewych.com)
+2026-03-01 00:30:58,786 [INFO] pipeline:   [92/100] Enriching: SRJ Consulting (https://srjtax.com)
+2026-03-01 00:31:40,140 [INFO] pipeline:   [93/100] Enriching: Grant Thornton (https://grantthornton.com/offices/illinois/chicago)
+2026-03-01 00:31:41,208 [INFO] pipeline:   [94/100] Enriching: Seattle Tax Group LLC (https://seattletaxgroup.com)
+2026-03-01 00:31:44,326 [INFO] pipeline:   [95/100] Enriching: HAAS CPA, PLLC (https://haascpas.com)
+2026-03-01 00:31:47,582 [INFO] pipeline:   [96/100] Enriching: Aldaris CPA Group (https://aldariscpa.com)
+2026-03-01 00:31:58,787 [INFO] pipeline:   [97/100] Enriching: Jacobson Lawrence & Company (https://jacobsonlawrence.com)
+2026-03-01 00:32:00,472 [INFO] pipeline:   [98/100] Enriching: Block Advisors (https://blockadvisors.com/tax-office-near-me/washington/seattle/63680/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 00:32:02,351 [INFO] pipeline:   [99/100] Enriching: Taxman Associates (https://taxman.cc)
+2026-03-01 00:32:06,539 [INFO] pipeline:   [100/100] Enriching: Raymond Lyle CPA PLLC (https://raymondlylecpa.com)
+2026-03-01 00:32:09,532 [INFO] pipeline:   → Enriched 89 companies from websites
+2026-03-01 00:32:09,533 [INFO] pipeline: 
+📊 STEP 4: Scoring companies...
+2026-03-01 00:32:09,535 [INFO] pipeline: 
+🏷️  STEP 5: Applying thesis filters...
+2026-03-01 00:32:09,535 [INFO] pipeline:   → Excluded: 14 companies
+2026-03-01 00:32:09,535 [INFO] pipeline:     - TC Services USA Inc: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 00:32:09,535 [INFO] pipeline:     - SD Mayer & Associates: Exclusively focused on Property Tax consulting
+2026-03-01 00:32:09,535 [INFO] pipeline:     - TRI-MERIT SPECIALTY TAX PROFESSIONALS: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 00:32:09,535 [INFO] pipeline:     - Strategic Tax Planning, LLC: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 00:32:09,535 [INFO] pipeline:     - Hegwood Group, LP: Exclusively focused on Property Tax consulting
+2026-03-01 00:32:09,535 [INFO] pipeline:     - SD Associates, P.C.: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 00:32:09,535 [INFO] pipeline:     - RCK Partners: Exclusively focused on Property Tax consulting
+2026-03-01 00:32:09,535 [INFO] pipeline:     - Jacobson Lawrence & Company: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 00:32:09,535 [INFO] pipeline:     - Tax Advisors Group Inc: Exclusively focused on Property Tax consulting
+2026-03-01 00:32:09,535 [INFO] pipeline:     - J Chester & Associates, Inc Dallas CPA Firm: Exclusively focused on Property Tax consulting
+2026-03-01 00:32:09,536 [INFO] pipeline:     - Dallas Tax Advisors: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 00:32:09,536 [INFO] pipeline:     - Mostafa Ibrahim Sabry CPA, LLC - Mostafa Ibrahim CPA: Exclusively focused on Property Tax consulting
+2026-03-01 00:32:09,536 [INFO] pipeline:     - Law Office of Tiffany L. Hamil, PLLC: Exclusively focused on Property Tax consulting
+2026-03-01 00:32:09,536 [INFO] pipeline:     - APA Financial Services: Exclusively focused on Property Tax consulting
+2026-03-01 00:32:09,536 [INFO] pipeline:   → Active targets: 86 companies
+2026-03-01 00:32:09,536 [INFO] pipeline: 
+💾 STEP 6: Saving to database...
+2026-03-01 00:32:09,771 [INFO] pipeline:   → Saved 100 companies to database
+2026-03-01 00:32:09,771 [INFO] pipeline: 
+📁 STEP 7: Exporting data...
+2026-03-01 00:32:09,777 [INFO] pipeline:   → Exported CSV: data/companies.csv
+2026-03-01 00:32:09,783 [INFO] pipeline:   → Exported JSON: data/companies.json
+2026-03-01 00:32:09,784 [INFO] pipeline: 
+============================================================
+2026-03-01 00:32:09,784 [INFO] pipeline: PIPELINE SUMMARY
+2026-03-01 00:32:09,784 [INFO] pipeline: ============================================================
+2026-03-01 00:32:09,784 [INFO] pipeline:   Raw results collected:  100
+2026-03-01 00:32:09,784 [INFO] pipeline:   After deduplication:    100
+2026-03-01 00:32:09,784 [INFO] pipeline:   Excluded:               14
+2026-03-01 00:32:09,784 [INFO] pipeline:   Final active targets:   86
+2026-03-01 00:32:09,784 [INFO] pipeline: 
+  Service Distribution:
+2026-03-01 00:32:09,784 [INFO] pipeline:     Work Opportunity Tax Credits: 26
+2026-03-01 00:32:09,784 [INFO] pipeline:     R&D Tax Credits: 23
+2026-03-01 00:32:09,784 [INFO] pipeline:     Cost Segregation: 6
+2026-03-01 00:32:09,784 [INFO] pipeline:     Sales & Use Tax: 3
+2026-03-01 00:32:09,784 [INFO] pipeline: 
+  Top States:
+2026-03-01 00:32:09,784 [INFO] pipeline:     CA: 22
+2026-03-01 00:32:09,784 [INFO] pipeline:     IL: 18
+2026-03-01 00:32:09,784 [INFO] pipeline:     TX: 14
+2026-03-01 00:32:09,784 [INFO] pipeline:     PA: 13
+2026-03-01 00:32:09,784 [INFO] pipeline:     NY: 9
+2026-03-01 00:32:09,784 [INFO] pipeline:     WA: 6
+2026-03-01 00:32:09,784 [INFO] pipeline:     OH: 2
+2026-03-01 00:32:09,784 [INFO] pipeline:     MA: 1
+2026-03-01 00:32:09,784 [INFO] pipeline:     MD: 1
+2026-03-01 00:32:09,784 [INFO] pipeline: 
+  Data Coverage:
+2026-03-01 00:32:09,784 [INFO] pipeline:     With website:   75/86 (87%)
+2026-03-01 00:32:09,787 [INFO] pipeline:     With revenue:   1/86 (1%)
+2026-03-01 00:32:09,787 [INFO] pipeline:     With employees: 8/86 (9%)
+2026-03-01 00:32:09,787 [INFO] pipeline:     With contact:   4/86 (5%)
+2026-03-01 00:32:09,787 [INFO] pipeline: 
+============================================================
+2026-03-01 00:32:09,787 [INFO] pipeline: Database: data/companies.db
+2026-03-01 00:32:09,787 [INFO] pipeline: CSV Export: data/companies.csv
+2026-03-01 00:32:09,787 [INFO] pipeline: JSON Export: data/companies.json
+2026-03-01 00:32:09,787 [INFO] pipeline: ============================================================
+2026-03-01 08:16:02,001 [INFO] __main__: API Keys configured:
+2026-03-01 08:16:02,001 [INFO] __main__:   Google Places: ✓
+2026-03-01 08:16:02,001 [INFO] __main__:   SerpAPI:       ✓
+2026-03-01 08:16:02,003 [INFO] pipeline: ============================================================
+2026-03-01 08:16:02,003 [INFO] pipeline: Pipeline started: Specialty Tax Advisory Services
+2026-03-01 08:16:02,003 [INFO] pipeline: Target services: ['R&D Tax Credits', 'Cost Segregation', 'Work Opportunity Tax Credits', 'Sales & Use Tax']
+2026-03-01 08:16:02,003 [INFO] pipeline: ============================================================
+2026-03-01 08:16:02,003 [INFO] pipeline: 
+📡 STEP 1: Collecting data from sources...
+2026-03-01 08:16:02,003 [INFO] scrapers.google_places: Google Places: Running 50 search queries (randomized for balanced coverage)...
+2026-03-01 08:16:02,003 [INFO] scrapers.google_places:   [1/50] Searching: 'cost segregation company' near 'Los Angeles, CA'
+2026-03-01 08:16:02,725 [INFO] scrapers.google_places:   [2/50] Searching: 'sales and use tax consulting' near 'Seattle, WA'
+2026-03-01 08:16:03,481 [INFO] scrapers.google_places:   [3/50] Searching: 'R&D tax credit consulting' near 'Los Angeles, CA'
+2026-03-01 08:16:04,032 [INFO] scrapers.google_places:   [4/50] Searching: 'sales and use tax consulting' near 'Atlanta, GA'
+2026-03-01 08:16:04,797 [INFO] scrapers.google_places:   [5/50] Searching: 'WOTC tax credit services' near 'Los Angeles, CA'
+2026-03-01 08:16:05,620 [INFO] scrapers.google_places:   [6/50] Searching: 'WOTC tax credit services' near 'Philadelphia, PA'
+2026-03-01 08:16:06,636 [INFO] scrapers.google_places:   [7/50] Searching: 'specialty tax advisory firm' near 'Philadelphia, PA'
+2026-03-01 08:16:07,818 [INFO] scrapers.google_places:   [8/50] Searching: 'R&D tax credit consulting' near 'Boston, MA'
+2026-03-01 08:16:08,793 [INFO] scrapers.google_places:   [9/50] Searching: 'cost segregation company' near 'Atlanta, GA'
+2026-03-01 08:16:09,379 [INFO] scrapers.google_places: Reached max company cap, stopping.
+2026-03-01 08:16:09,380 [INFO] scrapers.google_places: Google Places: Found 100 unique companies
+2026-03-01 08:16:09,380 [INFO] scrapers.google_places:   Service distribution: R&D=13, CostSeg=5, WOTC=29, SUT=33
+2026-03-01 08:16:09,380 [INFO] pipeline:   → Google Places: 100 companies
+2026-03-01 08:16:09,380 [INFO] pipeline:   → SerpAPI: Disabled (using Google Places only)
+2026-03-01 08:16:09,380 [INFO] pipeline: 
+  Total raw results: 100
+2026-03-01 08:16:09,380 [INFO] pipeline: 
+🔄 STEP 2: Deduplicating records...
+2026-03-01 08:16:09,380 [INFO] dedup: Deduplication: Starting with 100 companies
+2026-03-01 08:16:09,380 [INFO] dedup:   After domain dedup: 100
+2026-03-01 08:16:09,444 [INFO] dedup:   After name dedup: 100
+2026-03-01 08:16:09,444 [INFO] dedup: Deduplication: Final count = 100
+2026-03-01 08:16:09,444 [INFO] pipeline:   → After dedup: 100 companies
+2026-03-01 08:16:09,444 [INFO] pipeline: 
+🔍 STEP 3: Enriching from company websites...
+2026-03-01 08:16:09,444 [INFO] pipeline:   → Fetching website URLs from Google Places...
+2026-03-01 08:16:59,546 [INFO] pipeline:   → Found 84 websites
+2026-03-01 08:16:59,547 [INFO] pipeline:   → Visiting websites for enrichment...
+2026-03-01 08:16:59,547 [INFO] pipeline:   [1/100] Enriching: KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) (https://kbkg.com)
+2026-03-01 08:16:59,951 [INFO] pipeline:   [2/100] Enriching: Cost Segregation Consultants, LLC (https://costsegconsultants.com)
+2026-03-01 08:17:06,041 [INFO] pipeline:   [3/100] Enriching: Seattle Tax Group LLC (https://seattletaxgroup.com)
+2026-03-01 08:17:09,426 [INFO] pipeline:   [4/100] Enriching: USA Tax Gurus LLC (https://usataxgurus.com)
+2026-03-01 08:17:27,518 [INFO] pipeline:   [5/100] Enriching: Taxman Associates (https://taxman.cc)
+2026-03-01 08:17:31,810 [INFO] pipeline:   [6/100] Enriching: HAAS CPA, PLLC (https://haascpas.com)
+2026-03-01 08:17:35,208 [INFO] pipeline:   [7/100] Enriching: Aldaris CPA Group (https://aldariscpa.com)
+2026-03-01 08:17:46,281 [INFO] pipeline:   [8/100] Enriching: Empowered Accounting Inc (https://empoweredaccounting.net)
+2026-03-01 08:17:48,059 [INFO] pipeline:   [9/100] Enriching: ZeiSei CPA Group (https://zeiseigroup.com)
+2026-03-01 08:17:52,196 [INFO] pipeline:   [10/100] Enriching: Seattle Legal Services, PLLC (https://seattle-taxattorney.com/tax-attorney-for-tax-resolution-services)
+2026-03-01 08:17:58,137 [INFO] pipeline:   [11/100] Enriching: Tax Consultants of Washington (https://oldhamfrancis.com)
+2026-03-01 08:18:01,431 [INFO] pipeline:   [12/100] Enriching: Sound NW Tax Services (https://soundnwtax.com)
+2026-03-01 08:18:05,533 [INFO] pipeline:   [13/100] Enriching: Your Financial Solutions, CPA (https://yourfinancialsolutions.com)
+2026-03-01 08:18:07,284 [INFO] pipeline:   [14/100] Enriching: Focus Tax Resolution Services LLC (https://focustaxes.com)
+2026-03-01 08:18:09,418 [INFO] pipeline:   [15/100] Enriching: Joseph & Hetrick, LLC (https://josephandhetrick.com)
+2026-03-01 08:18:15,260 [INFO] pipeline:   [16/100] Enriching: Raymond Lyle CPA PLLC (https://raymondlylecpa.com)
+2026-03-01 08:18:19,090 [INFO] pipeline:   [17/100] Enriching: Northwest Tax Advisors LLC (https://nw-tax.com)
+2026-03-01 08:18:20,871 [INFO] pipeline:   [18/100] Enriching: Francis & Company (https://francis-company.com/?y_source=1_mte1nja2ndgtnze1lwxvy2f0aw9ulndlynnpdgu%3d)
+2026-03-01 08:18:22,646 [INFO] pipeline:   [19/100] Enriching: Pacific Tax Service (https://pacifictaxservice.com)
+2026-03-01 08:18:25,961 [INFO] pipeline:   [21/100] Enriching: Linda M. Teachout CPA PLLC (https://lindamteachoutcpa.com)
+2026-03-01 08:18:31,066 [INFO] pipeline:   [23/100] Enriching: Energy Tax Savers / R&D Tax Savers (https://energytaxsavers.com)
+2026-03-01 08:18:34,246 [INFO] pipeline:   [24/100] Enriching: RND Consulting Inc (https://rndcredits.com)
+2026-03-01 08:18:36,061 [INFO] pipeline:   [25/100] Enriching: W3 Business & Tax Consultants, Inc. (https://warrenlee3.net)
+2026-03-01 08:18:36,734 [INFO] pipeline:   [26/100] Enriching: Levy Tax & Consulting LLC (https://levycpafirm.com)
+2026-03-01 08:18:37,283 [INFO] pipeline:   [27/100] Enriching: Distinct Tax Consulting Group (https://distincttax.com)
+2026-03-01 08:18:39,269 [INFO] pipeline:   [28/100] Enriching: Clarke CPA LLC (https://clarkecpallc.com)
+2026-03-01 08:18:41,958 [INFO] pipeline:   [29/100] Enriching: The Peck Group, LC (https://pecklc.com)
+2026-03-01 08:18:43,734 [INFO] pipeline:   [30/100] Enriching: Manay CPA Inc. (https://manaycpa.com)
+2026-03-01 08:19:03,925 [INFO] pipeline:   [31/100] Enriching: Advisors Professional Services Inc (https://advisorstaxpro.com)
+2026-03-01 08:19:05,274 [INFO] pipeline:   [32/100] Enriching: King of Kings Firm LLC (https://kingofkingsllc.com/?utm_source=gbp&utm_medium=organic)
+2026-03-01 08:19:07,213 [INFO] pipeline:   [33/100] Enriching: Eleven30 Financial Group (https://eleven30fg.com)
+2026-03-01 08:19:09,403 [INFO] pipeline:   [34/100] Enriching: TAXRELAX with WISEADVICE - Personal & Business Tax Services (https://wiseadviceusa.com)
+2026-03-01 08:19:10,352 [INFO] pipeline:   [35/100] Enriching: Tax Solutions Atlanta USA (https://taxsolutionsatlanta.net)
+2026-03-01 08:19:17,979 [INFO] pipeline:   [36/100] Enriching: Carter & Company Business Accounting Firm Atlanta CPA (https://cartercompanycpa.com)
+2026-03-01 08:19:19,551 [INFO] pipeline:   [37/100] Enriching: Positive Rate Tax Advisors (https://positiverate.tax)
+2026-03-01 08:19:20,110 [INFO] pipeline:   [39/100] Enriching: Choice Tax Relief (https://choicetaxrelief.com)
+2026-03-01 08:19:24,143 [INFO] pipeline:   [40/100] Enriching: Maurice Joffe Tax Services (https://joffetax.net)
+2026-03-01 08:19:27,512 [INFO] pipeline:   [42/100] Enriching: loto income tax (https://lotoincometax.com)
+2026-03-01 08:19:38,429 [INFO] pipeline:   [45/100] Enriching: ATC Accounting & Insurance Services (https://atc-accounting.com)
+2026-03-01 08:19:40,320 [INFO] pipeline:   [46/100] Enriching: HCVT West Los Angeles (https://hcvt.com/offices-west-los-angeles)
+2026-03-01 08:19:43,341 [INFO] pipeline:   [47/100] Enriching: Economy Tax Services (https://economytax.com)
+2026-03-01 08:19:43,961 [INFO] pipeline:   [49/100] Enriching: Advantage Tax Consultants (https://ataxconsultants.com)
+2026-03-01 08:19:52,172 [INFO] pipeline:   [50/100] Enriching: H&R Block (https://hrblock.com/tax-office-near-me/california/los-angeles/6409/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 08:19:54,430 [INFO] pipeline:   [51/100] Enriching: Orocovis Service Co (https://orocovisservice.com)
+2026-03-01 08:19:56,840 [INFO] pipeline:   [55/100] Enriching: Wise Financial Profit Inc (https://wisefinancialinc.com)
+2026-03-01 08:20:03,279 [INFO] pipeline:   [56/100] Enriching: Woodwee Financial Services (https://woodweefinancial.com)
+2026-03-01 08:20:03,908 [INFO] pipeline:   [58/100] Enriching: Philadelphia Department of Revenue-Center City Philadelphia (https://phila.gov/revenue)
+2026-03-01 08:20:06,921 [INFO] pipeline:   [60/100] Enriching: Accountants For You & OfficeStaff For You (https://accountantsforyou.com)
+2026-03-01 08:20:08,693 [INFO] pipeline:   [61/100] Enriching: Victor's Office - VJP Services (https://vjpservices.com)
+2026-03-01 08:20:12,696 [INFO] pipeline:   [62/100] Enriching: TWS, LLC Accounting (https://twelvewhitestone.com)
+2026-03-01 08:20:22,158 [INFO] pipeline:   [64/100] Enriching: TC Services USA Inc (https://tcservicesusa.com)
+2026-03-01 08:20:32,167 [INFO] pipeline:   [65/100] Enriching: Worry Free Tax & Financial Solutions, LLC (https://wftfs.com)
+2026-03-01 08:20:40,345 [INFO] pipeline:   [67/100] Enriching: Precision Tax & Advisory (https://precisiontaxadvisory.com)
+2026-03-01 08:20:42,196 [INFO] pipeline:   [68/100] Enriching: JBB & Associates, LLC (https://jbbandassociates.com)
+2026-03-01 08:20:48,764 [INFO] pipeline:   [69/100] Enriching: Strategic Tax & Advisory Services (https://strategictax.co)
+2026-03-01 08:20:49,757 [INFO] pipeline:   [70/100] Enriching: JMS Tax & Business Solutions (https://jmstaxsolutions.com)
+2026-03-01 08:20:52,009 [INFO] pipeline:   [71/100] Enriching: Centri Business Consulting (https://centriconsulting.com/locations/philadelphia/?utm_source=google&utm_medium=organic&utm_campaign=local_philly)
+2026-03-01 08:20:53,237 [INFO] pipeline:   [72/100] Enriching: Amro Azazi CPA, PC (https://amroazazi.com)
+2026-03-01 08:20:55,255 [INFO] pipeline:   [73/100] Enriching: Parker Financial Services (https://lesstax123.com)
+2026-03-01 08:20:58,477 [INFO] pipeline:   [74/100] Enriching: Spina McCarthy & Company, LLC (https://spinacpa.com)
+2026-03-01 08:21:02,382 [INFO] pipeline:   [75/100] Enriching: NB Advisors Small Business Accountant - Philadelphia Location (https://nbcpa.us/small-business-accountant-philadelphia)
+2026-03-01 08:21:06,181 [INFO] pipeline:   [76/100] Enriching: Kim Yeung Ling P.C. (https://kimlingcpa.net)
+2026-03-01 08:21:09,483 [INFO] pipeline:   [77/100] Enriching: Internal Tax Service, LLC (https://bestphillycpa.com)
+2026-03-01 08:21:11,588 [INFO] pipeline:   [78/100] Enriching: SD Associates, P.C. (https://sdaccounting.com)
+2026-03-01 08:21:13,886 [INFO] pipeline:   [79/100] Enriching: Wipfli (https://wipfli.com/about-wipfli/locations/pennsylvania/pa-philadelphia?utm_source=gmb&utm_medium=organic)
+2026-03-01 08:21:33,944 [INFO] pipeline:   [81/100] Enriching: EisnerAmper (https://eisneramper.com)
+2026-03-01 08:21:35,719 [INFO] pipeline:   [82/100] Enriching: Keystone Tax Service, Inc (https://keystonetax.com)
+2026-03-01 08:21:42,684 [INFO] pipeline:   [83/100] Enriching: Mac Alpine Carll & Co (https://macalpinecarll.com)
+2026-03-01 08:21:47,011 [INFO] pipeline:   [84/100] Enriching: Holtzman Tax and Financial Services (https://holtzmantax.net)
+2026-03-01 08:21:48,460 [INFO] pipeline:   [85/100] Enriching: USA Tax Service (https://usataxservice.com)
+2026-03-01 08:21:51,887 [INFO] pipeline:   [87/100] Enriching: Tax Point Advisors (https://taxpointadvisors.com)
+2026-03-01 08:21:55,611 [INFO] pipeline:   [88/100] Enriching: Debits & Credits LLC (https://dbscds.com)
+2026-03-01 08:21:58,129 [INFO] pipeline:   [89/100] Enriching: Anomaly CPA (https://anomalycpa.com/our-impact)
+2026-03-01 08:22:00,761 [INFO] pipeline:   [90/100] Enriching: Walter Shuffain (https://wsadvisors.com)
+2026-03-01 08:22:06,266 [INFO] pipeline:   [91/100] Enriching: Boylston Tax Group (https://boylston.cpa)
+2026-03-01 08:22:09,529 [INFO] pipeline:   [92/100] Enriching: FinAccurate, LLC (https://finaccurate.com)
+2026-03-01 08:22:12,880 [INFO] pipeline:   [93/100] Enriching: randd uk ltd (https://randduk.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb_profile)
+2026-03-01 08:22:15,191 [INFO] pipeline:   [94/100] Enriching: TRI-MERIT SPECIALTY TAX PROFESSIONALS (https://tri-merit.com)
+2026-03-01 08:22:24,114 [INFO] pipeline:   [95/100] Enriching: Research Tax Credits, LLC (https://researchtaxcreditsllc.com/about-us)
+2026-03-01 08:22:26,342 [INFO] pipeline:   [96/100] Enriching: Strategic Tax Planning, LLC (https://strategictaxplanning.net)
+2026-03-01 08:22:28,121 [INFO] pipeline:   [97/100] Enriching: Financetec (https://financetec.com)
+2026-03-01 08:22:29,075 [INFO] pipeline:   [98/100] Enriching: Cost Segregation Consultants, LLC (https://costsegconsultants.com)
+2026-03-01 08:22:35,690 [INFO] pipeline:   [99/100] Enriching: Delerme CPA (https://delermecpa.com)
+2026-03-01 08:22:37,878 [INFO] pipeline:   [100/100] Enriching: Forvis Mazars, LLP (https://forvismazars.us/about-us/locations/atlanta-ga?utm_source=yext&utm_medium=organic&utm_campaign=yext)
+2026-03-01 08:22:39,940 [INFO] pipeline:   → Enriched 84 companies from websites
+2026-03-01 08:22:39,940 [INFO] pipeline: 
+📊 STEP 4: Scoring companies...
+2026-03-01 08:22:39,941 [INFO] pipeline: 
+🏷️  STEP 5: Applying thesis filters...
+2026-03-01 08:22:39,941 [INFO] pipeline:   → Excluded: 4 companies
+2026-03-01 08:22:39,941 [INFO] pipeline:     - TC Services USA Inc: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 08:22:39,941 [INFO] pipeline:     - TRI-MERIT SPECIALTY TAX PROFESSIONALS: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 08:22:39,941 [INFO] pipeline:     - Strategic Tax Planning, LLC: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 08:22:39,941 [INFO] pipeline:     - SD Associates, P.C.: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 08:22:39,941 [INFO] pipeline:   → Active targets: 96 companies
+2026-03-01 08:22:39,941 [INFO] pipeline: 
+💾 STEP 6: Saving to database...
+2026-03-01 08:22:40,150 [INFO] pipeline:   → Saved 100 companies to database
+2026-03-01 08:22:40,150 [INFO] pipeline: 
+📁 STEP 7: Exporting data...
+2026-03-01 08:22:40,156 [INFO] pipeline:   → Exported CSV: data/companies.csv
+2026-03-01 08:22:40,164 [INFO] pipeline:   → Exported JSON: data/companies.json
+2026-03-01 08:22:40,165 [INFO] pipeline: 
+============================================================
+2026-03-01 08:22:40,165 [INFO] pipeline: PIPELINE SUMMARY
+2026-03-01 08:22:40,165 [INFO] pipeline: ============================================================
+2026-03-01 08:22:40,165 [INFO] pipeline:   Raw results collected:  100
+2026-03-01 08:22:40,165 [INFO] pipeline:   After deduplication:    100
+2026-03-01 08:22:40,165 [INFO] pipeline:   Excluded:               4
+2026-03-01 08:22:40,165 [INFO] pipeline:   Final active targets:   96
+2026-03-01 08:22:40,165 [INFO] pipeline: 
+  Service Distribution:
+2026-03-01 08:22:40,165 [INFO] pipeline:     Sales & Use Tax: 33
+2026-03-01 08:22:40,165 [INFO] pipeline:     Work Opportunity Tax Credits: 28
+2026-03-01 08:22:40,165 [INFO] pipeline:     R&D Tax Credits: 11
+2026-03-01 08:22:40,165 [INFO] pipeline:     Cost Segregation: 10
+2026-03-01 08:22:40,165 [INFO] pipeline: 
+  Top States:
+2026-03-01 08:22:40,165 [INFO] pipeline:     PA: 31
+2026-03-01 08:22:40,165 [INFO] pipeline:     WA: 20
+2026-03-01 08:22:40,165 [INFO] pipeline:     CA: 19
+2026-03-01 08:22:40,165 [INFO] pipeline:     GA: 15
+2026-03-01 08:22:40,165 [INFO] pipeline:     MA: 7
+2026-03-01 08:22:40,165 [INFO] pipeline:     NY: 1
+2026-03-01 08:22:40,166 [INFO] pipeline:     OH: 1
+2026-03-01 08:22:40,166 [INFO] pipeline:     UT: 1
+2026-03-01 08:22:40,166 [INFO] pipeline: 
+  Data Coverage:
+2026-03-01 08:22:40,166 [INFO] pipeline:     With website:   80/96 (83%)
+2026-03-01 08:22:40,166 [INFO] pipeline:     With revenue:   0/96 (0%)
+2026-03-01 08:22:40,166 [INFO] pipeline:     With employees: 12/96 (12%)
+2026-03-01 08:22:40,166 [INFO] pipeline:     With contact:   2/96 (2%)
+2026-03-01 08:22:40,166 [INFO] pipeline: 
+============================================================
+2026-03-01 08:22:40,166 [INFO] pipeline: Database: data/companies.db
+2026-03-01 08:22:40,166 [INFO] pipeline: CSV Export: data/companies.csv
+2026-03-01 08:22:40,166 [INFO] pipeline: JSON Export: data/companies.json
+2026-03-01 08:22:40,166 [INFO] pipeline: ============================================================
+2026-03-01 08:29:26,506 [INFO] __main__: API Keys configured:
+2026-03-01 08:29:26,506 [INFO] __main__:   Google Places: ✓
+2026-03-01 08:29:26,506 [INFO] __main__:   SerpAPI:       ✓
+2026-03-01 08:29:26,511 [INFO] pipeline: ============================================================
+2026-03-01 08:29:26,511 [INFO] pipeline: Pipeline started: Specialty Tax Advisory Services
+2026-03-01 08:29:26,511 [INFO] pipeline: Target services: ['R&D Tax Credits', 'Cost Segregation', 'Work Opportunity Tax Credits', 'Sales & Use Tax']
+2026-03-01 08:29:26,511 [INFO] pipeline: ============================================================
+2026-03-01 08:29:26,511 [INFO] pipeline: 
+📡 STEP 1: Collecting data from sources...
+2026-03-01 08:29:26,511 [INFO] scrapers.google_places: Google Places: Running 50 search queries (randomized for balanced coverage)...
+2026-03-01 08:29:26,511 [INFO] scrapers.google_places:   [1/50] Searching: 'sales and use tax consulting' near 'Atlanta, GA'
+2026-03-01 08:29:27,327 [INFO] scrapers.google_places:   [2/50] Searching: 'sales and use tax consulting' near 'Dallas, TX'
+2026-03-01 08:29:28,037 [INFO] scrapers.google_places:   [3/50] Searching: 'R&D tax credit consulting' near 'Los Angeles, CA'
+2026-03-01 08:29:28,562 [INFO] scrapers.google_places:   [4/50] Searching: 'WOTC tax credit services' near 'New York, NY'
+2026-03-01 08:29:29,285 [INFO] scrapers.google_places:   [5/50] Searching: 'WOTC tax credit services' near 'Dallas, TX'
+2026-03-01 08:29:30,060 [INFO] scrapers.google_places:   [6/50] Searching: 'R&D tax credit consulting' near 'Atlanta, GA'
+2026-03-01 08:29:30,980 [INFO] scrapers.google_places:   [7/50] Searching: 'R&D tax credit consulting' near 'Philadelphia, PA'
+2026-03-01 08:29:32,098 [INFO] scrapers.google_places:   [8/50] Searching: 'WOTC tax credit services' near 'Boston, MA'
+2026-03-01 08:29:33,151 [INFO] scrapers.google_places:   [9/50] Searching: 'cost segregation company' near 'Philadelphia, PA'
+2026-03-01 08:29:33,948 [INFO] scrapers.google_places:   [10/50] Searching: 'WOTC tax credit services' near 'Houston, TX'
+2026-03-01 08:29:34,772 [INFO] scrapers.google_places:   [11/50] Searching: 'sales and use tax consulting' near 'Houston, TX'
+2026-03-01 08:29:35,608 [INFO] scrapers.google_places:   [12/50] Searching: 'cost segregation company' near 'Chicago, IL'
+2026-03-01 08:29:36,695 [INFO] scrapers.google_places:   [13/50] Searching: 'sales and use tax consulting' near 'Boston, MA'
+2026-03-01 08:29:37,279 [INFO] scrapers.google_places:   [14/50] Searching: 'sales and use tax consulting' near 'Chicago, IL'
+2026-03-01 08:29:38,059 [INFO] scrapers.google_places: Reached max company cap, stopping.
+2026-03-01 08:29:38,060 [INFO] scrapers.google_places: Google Places: Found 100 unique companies
+2026-03-01 08:29:38,060 [INFO] scrapers.google_places:   Service distribution: R&D=10, CostSeg=3, WOTC=36, SUT=51
+2026-03-01 08:29:38,060 [INFO] pipeline:   → Google Places: 100 companies
+2026-03-01 08:29:38,065 [INFO] scrapers.clutch_directory: Clutch Directory: Searching 4 categories...
+2026-03-01 08:29:38,222 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-consulting: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-consulting
+2026-03-01 08:29:39,181 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-advisory: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-advisory
+2026-03-01 08:29:40,190 [ERROR] scrapers.clutch_directory: Error scraping page 0 of accounting-firms/tax-services: 403 Client Error: Forbidden for url: https://clutch.co/directory/accounting-firms/tax-services
+2026-03-01 08:29:41,195 [ERROR] scrapers.clutch_directory: Error scraping page 0 of business-services/tax-preparation: 403 Client Error: Forbidden for url: https://clutch.co/directory/business-services/tax-preparation
+2026-03-01 08:29:41,195 [INFO] scrapers.clutch_directory: Clutch Directory: Found 0 companies
+2026-03-01 08:29:41,195 [INFO] pipeline:   → Clutch Directory: 0 companies
+2026-03-01 08:29:41,196 [INFO] pipeline:   → SerpAPI: Disabled (using Google Places only)
+2026-03-01 08:29:41,196 [INFO] pipeline: 
+  Total raw results: 100
+2026-03-01 08:29:41,196 [INFO] pipeline: 
+🔄 STEP 2: Deduplicating records...
+2026-03-01 08:29:41,196 [INFO] dedup: Deduplication: Starting with 100 companies
+2026-03-01 08:29:41,196 [INFO] dedup:   After domain dedup: 100
+2026-03-01 08:29:41,256 [INFO] dedup:   After name dedup: 100
+2026-03-01 08:29:41,256 [INFO] dedup: Deduplication: Final count = 100
+2026-03-01 08:29:41,256 [INFO] pipeline:   → After dedup: 100 companies
+2026-03-01 08:29:41,256 [INFO] pipeline: 
+🔍 STEP 3: Enriching from company websites...
+2026-03-01 08:29:41,256 [INFO] pipeline:   → Fetching website URLs from Google Places...
+2026-03-01 08:33:36,472 [INFO] __main__: API Keys configured:
+2026-03-01 08:33:36,472 [INFO] __main__:   Google Places: ✓
+2026-03-01 08:33:36,472 [INFO] __main__:   SerpAPI:       ✓
+2026-03-01 08:33:36,475 [INFO] pipeline: ============================================================
+2026-03-01 08:33:36,475 [INFO] pipeline: Pipeline started: Specialty Tax Advisory Services
+2026-03-01 08:33:36,475 [INFO] pipeline: Target services: ['R&D Tax Credits', 'Cost Segregation', 'Work Opportunity Tax Credits', 'Sales & Use Tax']
+2026-03-01 08:33:36,475 [INFO] pipeline: ============================================================
+2026-03-01 08:33:36,475 [INFO] pipeline: 
+📡 STEP 1: Collecting data from sources...
+2026-03-01 08:33:36,475 [INFO] scrapers.google_places: Google Places: Running 50 search queries (randomized for balanced coverage)...
+2026-03-01 08:33:36,475 [INFO] scrapers.google_places:   [1/50] Searching: 'sales and use tax consulting' near 'New York, NY'
+2026-03-01 08:33:37,130 [INFO] scrapers.google_places:   [2/50] Searching: 'cost segregation company' near 'Houston, TX'
+2026-03-01 08:33:37,624 [INFO] scrapers.google_places:   [3/50] Searching: 'WOTC tax credit services' near 'Boston, MA'
+2026-03-01 08:33:38,327 [INFO] scrapers.google_places:   [4/50] Searching: 'WOTC tax credit services' near 'Atlanta, GA'
+2026-03-01 08:33:39,198 [INFO] scrapers.google_places:   [5/50] Searching: 'R&D tax credit consulting' near 'Atlanta, GA'
+2026-03-01 08:33:40,005 [INFO] scrapers.google_places:   [6/50] Searching: 'cost segregation company' near 'Philadelphia, PA'
+2026-03-01 08:33:40,743 [INFO] scrapers.google_places:   [7/50] Searching: 'WOTC tax credit services' near 'New York, NY'
+2026-03-01 08:33:41,578 [INFO] scrapers.google_places:   [8/50] Searching: 'R&D tax credit consulting' near 'New York, NY'
+2026-03-01 08:33:42,401 [INFO] scrapers.google_places:   [9/50] Searching: 'WOTC tax credit services' near 'Houston, TX'
+2026-03-01 08:33:43,609 [INFO] scrapers.google_places:   [10/50] Searching: 'sales and use tax consulting' near 'Boston, MA'
+2026-03-01 08:33:44,148 [INFO] scrapers.google_places:   [11/50] Searching: 'R&D tax credit consulting' near 'Boston, MA'
+2026-03-01 08:33:44,855 [INFO] scrapers.google_places:   [12/50] Searching: 'cost segregation company' near 'New York, NY'
+2026-03-01 08:33:45,395 [INFO] scrapers.google_places:   [13/50] Searching: 'sales and use tax consulting' near 'Philadelphia, PA'
+2026-03-01 08:33:46,271 [INFO] scrapers.google_places: Reached max company cap, stopping.
+2026-03-01 08:33:46,271 [INFO] scrapers.google_places: Google Places: Found 100 unique companies
+2026-03-01 08:33:46,271 [INFO] scrapers.google_places:   Service distribution: R&D=20, CostSeg=4, WOTC=40, SUT=36
+2026-03-01 08:33:46,271 [INFO] pipeline:   → Google Places: 100 companies
+2026-03-01 08:33:46,275 [INFO] scrapers.clutch_directory: Clutch Directory: Searching 4 categories...
+2026-03-01 08:33:46,382 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-consulting: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-consulting
+2026-03-01 08:33:47,405 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-advisory: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-advisory
+2026-03-01 08:33:48,408 [ERROR] scrapers.clutch_directory: Error scraping page 0 of accounting-firms/tax-services: 403 Client Error: Forbidden for url: https://clutch.co/directory/accounting-firms/tax-services
+2026-03-01 08:33:49,420 [ERROR] scrapers.clutch_directory: Error scraping page 0 of business-services/tax-preparation: 403 Client Error: Forbidden for url: https://clutch.co/directory/business-services/tax-preparation
+2026-03-01 08:33:49,420 [INFO] scrapers.clutch_directory: Clutch Directory: Found 0 companies
+2026-03-01 08:33:49,420 [INFO] pipeline:   → Clutch Directory: 0 companies
+2026-03-01 08:33:49,420 [INFO] pipeline:   → SerpAPI: Disabled (using Google Places only)
+2026-03-01 08:33:49,420 [INFO] pipeline: 
+  Total raw results: 100
+2026-03-01 08:33:49,421 [INFO] pipeline: 
+🔄 STEP 2: Deduplicating records...
+2026-03-01 08:33:49,421 [INFO] dedup: Deduplication: Starting with 100 companies
+2026-03-01 08:33:49,421 [INFO] dedup:   After domain dedup: 100
+2026-03-01 08:33:49,480 [INFO] dedup:   After name dedup: 98
+2026-03-01 08:33:49,480 [INFO] dedup: Deduplication: Final count = 98
+2026-03-01 08:33:49,480 [INFO] pipeline:   → After dedup: 98 companies
+2026-03-01 08:33:49,480 [INFO] pipeline: 
+🔍 STEP 3: Enriching from company websites...
+2026-03-01 08:33:49,480 [INFO] pipeline:   → Fetching website URLs from Google Places...
+2026-03-01 08:34:38,544 [INFO] pipeline:   → Found 86 websites
+2026-03-01 08:34:38,544 [INFO] pipeline:   → Visiting websites for enrichment...
+2026-03-01 08:34:38,544 [INFO] pipeline:   [1/98] Enriching: Sales Tax Helper LLC (https://salestaxhelper.com)
+2026-03-01 08:34:44,537 [INFO] pipeline:   [2/98] Enriching: Sales Tax Defense LLC (https://salestaxdefense.com)
+2026-03-01 08:34:46,199 [INFO] pipeline:   [4/98] Enriching: Tax Defender USA (https://taxdefenderusa.com)
+2026-03-01 08:34:50,704 [INFO] pipeline:   [5/98] Enriching: Upside Tax and Financial - Andrew Donoghue CPA CFP (https://upsidetax.com)
+2026-03-01 08:34:53,049 [INFO] pipeline:   [6/98] Enriching: Agro Accounting CPA (https://agroaccounting.com)
+2026-03-01 08:34:53,444 [INFO] pipeline:   [7/98] Enriching: CommissionTax®️ By The Commission Ent LLC (https://commissiontax.com)
+2026-03-01 08:34:54,047 [INFO] pipeline:   [8/98] Enriching: Tax Relief R Us (https://taxreliefrus.com)
+2026-03-01 08:35:01,039 [INFO] pipeline:   [9/98] Enriching: C & S Tax Consultants Inc. (https://cstaxes.com)
+2026-03-01 08:35:03,930 [INFO] pipeline:   [10/98] Enriching: Spear CPA CFP (https://spearcpa.com)
+2026-03-01 08:35:15,891 [INFO] pipeline:   [11/98] Enriching: Tax Solutions Service Center (https://tssc.nyc)
+2026-03-01 08:35:16,593 [INFO] pipeline:   [12/98] Enriching: Ivy Tax and Accounting Services - NYC CPA and Tax Preparer (https://healthytaxes.com)
+2026-03-01 08:35:19,870 [INFO] pipeline:   [13/98] Enriching: Tax Genius Inc. (https://taxgeniusinc.com)
+2026-03-01 08:35:28,980 [INFO] pipeline:   [14/98] Enriching: 212 Tax (https://212tax.com)
+2026-03-01 08:35:50,518 [INFO] pipeline:   [15/98] Enriching: SJ Associates (https://sjtax.com)
+2026-03-01 08:35:52,227 [INFO] pipeline:   [16/98] Enriching: Real Tax USA- Accounting, Tax and Bookkeeping Services – Accountant in Brooklyn (https://realtaxusa.com)
+2026-03-01 08:36:11,090 [INFO] pipeline:   [17/98] Enriching: Timothy S. Hart Law Group, P.C. (https://irstaxpros.com/?utm_source=local&utm_medium=organic&utm_campaign=gmb)
+2026-03-01 08:36:13,795 [INFO] pipeline:   [18/98] Enriching: Goldfine Tax Accountants and Consultants (https://goldfinecpa.com)
+2026-03-01 08:36:16,792 [INFO] pipeline:   [19/98] Enriching: Tax Accountant - Fincadia (https://fincadiatax.com/taxaccountant-nyc/?utm_campaign=gmb&utm_medium=tax_accountant_nyc)
+2026-03-01 08:36:17,981 [INFO] pipeline:   [20/98] Enriching: Tax Problem Law Center LLC. (https://taxproblemlawcenter.com)
+2026-03-01 08:36:19,028 [INFO] pipeline:   [21/98] Enriching: Velasquez Tax & Business Services (https://velasqueztaxbizsvcs.com)
+2026-03-01 08:36:20,042 [INFO] pipeline:   [22/98] Enriching: Massachusetts Revenue Department (https://mass.gov/orgs/massachusetts-department-of-revenue)
+2026-03-01 08:36:21,029 [INFO] pipeline:   [23/98] Enriching: The OCI Group (https://theocigroup.com)
+2026-03-01 08:36:43,745 [INFO] pipeline:   [24/98] Enriching: Financetec (https://financetec.com)
+2026-03-01 08:36:44,287 [INFO] pipeline:   [25/98] Enriching: CP Tax Services (https://cptaxserv.com)
+2026-03-01 08:36:52,912 [INFO] pipeline:   [27/98] Enriching: Walter Financial Services.Inc (https://walterfinancialservices.com)
+2026-03-01 08:37:00,558 [INFO] pipeline:   [28/98] Enriching: TC Services USA Inc (https://tcservicesusa.com)
+2026-03-01 08:37:08,143 [INFO] pipeline:   [29/98] Enriching: Taxpayer Advocate Service Office (https://taxpayeradvocate.irs.gov)
+2026-03-01 08:37:45,881 [INFO] pipeline:   [30/98] Enriching: The W Tax Group (https://wtaxattorney.com)
+2026-03-01 08:37:52,722 [INFO] pipeline:   [31/98] Enriching: TW Tax & Credit Services (https://twtaxcreditservices.com)
+2026-03-01 08:38:08,673 [INFO] pipeline:   [32/98] Enriching: Wynter Financial Services, Inc. (https://wynterfinancialservice.com)
+2026-03-01 08:38:12,195 [INFO] pipeline:   [33/98] Enriching: W Systems & Trading PC (https://wsprofessionals.com)
+2026-03-01 08:38:20,222 [INFO] pipeline:   [34/98] Enriching: Atc Financial L Lc (https://atcincometax.com)
+2026-03-01 08:38:30,634 [INFO] pipeline:   [35/98] Enriching: McMillian & Associates (https://mcataxcredits.com)
+2026-03-01 08:38:43,689 [INFO] pipeline:   [36/98] Enriching: ATC Income Tax (https://atcincometax.com)
+2026-03-01 08:38:53,994 [INFO] pipeline:   [37/98] Enriching: Costwise Tax and Business Services (https://costwisetaxservices.com)
+2026-03-01 08:39:00,051 [INFO] pipeline:   [38/98] Enriching: Wilson Lewis CPA s (https://wilsonlewis.com)
+2026-03-01 08:39:15,509 [INFO] pipeline:   [40/98] Enriching: Total Choice Financial Solutions Group (https://choicefinancialcoaching.org)
+2026-03-01 08:39:17,549 [INFO] pipeline:   [42/98] Enriching: RND Consulting Inc (https://rndcredits.com)
+2026-03-01 08:39:18,755 [INFO] pipeline:   [43/98] Enriching: Real Tax Debt Relief (https://realtaxdebtrelief.com)
+2026-03-01 08:39:19,633 [INFO] pipeline:   [45/98] Enriching: KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) (https://kbkg.com)
+2026-03-01 08:39:20,824 [INFO] pipeline:   [46/98] Enriching: Amro Azazi CPA, PC (https://amroazazi.com)
+2026-03-01 08:39:22,469 [INFO] pipeline:   [47/98] Enriching: Tax Opportunities America (https://taxoa.com)
+2026-03-01 08:39:23,464 [INFO] pipeline:   [48/98] Enriching: W.C. Tax and Consulting Service Inc. (https://wc-planning.com)
+2026-03-01 08:39:34,938 [INFO] pipeline:   [49/98] Enriching: New York State Income Tax Center (https://tax.ny.gov/pit)
+2026-03-01 08:39:36,160 [INFO] pipeline:   [50/98] Enriching: Robert A. Woloshen CPA, PC (https://rawcpa.com)
+2026-03-01 08:39:38,119 [INFO] pipeline:   [51/98] Enriching: WOTC.com (https://hitechpayroll.com)
+2026-03-01 08:39:40,525 [INFO] pipeline:   [56/98] Enriching: C&W Tax & Accounting, Co. (https://cwtax.com)
+2026-03-01 08:39:42,397 [INFO] pipeline:   [57/98] Enriching: Energy Tax Savers / R&D Tax Savers (https://energytaxsavers.com)
+2026-03-01 08:39:45,787 [INFO] pipeline:   [58/98] Enriching: Research Tax Credits, LLC (https://researchtaxcreditsllc.com/about-us)
+2026-03-01 08:39:47,771 [INFO] pipeline:   [59/98] Enriching: Anchin (https://anchin.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb)
+2026-03-01 08:39:50,168 [INFO] pipeline:   [60/98] Enriching: RÖDL USA - Rödl Langford de Kock LLP (https://roedl.com/us/locations/new_york.html)
+2026-03-01 08:40:02,331 [INFO] pipeline:   [61/98] Enriching: L&D Tax Prep & Consulting (https://ldtaxconsulting.com)
+2026-03-01 08:40:03,875 [INFO] pipeline:   [63/98] Enriching: Strategic Tax Planning, LLC (https://strategictaxplanning.net)
+2026-03-01 08:40:04,784 [INFO] pipeline:   [64/98] Enriching: RAC Solutions Inc. (https://racsolutionsinc.com)
+2026-03-01 08:40:06,547 [INFO] pipeline:   [65/98] Enriching: D & D Consulting (https://ddtax.net)
+2026-03-01 08:40:13,431 [INFO] pipeline:   [66/98] Enriching: RRD Accounting, Inc (https://rrdaccounting.com)
+2026-03-01 08:40:16,712 [INFO] pipeline:   [67/98] Enriching: Vo & Ouk CPA LLC (https://vooukcpa.com)
+2026-03-01 08:40:19,951 [INFO] pipeline:   [68/98] Enriching: OTS TAX SERVICES (https://otsmanagementgroup.com)
+2026-03-01 08:40:23,872 [INFO] pipeline:   [69/98] Enriching: The Right Choice Financial & Tax Services (https://trcfinancialservices.com)
+2026-03-01 08:40:30,459 [INFO] pipeline:   [70/98] Enriching: Sandra Tapia, CPA, PLLC (https://pasadena-taxservices.com)
+2026-03-01 08:40:32,589 [INFO] pipeline:   [71/98] Enriching: Wang & Co (https://wangcpa.com)
+2026-03-01 08:40:34,359 [INFO] pipeline:   [72/98] Enriching: Platinum Tax Service (https://platinumtaxservice.net)
+2026-03-01 08:40:39,031 [INFO] pipeline:   [74/98] Enriching: CB Unlimited Tax Consulting Corp. (https://cbunlimitedtaxconsulting.com)
+2026-03-01 08:41:02,461 [INFO] pipeline:   [75/98] Enriching: Upscale of Boston (https://upscalebos.com)
+2026-03-01 08:41:04,539 [INFO] pipeline:   [76/98] Enriching: S&T Tax & Business Solutions LLC (https://sttaxbusinesssolutionsllc.com)
+2026-03-01 08:41:05,526 [INFO] pipeline:   [77/98] Enriching: eTax Professional Accounting (https://etaxprofessional.com/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=17499013969825211035)
+2026-03-01 08:42:01,270 [INFO] pipeline:   [78/98] Enriching: Caraballo CPA (https://caraballocpa.com)
+2026-03-01 08:42:04,425 [INFO] pipeline:   [79/98] Enriching: Savage Weiner & Company, CPAs (https://swcpa.com)
+2026-03-01 08:42:07,356 [INFO] pipeline:   [80/98] Enriching: Dukhon Tax and Accounting LLC (https://dukhontax.com)
+2026-03-01 08:42:12,062 [INFO] pipeline:   [81/98] Enriching: BFA (https://bfallc.net)
+2026-03-01 08:42:23,009 [INFO] pipeline:   [82/98] Enriching: Z&Z Accounting Services (https://sites.google.com/znzaccounting.com/888)
+2026-03-01 08:42:24,183 [INFO] pipeline:   [83/98] Enriching: S & T Associates (https://sandtassociates.com)
+2026-03-01 08:42:28,628 [INFO] pipeline:   [84/98] Enriching: DLS TAX SOLUTIONS (https://dlstaxsolutions.com)
+2026-03-01 08:42:33,146 [INFO] pipeline:   [85/98] Enriching: Baker Newman Noyes (https://bnncpa.com)
+2026-03-01 08:42:40,860 [INFO] pipeline:   [86/98] Enriching: Omar Financial (https://omarfinancial.com)
+2026-03-01 08:42:41,987 [INFO] pipeline:   [87/98] Enriching: The Tax Consultants, Inc. (https://taxes52.com)
+2026-03-01 08:42:42,838 [INFO] pipeline:   [88/98] Enriching: Tax Point Advisors (https://taxpointadvisors.com)
+2026-03-01 08:42:46,525 [INFO] pipeline:   [89/98] Enriching: Anomaly CPA (https://anomalycpa.com/our-impact)
+2026-03-01 08:42:48,658 [INFO] pipeline:   [90/98] Enriching: Walter Shuffain (https://wsadvisors.com)
+2026-03-01 08:42:52,440 [INFO] pipeline:   [91/98] Enriching: Boylston Tax Group (https://boylston.cpa)
+2026-03-01 08:42:55,882 [INFO] pipeline:   [92/98] Enriching: FinAccurate, LLC (https://finaccurate.com)
+2026-03-01 08:42:58,805 [INFO] pipeline:   [93/98] Enriching: randd uk ltd (https://randduk.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb_profile)
+2026-03-01 08:43:00,757 [INFO] pipeline:   [94/98] Enriching: TRI-MERIT SPECIALTY TAX PROFESSIONALS (https://tri-merit.com)
+2026-03-01 08:43:10,395 [INFO] pipeline:   [95/98] Enriching: Debits & Credits LLC (https://dbscds.com)
+2026-03-01 08:43:11,734 [INFO] pipeline:   [96/98] Enriching: Cost Segregation Consultants, LLC (https://costsegconsultants.com)
+2026-03-01 08:43:17,542 [INFO] pipeline:   [97/98] Enriching: USA Tax Service (https://usataxservice.com)
+2026-03-01 08:43:20,772 [INFO] pipeline:   → Enriched 86 companies from websites
+2026-03-01 08:43:20,773 [INFO] pipeline:   → Enriching from state business filings...
+2026-03-01 08:44:07,932 [INFO] pipeline:   → Enriched 97 companies from state filings
+2026-03-01 08:44:07,934 [INFO] pipeline: 
+📊 STEP 4: Scoring companies...
+2026-03-01 08:44:07,935 [INFO] pipeline: 
+🏷️  STEP 5: Applying thesis filters...
+2026-03-01 08:44:07,935 [INFO] pipeline:   → Excluded: 4 companies
+2026-03-01 08:44:07,935 [INFO] pipeline:     - TC Services USA Inc: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 08:44:07,936 [INFO] pipeline:     - Strategic Tax Planning, LLC: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 08:44:07,936 [INFO] pipeline:     - TRI-MERIT SPECIALTY TAX PROFESSIONALS: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 08:44:07,936 [INFO] pipeline:     - Tax Relief R Us: Exclusively focused on Property Tax consulting
+2026-03-01 08:44:07,936 [INFO] pipeline:   → Active targets: 94 companies
+2026-03-01 08:44:07,936 [INFO] pipeline: 
+💾 STEP 6: Saving to database...
+2026-03-01 08:44:08,221 [INFO] pipeline:   → Saved 98 companies to database
+2026-03-01 08:44:08,221 [INFO] pipeline: 
+📁 STEP 7: Exporting data...
+2026-03-01 08:44:08,227 [INFO] pipeline:   → Exported CSV: data/companies.csv
+2026-03-01 08:44:08,233 [INFO] pipeline:   → Exported JSON: data/companies.json
+2026-03-01 08:44:08,234 [INFO] pipeline: 
+============================================================
+2026-03-01 08:44:08,234 [INFO] pipeline: PIPELINE SUMMARY
+2026-03-01 08:44:08,234 [INFO] pipeline: ============================================================
+2026-03-01 08:44:08,234 [INFO] pipeline:   Raw results collected:  100
+2026-03-01 08:44:08,234 [INFO] pipeline:   After deduplication:    98
+2026-03-01 08:44:08,234 [INFO] pipeline:   Excluded:               4
+2026-03-01 08:44:08,234 [INFO] pipeline:   Final active targets:   94
+2026-03-01 08:44:08,234 [INFO] pipeline: 
+  Service Distribution:
+2026-03-01 08:44:08,236 [INFO] pipeline:     Work Opportunity Tax Credits: 37
+2026-03-01 08:44:08,236 [INFO] pipeline:     Sales & Use Tax: 36
+2026-03-01 08:44:08,236 [INFO] pipeline:     R&D Tax Credits: 20
+2026-03-01 08:44:08,236 [INFO] pipeline:     Cost Segregation: 7
+2026-03-01 08:44:08,236 [INFO] pipeline: 
+  Top States:
+2026-03-01 08:44:08,237 [INFO] pipeline:     NY: 37
+2026-03-01 08:44:08,237 [INFO] pipeline:     MA: 29
+2026-03-01 08:44:08,237 [INFO] pipeline:     GA: 12
+2026-03-01 08:44:08,237 [INFO] pipeline:     TX: 7
+2026-03-01 08:44:08,237 [INFO] pipeline:     PA: 5
+2026-03-01 08:44:08,237 [INFO] pipeline:     OH: 1
+2026-03-01 08:44:08,237 [INFO] pipeline:     UT: 1
+2026-03-01 08:44:08,237 [INFO] pipeline:     CA: 1
+2026-03-01 08:44:08,237 [INFO] pipeline: 
+  Data Coverage:
+2026-03-01 08:44:08,237 [INFO] pipeline:     With website:   82/94 (87%)
+2026-03-01 08:44:08,237 [INFO] pipeline:     With revenue:   0/94 (0%)
+2026-03-01 08:44:08,237 [INFO] pipeline:     With employees: 12/94 (13%)
+2026-03-01 08:44:08,237 [INFO] pipeline:     With contact:   3/94 (3%)
+2026-03-01 08:44:08,237 [INFO] pipeline: 
+============================================================
+2026-03-01 08:44:08,237 [INFO] pipeline: Database: data/companies.db
+2026-03-01 08:44:08,237 [INFO] pipeline: CSV Export: data/companies.csv
+2026-03-01 08:44:08,237 [INFO] pipeline: JSON Export: data/companies.json
+2026-03-01 08:44:08,237 [INFO] pipeline: ============================================================
+2026-03-01 10:09:04,884 [INFO] __main__: API Keys configured:
+2026-03-01 10:09:04,884 [INFO] __main__:   Google Places: ✓
+2026-03-01 10:09:04,884 [INFO] __main__:   SerpAPI:       ✓
+2026-03-01 10:09:04,886 [INFO] pipeline: ============================================================
+2026-03-01 10:09:04,886 [INFO] pipeline: Pipeline started: Specialty Tax Advisory Services
+2026-03-01 10:09:04,886 [INFO] pipeline: Target services: ['R&D Tax Credits', 'Cost Segregation', 'Work Opportunity Tax Credits', 'Sales & Use Tax']
+2026-03-01 10:09:04,886 [INFO] pipeline: ============================================================
+2026-03-01 10:09:04,886 [INFO] pipeline: 
+📡 STEP 1: Collecting data from sources...
+2026-03-01 10:09:04,886 [INFO] scrapers.google_places: Google Places: Running 50 search queries (randomized for balanced coverage)...
+2026-03-01 10:09:04,887 [INFO] scrapers.google_places:   [1/50] Searching: 'R&D tax credit consulting' near 'Boston, MA'
+2026-03-01 10:09:05,885 [INFO] scrapers.google_places:   [2/50] Searching: 'R&D tax credit consulting' near 'Houston, TX'
+2026-03-01 10:09:06,687 [INFO] scrapers.google_places:   [3/50] Searching: 'WOTC tax credit services' near 'Chicago, IL'
+2026-03-01 10:09:07,706 [INFO] scrapers.google_places:   [4/50] Searching: 'cost segregation company' near 'Los Angeles, CA'
+2026-03-01 10:09:08,293 [INFO] scrapers.google_places:   [5/50] Searching: 'sales and use tax consulting' near 'Philadelphia, PA'
+2026-03-01 10:09:09,454 [INFO] scrapers.google_places:   [6/50] Searching: 'sales and use tax consulting' near 'Los Angeles, CA'
+2026-03-01 10:09:10,429 [INFO] scrapers.google_places:   [7/50] Searching: 'cost segregation company' near 'Houston, TX'
+2026-03-01 10:09:10,911 [INFO] scrapers.google_places:   [8/50] Searching: 'WOTC tax credit services' near 'Boston, MA'
+2026-03-01 10:09:11,794 [INFO] scrapers.google_places:   [9/50] Searching: 'sales and use tax consulting' near 'Boston, MA'
+2026-03-01 10:09:12,624 [INFO] scrapers.google_places: Reached max company cap, stopping.
+2026-03-01 10:09:12,624 [INFO] scrapers.google_places: Google Places: Found 100 unique companies
+2026-03-01 10:09:12,624 [INFO] scrapers.google_places:   Service distribution: R&D=18, CostSeg=2, WOTC=29, SUT=51
+2026-03-01 10:09:12,624 [INFO] pipeline:   → Google Places: 100 companies
+2026-03-01 10:09:12,627 [INFO] scrapers.clutch_directory: Clutch Directory: Searching 4 categories...
+2026-03-01 10:09:12,786 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-consulting: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-consulting
+2026-03-01 10:09:13,760 [ERROR] scrapers.clutch_directory: Error scraping page 0 of tax-advisory: 403 Client Error: Forbidden for url: https://clutch.co/directory/tax-advisory
+2026-03-01 10:09:14,738 [ERROR] scrapers.clutch_directory: Error scraping page 0 of accounting-firms/tax-services: 403 Client Error: Forbidden for url: https://clutch.co/directory/accounting-firms/tax-services
+2026-03-01 10:09:15,750 [ERROR] scrapers.clutch_directory: Error scraping page 0 of business-services/tax-preparation: 403 Client Error: Forbidden for url: https://clutch.co/directory/business-services/tax-preparation
+2026-03-01 10:09:15,751 [INFO] scrapers.clutch_directory: Clutch Directory: Found 0 companies
+2026-03-01 10:09:15,751 [INFO] pipeline:   → Clutch Directory: 0 companies
+2026-03-01 10:09:15,751 [INFO] pipeline:   → SerpAPI: Disabled (using Google Places only)
+2026-03-01 10:09:15,751 [INFO] pipeline: 
+  Total raw results: 100
+2026-03-01 10:09:15,751 [INFO] pipeline: 
+🔄 STEP 2: Deduplicating records...
+2026-03-01 10:09:15,751 [INFO] dedup: Deduplication: Starting with 100 companies
+2026-03-01 10:09:15,752 [INFO] dedup:   After domain dedup: 100
+2026-03-01 10:09:15,813 [INFO] dedup:   After name dedup: 100
+2026-03-01 10:09:15,813 [INFO] dedup: Deduplication: Final count = 100
+2026-03-01 10:09:15,813 [INFO] pipeline:   → After dedup: 100 companies
+2026-03-01 10:09:15,813 [INFO] pipeline: 
+🔍 STEP 3: Enriching from company websites...
+2026-03-01 10:09:15,813 [INFO] pipeline:   → Fetching website URLs from Google Places...
+2026-03-01 10:10:05,907 [INFO] pipeline:   → Found 81 websites
+2026-03-01 10:10:05,908 [INFO] pipeline:   → Visiting websites for enrichment...
+2026-03-01 10:10:05,908 [INFO] pipeline:   [1/100] Enriching: Tax Point Advisors (https://taxpointadvisors.com)
+2026-03-01 10:10:09,451 [INFO] pipeline:   [2/100] Enriching: PRD TAX SERVICES (https://prdtaxservices.com)
+2026-03-01 10:10:10,412 [INFO] pipeline:   [3/100] Enriching: Walter Shuffain (https://wsadvisors.com)
+2026-03-01 10:10:14,279 [INFO] pipeline:   [4/100] Enriching: Anomaly CPA (https://anomalycpa.com/our-impact)
+2026-03-01 10:10:17,570 [INFO] pipeline:   [5/100] Enriching: Boylston Tax Group (https://boylston.cpa)
+2026-03-01 10:10:20,708 [INFO] pipeline:   [6/100] Enriching: CFGI (https://cfgi.com)
+2026-03-01 10:10:22,785 [INFO] pipeline:   [7/100] Enriching: FinAccurate, LLC (https://finaccurate.com)
+2026-03-01 10:10:25,730 [INFO] pipeline:   [8/100] Enriching: RND Consulting Inc (https://rndcredits.com)
+2026-03-01 10:10:27,378 [INFO] pipeline:   [9/100] Enriching: Energy Tax Savers / R&D Tax Savers (https://energytaxsavers.com)
+2026-03-01 10:10:30,188 [INFO] pipeline:   [10/100] Enriching: KBKG - Tax Credits, Incentives, Cost Recovery (Headquarters) (https://kbkg.com)
+2026-03-01 10:10:31,196 [INFO] pipeline:   [11/100] Enriching: randd uk ltd (https://randduk.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb_profile)
+2026-03-01 10:10:33,202 [INFO] pipeline:   [12/100] Enriching: TRI-MERIT SPECIALTY TAX PROFESSIONALS (https://tri-merit.com)
+2026-03-01 10:10:41,723 [INFO] pipeline:   [13/100] Enriching: Research Tax Credits, LLC (https://researchtaxcreditsllc.com/about-us)
+2026-03-01 10:10:54,321 [INFO] pipeline:   [14/100] Enriching: Debits & Credits LLC (https://dbscds.com)
+2026-03-01 10:10:56,454 [INFO] pipeline:   [15/100] Enriching: Financetec (https://financetec.com)
+2026-03-01 10:10:57,041 [INFO] pipeline:   [16/100] Enriching: Strategic Tax Planning, LLC (https://strategictaxplanning.net)
+2026-03-01 10:10:58,535 [INFO] pipeline:   [17/100] Enriching: Danisher Consulting (https://danisherconsulting.com)
+2026-03-01 10:11:02,205 [INFO] pipeline:   [18/100] Enriching: DRDA, LLC - Certified Public Accountants & Business Consultants (https://drdacpa.com)
+2026-03-01 10:11:10,489 [INFO] pipeline:   [19/100] Enriching: W.E.D. Tax and Accounting Services Inc (https://wedtax.com)
+2026-03-01 10:11:19,851 [INFO] pipeline:   [23/100] Enriching: Jeffrey R. Wolfe Accounting & Tax Services (https://jeffreyrwolfeaccountingandtaxservices.com)
+2026-03-01 10:11:20,684 [INFO] pipeline:   [24/100] Enriching: Porte Brown (https://portebrown.com)
+2026-03-01 10:11:23,661 [INFO] pipeline:   [26/100] Enriching: Windy City Tax Relief (https://windycitytaxrelief.com/?utm_source=gbp&utm_medium=google&utm_campaign=click)
+2026-03-01 10:11:24,528 [INFO] pipeline:   [27/100] Enriching: VMR Financial Strategies (https://vmrtaxservice.com)
+2026-03-01 10:11:24,573 [INFO] pipeline:   [30/100] Enriching: H&R Block (https://hrblock.com/tax-office-near-me/illinois/chicago/13375/?otppartnerid=9308&campaignid=pw_mcm_9308_9762&utm_medium=local)
+2026-03-01 10:11:26,562 [INFO] pipeline:   [32/100] Enriching: TC Services USA Inc (https://tcservicesusa.com)
+2026-03-01 10:11:35,595 [INFO] pipeline:   [35/100] Enriching: TAX ACCOUNTING SERVICES (https://windycityaccountingservices.com)
+2026-03-01 10:11:38,630 [INFO] pipeline:   [37/100] Enriching: Cost Segregation Consultants, LLC (https://costsegconsultants.com)
+2026-03-01 10:11:44,594 [INFO] pipeline:   [38/100] Enriching: Cost Segregation Consultants, LLC (https://costsegconsultants.com)
+2026-03-01 10:11:49,001 [INFO] pipeline:   [40/100] Enriching: USA Tax Service (https://usataxservice.com)
+2026-03-01 10:11:52,436 [INFO] pipeline:   [41/100] Enriching: Taxhauz LLC (https://taxhauz.com)
+2026-03-01 10:11:54,889 [INFO] pipeline:   [42/100] Enriching: Qtax1 (https://qtax1.net)
+2026-03-01 10:11:56,097 [INFO] pipeline:   [43/100] Enriching: Internal Tax Service, LLC (https://bestphillycpa.com)
+2026-03-01 10:11:57,851 [INFO] pipeline:   [44/100] Enriching: Affordable Accounting Solutions (https://taxpa.com)
+2026-03-01 10:12:05,497 [INFO] pipeline:   [45/100] Enriching: Friendly Tax Advisors LLC Philadelphia (https://ftaphiladelphia.com)
+2026-03-01 10:12:07,855 [INFO] pipeline:   [46/100] Enriching: Parker Financial Services (https://lesstax123.com)
+2026-03-01 10:12:10,700 [INFO] pipeline:   [47/100] Enriching: Agro Accounting CPA (https://agroaccounting.com)
+2026-03-01 10:12:11,104 [INFO] pipeline:   [49/100] Enriching: J. David Tax Law (https://jdavidtaxlaw.com/philadelphia-tax-attorney)
+2026-03-01 10:12:30,221 [INFO] pipeline:   [50/100] Enriching: TaxSpace (https://taxspace.us)
+2026-03-01 10:12:33,864 [INFO] pipeline:   [51/100] Enriching: Stanton Financial Management (https://stanton-financial.com)
+2026-03-01 10:12:34,844 [INFO] pipeline:   [52/100] Enriching: Tax Service Inc (https://taxservicesincpa.com)
+2026-03-01 10:12:36,676 [INFO] pipeline:   [53/100] Enriching: Weisz Accounting Services (https://weiszaccounting.com)
+2026-03-01 10:12:39,813 [INFO] pipeline:   [55/100] Enriching: Kevin Chou, CPA (https://taxprofessionalphiladelphia.com)
+2026-03-01 10:12:41,475 [INFO] pipeline:   [58/100] Enriching: Medallion Accounting PC (https://facebook.com/medallionaccounting)
+2026-03-01 10:12:44,609 [INFO] pipeline:   [59/100] Enriching: Sales Tax Helper LLC (https://salestaxhelper.com)
+2026-03-01 10:12:49,761 [INFO] pipeline:   [60/100] Enriching: Anderson Bradshaw Tax Consultants (https://andersonbradshawtax.com)
+2026-03-01 10:12:52,214 [INFO] pipeline:   [61/100] Enriching: Luxury Tax Service (https://luxurytaxservice.com)
+2026-03-01 10:13:00,417 [INFO] pipeline:   [62/100] Enriching: ACE Plus Tax Resolution - Tax Relief Service Specialist (https://aceplustaxresolution.com)
+2026-03-01 10:13:14,100 [INFO] pipeline:   [63/100] Enriching: The Tax Consultancy Group Inc. (https://taxconsultgroup.com)
+2026-03-01 10:13:20,610 [INFO] pipeline:   [64/100] Enriching: SoCal CPA Tax & Consulting Services, Inc. (https://socalcpatax.com)
+2026-03-01 10:13:24,345 [INFO] pipeline:   [65/100] Enriching: Innova Tax Solutions (https://innovataxsolutions.com)
+2026-03-01 10:13:27,799 [INFO] pipeline:   [66/100] Enriching: Hillhurst Tax Group (https://hillhursttaxgroup.com)
+2026-03-01 10:13:33,821 [INFO] pipeline:   [68/100] Enriching: Oren Hen EA, Inc. (https://orenhenea.com)
+2026-03-01 10:15:33,979 [INFO] pipeline:   [69/100] Enriching: S & S Financial Services Inc (https://ssfinancial.services)
+2026-03-01 10:15:34,989 [INFO] pipeline:   [70/100] Enriching: USA Tax Settlement (https://usataxsettlement.com)
+2026-03-01 10:15:35,946 [INFO] pipeline:   [71/100] Enriching: Bismark Tax, Inc. (https://bismarktax.com)
+2026-03-01 10:15:36,499 [INFO] pipeline:   [72/100] Enriching: Andy Yu, CPA & Associates (https://aycpa.com)
+2026-03-01 10:15:40,970 [INFO] pipeline:   [73/100] Enriching: Rush Tax Resolution (https://rushtaxresolution.com)
+2026-03-01 10:16:01,018 [INFO] pipeline:   [74/100] Enriching: Black Inc Tax Services (https://blackinctax.com)
+2026-03-01 10:16:16,317 [INFO] pipeline:   [75/100] Enriching: Defense Tax Partners (https://californiataxattorneys.net/los-angeles-ca/?utm_source=google&utm_medium=maps&utm_campaign=gmb_los_angeles_ca)
+2026-03-01 10:16:17,663 [INFO] pipeline:   [77/100] Enriching: Tax Hack Accounting Group (https://mytaxhack.com)
+2026-03-01 10:16:18,113 [INFO] pipeline:   [78/100] Enriching: CHARLIE KIM CPA (찰리킴 공인회계사) (https://charliekimcpa.com)
+2026-03-01 10:16:19,986 [INFO] pipeline:   [80/100] Enriching: Walter Financial Services.Inc (https://walterfinancialservices.com)
+2026-03-01 10:16:27,829 [INFO] pipeline:   [81/100] Enriching: Velasquez Tax & Business Services (https://velasqueztaxbizsvcs.com)
+2026-03-01 10:16:28,963 [INFO] pipeline:   [82/100] Enriching: The OCI Group (https://theocigroup.com)
+2026-03-01 10:16:57,131 [INFO] pipeline:   [83/100] Enriching: Massachusetts Revenue Department (https://mass.gov/orgs/massachusetts-department-of-revenue)
+2026-03-01 10:16:58,207 [INFO] pipeline:   [85/100] Enriching: CP Tax Services (https://cptaxserv.com)
+2026-03-01 10:17:06,648 [INFO] pipeline:   [86/100] Enriching: Water Street Tax Associates & CPAs (https://waterstreettax.com)
+2026-03-01 10:17:09,863 [INFO] pipeline:   [87/100] Enriching: Taxpayer Advocate Service Office (https://taxpayeradvocate.irs.gov)
+2026-03-01 10:17:43,849 [INFO] pipeline:   [88/100] Enriching: WTM Accounting Services LLP (https://wtmcpatax.com)
+2026-03-01 10:17:43,939 [INFO] pipeline:   [89/100] Enriching: The W Tax Group (https://wtaxattorney.com)
+2026-03-01 10:17:49,543 [INFO] pipeline:   [90/100] Enriching: CB Unlimited Tax Consulting Corp. (https://cbunlimitedtaxconsulting.com)
+2026-03-01 10:18:11,351 [INFO] pipeline:   [91/100] Enriching: Upscale of Boston (https://upscalebos.com)
+2026-03-01 10:18:18,196 [INFO] pipeline:   [92/100] Enriching: The Tax Consultants, Inc. (https://taxes52.com)
+2026-03-01 10:18:19,119 [INFO] pipeline:   [93/100] Enriching: CBIZ (https://cbiz.com/locations/boston-state-street-massachusetts?utm_source=google-business&utm_medium=organic&utm_campaign=offices&utm_content=boston-state-street-massachusetts)
+2026-03-01 10:18:20,253 [INFO] pipeline:   [94/100] Enriching: S&T Tax & Business Solutions LLC (https://sttaxbusinesssolutionsllc.com)
+2026-03-01 10:18:21,397 [INFO] pipeline:   [95/100] Enriching: Omar Financial (https://omarfinancial.com)
+2026-03-01 10:18:22,580 [INFO] pipeline:   [96/100] Enriching: One Accounting Tax, Inc. (https://oneaccountingtax.com)
+2026-03-01 10:18:27,437 [INFO] pipeline:   [97/100] Enriching: eTax Professional Accounting (https://etaxprofessional.com/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=17499013969825211035)
+2026-03-01 10:19:23,437 [INFO] pipeline:   [98/100] Enriching: Tax Express LLC (https://taxexpressllc.com)
+2026-03-01 10:19:37,220 [INFO] pipeline:   [99/100] Enriching: Dukhon Tax and Accounting LLC (https://dukhontax.com)
+2026-03-01 10:19:43,643 [INFO] pipeline:   [100/100] Enriching: Weiss & Associates, Inc. (https://weissaccountants.com)
+2026-03-01 10:19:52,452 [INFO] pipeline:   → Enriched 81 companies from websites
+2026-03-01 10:19:52,452 [INFO] pipeline: 
+📊 STEP 4: Scoring companies...
+2026-03-01 10:19:52,454 [INFO] pipeline: 
+🏷️  STEP 5: Applying thesis filters...
+2026-03-01 10:19:52,454 [INFO] pipeline:   → Excluded: 5 companies
+2026-03-01 10:19:52,454 [INFO] pipeline:     - TC Services USA Inc: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 10:19:52,454 [INFO] pipeline:     - TRI-MERIT SPECIALTY TAX PROFESSIONALS: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 10:19:52,454 [INFO] pipeline:     - Strategic Tax Planning, LLC: Primary service appears to be Employee Retention Credit (ERC)
+2026-03-01 10:19:52,454 [INFO] pipeline:     - One Accounting Tax, Inc.: Exclusively focused on Property Tax consulting
+2026-03-01 10:19:52,454 [INFO] pipeline:     - Anderson Bradshaw Tax Consultants: Exclusively focused on Property Tax consulting
+2026-03-01 10:19:52,454 [INFO] pipeline:   → Active targets: 95 companies
+2026-03-01 10:19:52,454 [INFO] pipeline: 
+💾 STEP 6: Saving to database...
+2026-03-01 10:19:52,741 [INFO] pipeline:   → Saved 100 companies to database
+2026-03-01 10:19:52,741 [INFO] pipeline: 
+📁 STEP 7: Exporting data...
+2026-03-01 10:19:52,764 [INFO] pipeline:   → Exported CSV: data/companies.csv
+2026-03-01 10:19:52,775 [INFO] pipeline:   → Exported JSON: data/companies.json
+2026-03-01 10:19:52,776 [INFO] pipeline: 
+============================================================
+2026-03-01 10:19:52,776 [INFO] pipeline: PIPELINE SUMMARY
+2026-03-01 10:19:52,776 [INFO] pipeline: ============================================================
+2026-03-01 10:19:52,776 [INFO] pipeline:   Raw results collected:  100
+2026-03-01 10:19:52,776 [INFO] pipeline:   After deduplication:    100
+2026-03-01 10:19:52,776 [INFO] pipeline:   Excluded:               5
+2026-03-01 10:19:52,776 [INFO] pipeline:   Final active targets:   95
+2026-03-01 10:19:52,776 [INFO] pipeline: 
+  Service Distribution:
+2026-03-01 10:19:52,776 [INFO] pipeline:     Sales & Use Tax: 50
+2026-03-01 10:19:52,776 [INFO] pipeline:     Work Opportunity Tax Credits: 28
+2026-03-01 10:19:52,776 [INFO] pipeline:     R&D Tax Credits: 16
+2026-03-01 10:19:52,776 [INFO] pipeline:     Cost Segregation: 5
+2026-03-01 10:19:52,776 [INFO] pipeline: 
+  Top States:
+2026-03-01 10:19:52,776 [INFO] pipeline:     MA: 30
+2026-03-01 10:19:52,776 [INFO] pipeline:     CA: 21
+2026-03-01 10:19:52,776 [INFO] pipeline:     PA: 21
+2026-03-01 10:19:52,776 [INFO] pipeline:     IL: 17
+2026-03-01 10:19:52,776 [INFO] pipeline:     TX: 2
+2026-03-01 10:19:52,777 [INFO] pipeline:     OH: 1
+2026-03-01 10:19:52,777 [INFO] pipeline:     NY: 1
+2026-03-01 10:19:52,777 [INFO] pipeline:     UT: 1
+2026-03-01 10:19:52,777 [INFO] pipeline: 
+  Data Coverage:
+2026-03-01 10:19:52,777 [INFO] pipeline:     With website:   76/95 (80%)
+2026-03-01 10:19:52,777 [INFO] pipeline:     With revenue:   0/95 (0%)
+2026-03-01 10:19:52,777 [INFO] pipeline:     With employees: 7/95 (7%)
+2026-03-01 10:19:52,777 [INFO] pipeline:     With contact:   1/95 (1%)
+2026-03-01 10:19:52,777 [INFO] pipeline: 
+============================================================
+2026-03-01 10:19:52,777 [INFO] pipeline: Database: data/companies.db
+2026-03-01 10:19:52,777 [INFO] pipeline: CSV Export: data/companies.csv
+2026-03-01 10:19:52,777 [INFO] pipeline: JSON Export: data/companies.json
+2026-03-01 10:19:52,777 [INFO] pipeline: ============================================================
