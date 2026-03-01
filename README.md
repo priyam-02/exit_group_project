@@ -33,26 +33,38 @@ The system combines web scraping, intelligent deduplication, data enrichment, an
 
 ### Core Features (Required)
 
-✅ Multi-source data collection (Google Places, Clutch, state filings, web scraping)
+✅ Tried Multi-source data collection (Google Places, Clutch (did not work), state filings (more overhead in terms of functionality), web scraping)
+
 ✅ 7-step ETL pipeline (Collect → Deduplicate → Enrich → Score → Filter → Store → Export)
+
 ✅ Confidence scoring algorithm (service match, data completeness, size fit)
+
 ✅ Sortable, filterable company table with search
+
 ✅ KPI summary cards (6 real-time metrics)
+
 ✅ Interactive charts (service distribution, geographic breakdown)
+
 ✅ Company detail modal with contact information
+
 ✅ CSV export with full data
 
 ### Bonus Features (Implemented)
 
-✅ **Demo mode** - Runs with 30 sample companies (no API keys needed)
 ✅ **REST API** - 8 endpoints for programmatic access
+
 ✅ **Data provenance tracking** - Know where every field came from
+
 ✅ **LinkedIn/website enrichment** - Ownership, revenue, contacts
-✅ **State business filing lookups** - Entity type, status verification
+
 ✅ **JSON export** - For data integration workflows
+
 ✅ **Mobile-responsive design** - Works on all screen sizes
+
 ✅ **Real-time search** - Debounced search with instant results
+
 ✅ **Pipeline run history** - Track execution logs
+
 ✅ **Investment thesis customization** - Easy to modify target criteria
 
 ---
@@ -214,6 +226,7 @@ The system implements a 7-step ETL pipeline that transforms raw data into invest
 #### 3. **Enrich** - Fill in missing data with 7 enhanced extraction methods
 
 **Enhanced website scraping capabilities:**
+
 - **LinkedIn URL extraction** - Searches 5 pages (homepage, about, about-us, contact, contact-us) instead of just homepage
 - **Revenue extraction** - 20+ patterns including ranges ("$5-10M" → $7.5M midpoint), tax credit inference
 - **Employee extraction** - 15+ patterns including qualitative descriptions ("boutique firm" → 8 employees)
@@ -223,12 +236,14 @@ The system implements a 7-step ETL pipeline that transforms raw data into invest
 - **Improved logging** - Tracks extraction success rates per field
 
 **Traditional enrichment:**
+
 - Visit company websites to extract services, revenue, ownership
 - Scrape LinkedIn for employee counts and leadership
 - Look up state business filings for entity verification
 - Extract key contacts (CEO, founder, managing director)
 
 **Expected coverage improvements:**
+
 - Revenue: 25-35% (improved from 0%)
 - Employees: 35-45% (improved from 9.6%)
 - Contacts: 20-30% (improved from 1.8%)

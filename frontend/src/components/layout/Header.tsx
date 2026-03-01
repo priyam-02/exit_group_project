@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, Download } from 'lucide-react';
+import { Database, Download, FileJson } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { companiesApi } from '../../services/api';
 
@@ -33,6 +33,14 @@ export const Header: React.FC = () => {
             >
               <Download size={16} />
               Export CSV
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => companiesApi.exportJSON()}
+              className="flex items-center gap-2"
+            >
+              <FileJson size={16} />
+              Export JSON
             </Button>
             <div className="flex items-center gap-2 px-4 py-2 glass rounded-md">
               <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
